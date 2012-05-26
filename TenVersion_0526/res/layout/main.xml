@@ -32,5 +32,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/setting_btn_txt" />
+    
+    <Button
+        android:id="@+id/testdailog_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/testdailog_btn_txt" />
 
 </LinearLayout>

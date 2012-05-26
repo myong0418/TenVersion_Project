@@ -19,10 +19,12 @@
             </intent-filter>
         </activity>
         
-         <activity android:name=".SafeListActivity" />
-         <activity android:name=".LiveListActivity" />
-         <activity android:name=".EtcListActivity" />
-          <activity android:name=".SettingListActivity" />
+        <activity android:name=".SafeListActivity" />
+        <activity android:name=".LiveListActivity" />
+        <activity android:name=".EtcListActivity" />
+        <activity android:name=".SettingListActivity" />
+        <activity android:name=".TestDialogActivity" />
+
     </application>
 
 </manifest>
