@@ -27,6 +27,10 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
         Button settingBtn = (Button)findViewById(R.id.setting_btn);
         settingBtn.setOnClickListener(this);
         
+        //test dialog btn
+        Button testdailogBtn = (Button)findViewById(R.id.testdailog_btn);
+        testdailogBtn.setOnClickListener(this);
+        
     }
 
 	public void onClick(View v) {
@@ -51,6 +55,13 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
 			intent = new Intent(this,SettingListActivity.class);
 			startActivity(intent);
 			break;
+			
+			
+		case R.id.testdailog_btn:
+			intent = new Intent(this,TestDialogActivity.class);
+			startActivity(intent);
+			break;
+
 			
 		}
 		

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <!-- TenVersionActivity.java -->
     <string name="hello">Hello World, TenVersionActivity!</string>
     <string name="app_name">TenVersion</string>
@@ -8,10 +8,21 @@
     <string name="live_btn_txt">Live List  </string>
     <string name="etc_btn_txt">Etc List  </string>
     <string name="setting_btn_txt">Setting  </string>
+    <string name="testdailog_btn_txt">test dialog </string>
 
     <!-- EtcListActivity.java -->
+
+
     <!-- LiveListActivity.java -->
+
+
     <!-- SafeListActivity.java -->
+
+
     <!-- SettingListActivity.java -->
 
+
+    <!-- TestDialogActivity.java -->
+    <string name="test_dialog1_btn_txt">test dialog 1 </string>
+    
 </resources>

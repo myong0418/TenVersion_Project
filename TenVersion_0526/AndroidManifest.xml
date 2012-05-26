@@ -24,6 +24,7 @@
          <activity android:name=".EtcListActivity" />
          <activity android:name=".SettingListActivity" />
          <activity android:name=".LiveListAddActivity" />
+         <activity android:name=".TestDialogActivity" />
     </application>
 
 </manifest>
