@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TenVersionActivity.java -->
+    <string name="hello">Hello World, TenVersionActivity!</string>
+    <string name="app_name">TenVersion</string>
+    <string name="safe_btn_txt">SafeList  </string>
+    <string name="live_btn_txt">Live List  </string>
+    <string name="etc_btn_txt">Etc List  </string>
+    <string name="setting_btn_txt">Setting  </string>
+
+    <!-- EtcListActivity.java -->
+    <!-- LiveListActivity.java -->
+    <!-- SafeListActivity.java -->
+    <!-- SettingListActivity.java -->
+
+</resources>
