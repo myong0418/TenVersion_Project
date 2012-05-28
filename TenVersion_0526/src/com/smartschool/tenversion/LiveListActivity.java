@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,7 @@ public class LiveListActivity extends Activity  implements OnClickListener{
         addButton.setOnClickListener(this);
         
         Button delButton = (Button) findViewById(R.id.del_btn);
-        //delButton.setOnClickListener(this);
+        delButton.setOnClickListener(this);
         
     }
 
@@ -44,8 +45,14 @@ public class LiveListActivity extends Activity  implements OnClickListener{
 		Intent intent = null;
 		switch(v.getId()) {
 		case R.id.add_btn:
-			intent = new Intent(this, LiveListAddActivity.class);
-			startActivity(intent);
+//			intent = new Intent(this, LiveListAddActivity.class);
+//			startActivity(intent);
+			new AlertDialog.Builder(this)
+			.setTitle("추가")
+			.setMessage("추가하시겠습니까?")
+			.setNeutralButton("확인",null)
+			.setNegativeButton("취소", null)
+			.show();
 			break;
 
 		case R.id.del_btn:

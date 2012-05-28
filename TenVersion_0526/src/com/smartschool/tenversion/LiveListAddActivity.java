@@ -13,9 +13,9 @@ public class LiveListAddActivity extends Activity  implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.livedailog);
+        setContentView(R.layout.livelist);
         
-        Button button = (Button)findViewById(R.id.livedail_btn);
+        Button button = (Button)findViewById(R.id.add_btn);
         button.setOnClickListener(this);
                 
     }
