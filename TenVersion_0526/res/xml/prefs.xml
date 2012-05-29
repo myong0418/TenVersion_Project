@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Wi-Fi 및 네트워크 설정" >
+        <ListPreference
+            android:dialogTitle="Wi-Fi설정"
+            android:enabled="true"
+
+            android:key="home_wifi"
+            android:summary="원하는 wifi를 설정해야 알람이 가능합니다."
+            android:title="wifi 설정" />
+</PreferenceCategory>
+</PreferenceScreen>
