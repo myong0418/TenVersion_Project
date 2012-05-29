@@ -11,13 +11,15 @@
 	    
 	    <Button
 	        android:id="@+id/allcheck"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
 	        android:text="전체선택" />
 	    <Button
 	        android:id="@+id/del_btn"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
 	        android:text="삭제" />
     </LinearLayout>
     <LinearLayout

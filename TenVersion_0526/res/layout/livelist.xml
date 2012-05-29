@@ -13,11 +13,13 @@
 	        android:id="@+id/add_btn"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
 	        android:text="추가" />
 	    <Button
 	        android:id="@+id/del_btn"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
 	        android:text="삭제" />
     </LinearLayout>
     <ListView
