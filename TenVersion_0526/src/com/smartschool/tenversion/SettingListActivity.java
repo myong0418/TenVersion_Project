@@ -3,11 +3,7 @@ package com.smartschool.tenversion;
 
 
 import java.util.List;
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.wifi.ScanResult;
@@ -19,17 +15,18 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.Toast;
 
 public class SettingListActivity extends PreferenceActivity  implements OnPreferenceClickListener,OnPreferenceChangeListener{
 	public static final String TAG = "SettingListActivity";
-	public static  String WIFI_MODE = null;
-	public static final String KEY_WIFIMODE = "home_wifi";
+//	public static  String WIFI_MODE = null;
+	public static final String KEY_WIFI_MODE = "wifi_mode";
+	public static final String KEY_WIFISSID = "wifi_ssid";
+	public static final String KEY_WIFIBSSID = "wifi_bssid";
 	
 	public static ListPreference wifiListPref = null;
-	private static Context context;
 	
-	private SharedPreferences sharedPrefs = null;
+//	private SharedPreferences sharedPrefs = null;
 	
 	
 	
@@ -38,25 +35,21 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
         super.onCreate(savedInstanceState);
         
         addPreferencesFromResource(R.xml.prefs);
-        
-        context= this;
-        
-        wifiListPref = (ListPreference) findPreference(KEY_WIFIMODE);  // (R.id.wifi_listpref);
+
+        wifiListPref = (ListPreference) findPreference(KEY_WIFI_MODE);  // (R.id.wifi_listpref);
         wifiListPref.setOnPreferenceClickListener(this);
         wifiListPref.setOnPreferenceChangeListener(this);
-        wifiListPref.setValue(WIFI_MODE);
+       
       
         
-        
-        sharedPrefs = this.getSharedPreferences(KEY_WIFIMODE, Context.MODE_PRIVATE);
-        String wifimode = getWifiSetting();
-        if(wifimode != null){
-        	if(wifimode.equals(WIFI_MODE)){
-        		Log.v(TAG,"wifimode = WIFI_MODE" );
-        		wifiListPref.setSummary(WIFI_MODE);
-        		
-        	}
-        }
+
+		String wifimode = WifiReceiver.getWifiSettingSSID(this);
+		if (wifimode != null) {
+			Log.v(TAG, "wifimode != null ::"+wifimode);
+			wifiListPref.setSummary(wifimode);
+			wifiListPref.setValue(wifimode);
+
+		}
 
     }
 
@@ -67,90 +60,79 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 		Log.v(TAG,"onResume()" );
 
 		 
-		initWifiSetting();
+		WifiReceiver.initWifiSetting(this);
 	}
 
 
 	public boolean onPreferenceClick(Preference preference) {
 		Log.v(TAG,"onPreferenceClick()" );
 		
-		initWifiSetting();
+		WifiReceiver.initWifiSetting(this);
 		return false;
 	}
 	
 	public boolean onPreferenceChange(Preference preference, Object objValue){
-		String wifiMode = objValue.toString(); 
-		if(preference == wifiListPref){
+		Log.v(TAG,"onPreferenceChange()  objValue::"+objValue.toString() );
 
-			//sharedPrefs.
-			Editor editor = sharedPrefs.edit();
-            
-            editor.putString(KEY_WIFIMODE, wifiMode); //SSID
-           
-            editor.commit();
+		if(preference == wifiListPref){
+			String wifiBSSID = objValue.toString() ;
+			String wifiSSID = null;
+
+			CharSequence[] entries = wifiListPref.getEntries();
+			CharSequence[] entryValues = wifiListPref.getEntryValues();
 			
-			WIFI_MODE = wifiMode;
-			wifiListPref.setSummary(WIFI_MODE);
-			  wifiListPref.setValue(WIFI_MODE);
+			Log.v(TAG,"=======================================\n");
+			for (int i = 0; i <entryValues.length; i++) {
+				if(entryValues[i].equals(wifiBSSID)){
+					Log.d(TAG,(i + 1) + "entries[i].equals(wifiBSSID)");
+					Log.d(TAG,(i + 1) + ". entries : "+entries[i]);
+					
+					wifiSSID = entries[i].toString();
+					//set sharedPrefs.
+					setWifiSetting(wifiSSID,wifiBSSID);
+					wifiListPref.setSummary(wifiSSID);
+					wifiListPref.setValue(wifiBSSID);
+				}
+			}
+			Log.v(TAG,"=======================================\n");
+			
+			
+			
+			
+			String connectedWifi =WifiReceiver.getConnectedWifiBSSID(this);
+			String wifimode = WifiReceiver.getWifiSettingBSSID(this);
+
+			if(connectedWifi == null || wifimode == null){
+				Log.e(TAG, "failed wifi info");
+				WifiReceiver.cancleNotification(this);
+				Toast.makeText(this, "failed wifi info", Toast.LENGTH_SHORT);
+			}
+			
+			if (connectedWifi.equals(wifimode)) {					//connected wifi mode
+				Log.d(TAG, "noti.start");
+				
+				//set Notification
+				WifiReceiver.setNotification(this);
+				WifiReceiver.WifiState = true;
+			}else{
+				WifiReceiver.cancleNotification(this);
+			} 
 		}
 		return false;
 	}
 	
 	
 	
-	public boolean initWifiSetting(){
-		Log.v(TAG,"initWifiSetting()" );
 
-        WifiManager	wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        if(wifiManager==null){
-        	return false;
-        }
+	
+	//set sharedPreference
+	public void setWifiSetting(String wifiSSID,String wifiBSSID){
+		SharedPreferences sharedPrefs = this.getSharedPreferences(KEY_WIFI_MODE,Context.MODE_PRIVATE);
+		Editor editor = sharedPrefs.edit();
         
-        int scanCount = 0;
-        
-     // init WIFISCAN
-        
-        List<ScanResult> mScanResult; // ScanResult List
-        mScanResult = wifiManager.getScanResults(); // ScanResult
-        if(mScanResult==null){
-        	Log.v(TAG,"mScanResult==null" );
-        	wifiListPref.setEnabled(false);
-        	return false;
-        }else{
-        	Log.v(TAG,"mScanResult!=null" );
-        	wifiListPref.setEnabled(true);
-        }
-		CharSequence[] entries = new CharSequence[mScanResult.size()];
-		//CharSequence[] entryValues = new CharSequence[mScanResult.size()];
-        
-        // Scan count
-		Log.v(TAG,"Scan count is \t" + ++scanCount + " times \n");
-
-		Log.v(TAG,"=======================================\n");
-		for (int i = 0; i < mScanResult.size(); i++) {
-			ScanResult result = mScanResult.get(i);
-			Log.v(TAG,(i + 1) + ". SSID : " + result.SSID.toString()
-					+ "\t\t RSSI : " + result.level + " dBm\n");
-			
-			entries[i] = result.SSID.toString();
-			
-			Log.d(TAG,(i + 1) + ". entries : "+entries[i]);
-		//	entryValues[i] = result.SSID.toString();
-			
-		}
-		Log.v(TAG,"=======================================\n");
-		
-        
-        wifiListPref.setEntries(entries);
-        wifiListPref.setEntryValues(entries);
-        return true;
+        editor.putString(KEY_WIFISSID, wifiSSID); //SSID
+        editor.putString(KEY_WIFIBSSID, wifiBSSID); //BSSID
+       
+        editor.commit();
 	}
-	
-	public String getWifiSetting(){
-		return sharedPrefs.getString(KEY_WIFIMODE, null);
-	}
-	
-//	 prefs = getContext().getSharedPreferences(getKey(), Context.MODE_PRIVATE);
-//	 idEdit.setText(prefs.getString("id", ""));
-	
 }
