@@ -20,7 +20,7 @@ public class DBHandler {
 	public static final String KEY_MODE = "mode";			//1=safe, 2=live, 3=etc
 	public static final String KEY_LIST_DATA = "list_data";
     
-    private DBHandler(Context ctx) {
+    public DBHandler(Context ctx) {
         this.helper = new DBHelper(ctx);
         this.db = helper.getWritableDatabase();
     }

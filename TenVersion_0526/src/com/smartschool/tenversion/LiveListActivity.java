@@ -30,8 +30,8 @@ public class LiveListActivity extends Activity  implements OnClickListener{
         
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, liveList);
         
-        ListView list = (ListView) findViewById(R.id.live_listview);
-        list.setAdapter(adapter);
+//        ListView list = (ListView) findViewById(R.id.live_listview);
+//        list.setAdapter(adapter);
         
         Button addButton = (Button) findViewById(R.id.add_btn);
         addButton.setOnClickListener(this);

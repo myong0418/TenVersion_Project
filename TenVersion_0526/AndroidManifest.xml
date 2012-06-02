@@ -27,6 +27,7 @@
         
         <activity android:name=".SafeListActivity" />
         <activity android:name=".LiveListActivity" />
+        <activity android:name=".LiveListActivity2" />
         <activity android:name=".EtcListActivity" />
         <activity android:name=".SettingListActivity" />
         <activity android:name=".LiveListAddActivity" />
@@ -40,6 +41,7 @@
 
             </intent-filter>
         </receiver>
+        
         
     </application>
 

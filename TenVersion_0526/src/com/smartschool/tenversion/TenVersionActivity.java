@@ -42,7 +42,7 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
 			break;
 			
 		case R.id.live_btn:
-			intent = new Intent(this,LiveListActivity.class);
+			intent = new Intent(this,LiveListActivity2.class);
 			startActivity(intent);
 			break;
 			

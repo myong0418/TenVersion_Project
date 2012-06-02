@@ -7,7 +7,7 @@
         android:id="@+id/add_live"                    
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:text="입력하세요" />
+        android:hint="입력하세요" />
     
 	<LinearLayout 
 	    android:layout_width="fill_parent"
@@ -28,7 +28,7 @@
 	        android:text="삭제" />
     </LinearLayout>
     <ListView
-        android:id="@+id/live_listview"
+        android:id="@android:id/list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
         />
