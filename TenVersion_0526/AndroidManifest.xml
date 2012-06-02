@@ -33,6 +33,12 @@
         <activity android:name=".LiveListAddActivity" />
         <activity android:name=".LIveListDelActivity" />
         <activity android:name=".TestDialogActivity" />
+        
+        <activity android:name=".FlipperView" >
+            <intent-filter>
+                <action android:name="smartplus.tenversion.action.flipper" />
+            </intent-filter>
+        </activity>
 
 		<receiver android:name=".WifiReceiver" >
             <intent-filter>

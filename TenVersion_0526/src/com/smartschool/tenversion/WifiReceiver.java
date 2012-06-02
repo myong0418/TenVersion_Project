@@ -1,6 +1,8 @@
 package com.smartschool.tenversion;
 
 import java.util.List;
+
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +11,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
@@ -17,18 +20,22 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class WifiReceiver extends BroadcastReceiver{
+	//wifi Key
 	public static final String TAG = "WifiReceiver";
 	public static final String KEY_WIFI_MODE = "wifi_mode";
 	public static final String KEY_WIFISSID = "wifi_ssid";
 	public static final String KEY_WIFIBSSID = "wifi_bssid";
 	
+	//wifi
 	private static WifiManager wifiManager =null;
 	private static NotificationManager notiMgr = null;
 	private List<ScanResult> mScanResult; // ScanResult List
 	private static Context mContext;
-	
+	//wifi state
 	public static  boolean WifiState = false;
-
+	
+	//alarm
+	private static MediaPlayer mplay = null;
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -77,8 +84,8 @@ public class WifiReceiver extends BroadcastReceiver{
 						// cancel notification
 						cancleNotification(context);
 
-						// allam
-						ringAlam();
+						// alarm
+						ringAlam(context);
 					}
 
 				} else if (networkType == ConnectivityManager.TYPE_MOBILE) {	// disconnected wifi mode
@@ -92,8 +99,8 @@ public class WifiReceiver extends BroadcastReceiver{
 					// cancel notification
 					cancleNotification(context);
 
-					// allam
-					ringAlam();
+					// alarm
+					ringAlam(context);
 				}
 			} catch (Exception e) {
 				Log.e(TAG, "Exception e ::" + e);
@@ -182,16 +189,72 @@ public class WifiReceiver extends BroadcastReceiver{
 		notiMgr = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
 		notiMgr.cancel(0);
 	}
+	//set Sound
+	public void startSound(Context context, int id) {
+		Log.v(TAG, "soundPlay()");
+		try {
+			MediaPlayer mplay = MediaPlayer.create(context, id);
+			if (mplay == null) {
+				mplay = MediaPlayer.create(context, R.raw.dingdong);
+			}
+			mplay.seekTo(0);
+			mplay.start();
+			Toast.makeText(context, "Start Sound ", Toast.LENGTH_SHORT);
+		} catch (Exception e) {
+			Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+		}
+		
+
+	}
+
+	public void stopSound(Context context, int id) {
+		Log.v(TAG, "soundPlay()");
+        try {
+            if(mplay == null) {
+            	mplay = MediaPlayer.create(context,  R.raw.dingdong);
+            }
+            mplay.stop();
+            mplay = null;
+        }catch( Exception e ) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+	}
+
+
 
 	
-	public void ringAlam() {
+	//ringing alarm
+	public void ringAlam(Context context) {
 		Log.v(TAG, "ringAlam()");
 		if (WifiState) {
-			// alam
+			// set alarm
+//			int SECS = 1000;
+//			int MINS = 60 * SECS;
+//		//	Calendar cal = Calendar.getInstance();
+//			Intent goIntent = new Intent(mContext, alarmDialogActivity.class);
+//			PendingIntent pi = PendingIntent.getActivity(mContext, 0, goIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+//			AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//			alarms.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),10 * MINS, pi);
 
-			// start flipperView
-			// Intent intent = new Intent(mContext,FlipperView.class);
-			// mContext.startActivity(intent);
+			
+			 // start flipperView
+//			 Intent intent = new Intent(mContext,FlipperView.class);
+//			 mContext.startActivity(intent);
+//			 
+//			 Intent i = new Intent("com.smartschool.tenversion", "com.smartschool.tenversion.FlipperView");
+//			 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			 context.startActivity(i);
+//			 
+			Intent intent = new Intent();
+			 intent.setClassName("com.smartschool.tenversion", "com.smartschool.tenversion.FlipperView");
+			 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			 context.startActivity( intent);
+	
+			 
+			 
+			startSound(context, R.raw.dingdong);      //ex)
+			
+
 		}
 		WifiState = false;
 	}
@@ -209,7 +272,8 @@ public class WifiReceiver extends BroadcastReceiver{
 		Log.v(TAG, "getConnectedWifiBSSID()");
 		wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 		String connectedWifiBSSID = wifiManager.getConnectionInfo().getBSSID();
-
+		
+		Log.v(TAG, "connectedWifiBSSID::"+connectedWifiBSSID);
 		return connectedWifiBSSID;
 	}
 

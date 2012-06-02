@@ -99,16 +99,17 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 			
 			
 			
-			String connectedWifi =WifiReceiver.getConnectedWifiBSSID(this);
+			String connectedWifi = WifiReceiver.getConnectedWifiBSSID(this);
 			String wifimode = WifiReceiver.getWifiSettingBSSID(this);
-
+			Log.e(TAG, "connectedWifi::"+connectedWifi+", wifimode"+wifimode);
 			if(connectedWifi == null || wifimode == null){
 				Log.e(TAG, "failed wifi info");
 				WifiReceiver.cancleNotification(this);
 				Toast.makeText(this, "failed wifi info", Toast.LENGTH_SHORT);
+				
 			}
-			
-			if (connectedWifi.equals(wifimode)) {					//connected wifi mode
+				
+			if (connectedWifi != null && connectedWifi.equals(wifimode)) {					//connected wifi mode
 				Log.d(TAG, "noti.start");
 				
 				//set Notification
@@ -116,7 +117,8 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 				WifiReceiver.WifiState = true;
 			}else{
 				WifiReceiver.cancleNotification(this);
-			} 
+			}
+			
 		}
 		return false;
 	}
