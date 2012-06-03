@@ -53,7 +53,10 @@ public class LiveListActivity2 extends ListActivity  implements View.OnClickList
 
 	public void onClick(View v) {
 		Intent intent = null;
-		DBHandler dbhandler = DBHandler.open(this);
+	//	DBHandler dbhandler = DBHandler.open(this);
+		dbhandler = new DBHandler(this);
+		dbhandler.open(this);
+		
 		switch(v.getId()) {
 		case R.id.add_btn:
 			add_liveRow(dbhandler);

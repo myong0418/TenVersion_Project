@@ -15,20 +15,19 @@ public class DBHandler {
 	private DBHelper helper;
 	private SQLiteDatabase db;
 
-	public static final String TABLE_NAME = "checklist_table";
-	public static final String KEY_ROWID = "_id";
-	public static final String KEY_MODE = "mode"; // 1=safe, 2=live, 3=etc
-	public static final String KEY_LIST_DATA = "list_data";
+	public static final String TABLE_NAME = DBHelper.TABLE_NAME;		//"checklist_table";
+	public static final String KEY_ROWID = DBHelper.KEY_ROWID;			//"_id";
+	public static final String KEY_MODE = DBHelper.KEY_MODE;			// "mode";			//1=safe, 2=live, 3=etc
+	public static final String KEY_LIST_DATA = DBHelper.KEY_LIST_DATA;//"list_data";
+    
+    public DBHandler(Context ctx) {
+    	this.helper =  DBHelper.getInstance(ctx);  //db [true,false] check
+    	this.db = helper.getWritableDatabase();
+    }
 
-	public DBHandler(Context ctx) {
-		this.helper = new DBHelper(ctx);
-		this.db = helper.getWritableDatabase();
-	}
-
-	public static DBHandler open(Context ctx) throws SQLException {
-		DBHandler handler = new DBHandler(ctx);
-
-		return handler;
+    public DBHandler open(Context ctx) throws SQLException {
+        DBHandler handler = new DBHandler(ctx);        
+        return handler;    
 	}
 
 	public void close() {
@@ -43,7 +42,12 @@ public class DBHandler {
 
 		return db.insert(TABLE_NAME, null, values);
 	}
-
+	
+	//all delete
+	public boolean deleteMemberAllRows() {
+		return db.delete(TABLE_NAME, null, null) == 1;
+	}
+	
 	public boolean delete(long rowID) {
 		Log.v(TAG, "delete()  rowID::" + rowID);
 		return db.delete(TABLE_NAME, KEY_ROWID + "=" + rowID, null) > 0;
@@ -89,6 +93,18 @@ public class DBHandler {
 
 		return lists;
 	}
+	   public Cursor selectAll2() throws SQLException {
+	    	Log.v(TAG,"selectAll() ");
+	    	String[] from = new String[] {
+	    			KEY_ROWID,
+	    			KEY_MODE, 
+	    			KEY_LIST_DATA	
+			};
+	    	
+	        Cursor cursor = db.query(true,TABLE_NAME, from, null, null, null, null, null, null);
+	        if (cursor != null) { cursor.moveToFirst(); }
+	        return cursor;
+	    }
 
 	public ArrayList<Lists> liveSelectAll() throws SQLException {
 		Log.v(TAG, "liveSelectAll() ");

@@ -3,8 +3,11 @@ package com.smartschool.tenversion;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
+private static final String TAG = "DBHelper";
+
 private static final String DATABASE_NAME = "tenversion.db";
 private static final int DATABASE_VERSION = 1;
 public static final String TABLE_NAME = "checklist_table";
@@ -14,9 +17,20 @@ public static final String KEY_ROWID = "_id";
 public static final String KEY_MODE = "mode";
 public static final String KEY_LIST_DATA = "list_data";
 	
+private static DBHelper mInstance = null;
+
 	public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+	
+	static synchronized DBHelper getInstance(Context context) {
+		if (mInstance == null) {
+			Log.v(TAG, "DBHelper ==null");
+			mInstance = new DBHelper(context);
+		}
+		Log.v(TAG, "DBHelper !=null");
+		return mInstance;
+	}
 
 	private static final String DATABASE_CREATE =
 			"CREATE TABLE "+TABLE_NAME+" ("+

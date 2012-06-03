@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="180dip"
+  android:layout_height="120dip"
+ >
+ <LinearLayout
+     android:id="@+id/dellist_btnlayout"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:orientation="horizontal" >
+
+     <Button
+         android:id="@+id/dellist_deleteBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="삭제" />
+
+     <Button
+         android:id="@+id/dellist_cancelBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="취소" />
+ </LinearLayout>
+ 
+  <TextView
+     android:id="@+id/dellist_testview"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_above="@id/dellist_btnlayout"
+      />
+
+</RelativeLayout>
+

@@ -25,4 +25,10 @@
     <!-- TestDialogActivity.java -->
     <string name="test_dialog1_btn_txt">test dialog 1 </string>
     
+    
+     <!-- List Tag id -->
+    <item type="id" name="tag_id"></item> 
+    <item type="id" name="tag_contents"></item> 
+    <item type="id" name="tag_mode"></item> 
+    
 </resources>
