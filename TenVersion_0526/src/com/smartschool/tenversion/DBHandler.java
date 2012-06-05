@@ -19,7 +19,11 @@ public class DBHandler {
 	public static final String KEY_ROWID = DBHelper.KEY_ROWID;			//"_id";
 	public static final String KEY_MODE = DBHelper.KEY_MODE;			// "mode";			//1=safe, 2=live, 3=etc
 	public static final String KEY_LIST_DATA = DBHelper.KEY_LIST_DATA;//"list_data";
-    
+	
+	public static final String SAFEMODE = "1";	
+	public static final String LIVEMODE = "2";	
+	public static final String ETCMODE = "3";	
+	
     public DBHandler(Context ctx) {
     	this.helper =  DBHelper.getInstance(ctx);  //db [true,false] check
     	this.db = helper.getWritableDatabase();
@@ -93,25 +97,67 @@ public class DBHandler {
 
 		return lists;
 	}
-	   public Cursor selectAll2() throws SQLException {
-	    	Log.v(TAG,"selectAll() ");
-	    	String[] from = new String[] {
-	    			KEY_ROWID,
-	    			KEY_MODE, 
-	    			KEY_LIST_DATA	
-			};
-	    	
-	        Cursor cursor = db.query(true,TABLE_NAME, from, null, null, null, null, null, null);
-	        if (cursor != null) { cursor.moveToFirst(); }
-	        return cursor;
-	    }
 
+	public Cursor selectAll2() throws SQLException {
+		Log.v(TAG, "selectAll() ");
+		String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
+
+		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
+				null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		return cursor;
+	}
+
+	public ArrayList<Lists> safeSelectAll() throws SQLException {
+		Log.v(TAG, "liveSelectAll() ");
+		ArrayList<Lists> lists = new ArrayList<Lists>();
+		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
+				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
+				new String[] { SAFEMODE }, null, null, null,
+				null);
+
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		while (cursor.moveToNext()) {
+			lists.add(new Lists(
+					cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), cursor
+							.getString(cursor.getColumnIndex(KEY_MODE)), cursor
+							.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
+		}
+
+		return lists;
+	}
+	
 	public ArrayList<Lists> liveSelectAll() throws SQLException {
 		Log.v(TAG, "liveSelectAll() ");
 		ArrayList<Lists> lists = new ArrayList<Lists>();
 		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
 				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
-				new String[] { String.valueOf("1") }, null, null, null,
+				new String[] { LIVEMODE }, null, null, null,
+				null);
+
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		while (cursor.moveToNext()) {
+			lists.add(new Lists(
+					cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), cursor
+							.getString(cursor.getColumnIndex(KEY_MODE)), cursor
+							.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
+		}
+
+		return lists;
+	}
+	
+	public ArrayList<Lists> etcSelectAll() throws SQLException {
+		Log.v(TAG, "liveSelectAll() ");
+		ArrayList<Lists> lists = new ArrayList<Lists>();
+		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
+				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
+				new String[] { SAFEMODE }, null, null, null,
 				null);
 
 		if (cursor != null) {
