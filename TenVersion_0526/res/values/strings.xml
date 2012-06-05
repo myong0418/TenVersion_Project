@@ -25,6 +25,10 @@
     <!-- TestDialogActivity.java -->
     <string name="test_dialog1_btn_txt">test dialog 1 </string>
     
+    <!-- FlipperViewActivity.java -->
+    <string name="testFlipper_btn_txt">test flipper View </string>
+    
+    
     
      <!-- List Tag id -->
     <item type="id" name="tag_id"></item> 

@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		>
-	<Button android:id="@+id/flip_me"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="페이지 넘김"
-			/>
-	<ViewFlipper android:id="@+id/view_flipper"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		>
-		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:textStyle="bold"
-			android:textColor="#FF00FF00"
-			android:text="첫번째 페이지"
-		/>
-		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:textStyle="bold"
-			android:textColor="#FFFF0000"
-			android:text="두번째 페이지"
-		/>
-		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:textStyle="bold"
-			android:textColor="#FFFFFF00"
-			android:text="세번째 페이지"
-		/>
-	</ViewFlipper>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="첫번째 페이지"
+            android:textColor="#FF00FF00"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="두번째 페이지"
+            android:textColor="#FFFF0000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="세번째 페이지"
+            android:textColor="#FFFFFF00"
+            android:textStyle="bold" />
+    </ViewFlipper>
+
 </LinearLayout>
-
-

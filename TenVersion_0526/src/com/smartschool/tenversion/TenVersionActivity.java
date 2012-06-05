@@ -31,6 +31,10 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
         Button testdailogBtn = (Button)findViewById(R.id.testdailog_btn);
         testdailogBtn.setOnClickListener(this);
         
+       //test Flipper btn
+        Button testFlipperBtn = (Button)findViewById(R.id.testFlipper_btn);
+        testFlipperBtn.setOnClickListener(this);
+        
     }
 
 	public void onClick(View v) {
@@ -62,6 +66,10 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
 			startActivity(intent);
 			break;
 
+		case R.id.testFlipper_btn:
+			intent = new Intent(this,FlipperView.class);
+			startActivity(intent);
+			break;
 			
 		}
 		
