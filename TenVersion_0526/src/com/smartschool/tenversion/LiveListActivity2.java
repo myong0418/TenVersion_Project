@@ -74,7 +74,7 @@ public class LiveListActivity2 extends ListActivity  implements View.OnClickList
         
 	public void add_liveRow(DBHandler dbh) {
 		String liveName = add_live.getText().toString();
-		long cnt = dbh.insert("1", liveName);
+		long cnt = dbh.insert("2", liveName);
 		
 		if(cnt == -1 ){
 			Toast.makeText(this, liveName + "가 추가되지 않았습니다. ",Toast.LENGTH_LONG).show();
