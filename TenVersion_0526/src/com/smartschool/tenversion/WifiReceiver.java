@@ -16,6 +16,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -245,21 +246,32 @@ public class WifiReceiver extends BroadcastReceiver{
 //			 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //			 context.startActivity(i);
 //			 
-			Intent intent = new Intent();
+			
+			 Intent intent = new Intent();
 			 intent.setClassName("com.smartschool.tenversion", "com.smartschool.tenversion.FlipperView");
 			 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			 context.startActivity( intent);
-	
+			
+			 //start vibrator
+			 startVibrator(context);							// ..............add setting vibrate
 			 
-			 
-			startSound(context, R.raw.dingdong);      //ex)
+			 //start alarm
+			 startSound(context, R.raw.dingdong);     	// ..............add select sound
 			
 
 		}
 		WifiState = false;
 	}
 	
+	public static void startVibrator(Context mContext){
+		 Vibrator vibrator = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
+		 vibrator.vibrate(2000);  //2sec
+	}
 	
+	
+	
+	
+	// WIFI Info  START
 	public static String getConnectedWifiSSID(Context mContext){
 		Log.v(TAG, "getConnectedWifiSSID()");
 		wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
@@ -288,4 +300,5 @@ public class WifiReceiver extends BroadcastReceiver{
 		String wifiBSSID = sharedPrefs.getString(KEY_WIFIBSSID, null);
 		return wifiBSSID;
 	}
+	// WIFI Info  END
 }
