@@ -24,21 +24,21 @@
 		android:id="@+id/addBtn"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
-		android:text="add"
+		android:text="추가"
 		android:layout_weight="1"
 		/>
 	<Button
 		android:id="@+id/deleteBtn"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
-		android:text="Delete"
+		android:text="삭제"
 		android:layout_weight="1"
 		/>
 	<Button
 		android:id="@+id/testBtn"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
-		android:text="test"
+		android:text="전체삭제"
 		android:layout_weight="1"
 		
 		/>

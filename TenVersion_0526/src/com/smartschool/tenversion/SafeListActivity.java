@@ -83,6 +83,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
         checkListDelBtn = (Button)findViewById(R.id.deleteBtn);
         checkListDelBtn.setOnClickListener(this);
         
+        
         //listView
         buddyListView =(ListView)findViewById(R.id.listView);
         //buddyListView.setOnItemClickListener(this);
@@ -91,8 +92,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
 
 		/**  DB  **/
      //   contactsDBHelper = new ContactsDBHelper(this);
-        mDBHandler = new DBHandler(this);
-        mDBHandler.open(this);
+        mDBHandler = DBHandler.open(this);
         // requastBuddylist();
         updateListview();
        
@@ -250,6 +250,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
 			
   
     public void onClick(View v) {
+    	Intent intent = null;
 		switch(v.getId()){
 		case R.id.addBtn: 		//add list Item
 			Log.v(TAG,"chekListAddBtn Click");
@@ -269,8 +270,8 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
 			
 			break;
 		case R.id.testBtn:  	//reques tbuddylist
-//			requestBuddylist();
-//			updateListview();
+			intent = new Intent(this, LIveListDelActivity.class);
+			startActivity(intent);
 			break;
 		}
 	}
