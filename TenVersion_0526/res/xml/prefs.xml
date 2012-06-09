@@ -16,12 +16,22 @@
             android:title="알람설정"
             android:enabled="true"
             android:key="alarm_mode"
+            android:defaultValue="true"
             android:summary="알람 on"/>
+        
+         <Preference
+            android:title="알람시간 설정"
+            android:enabled="true"
+            android:key="alarm_time_mode"
+            android:summary="" />
+         
         <CheckBoxPreference
             android:title="진동설정"
             android:enabled="true"
             android:key="vibrator_mode"
-            android:summary="진동 on"/>
+            android:defaultValue="true"
+            android:summary="진동 on"
+            />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="Help" >

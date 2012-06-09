@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,6 +27,9 @@ public class WifiReceiver extends BroadcastReceiver{
 	public static final String KEY_WIFI_MODE = "wifi_mode";
 	public static final String KEY_WIFISSID = "wifi_ssid";
 	public static final String KEY_WIFIBSSID = "wifi_bssid";
+	//hw Key
+	public static final String KEY_ALARM = "alarm_mode";
+	public static final String KEY_VIBRATE = "vibrator_mode";
 	
 	//wifi
 	private static WifiManager wifiManager =null;
@@ -40,7 +44,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	private static MediaPlayer mplay = null;
 	
 	//vibrator
-	private static int VIBRATOR_TIME = 1000;
+	private static int VIBRATE_TIME = 1000;
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -197,16 +201,20 @@ public class WifiReceiver extends BroadcastReceiver{
 	//set Sound
 	public void startSound(Context context, int id) {
 		Log.v(TAG, "soundPlay()");
-		try {
-			MediaPlayer mplay = MediaPlayer.create(context, id);
-			if (mplay == null) {
-				mplay = MediaPlayer.create(context, R.raw.dingdong);
+		boolean alramState = WifiReceiver.getCheckBoxPrefence(mContext, KEY_ALARM);
+		if (alramState) {
+
+			try {
+				MediaPlayer mplay = MediaPlayer.create(context, id);
+				if (mplay == null) {
+					mplay = MediaPlayer.create(context, R.raw.dingdong);
+				}
+				mplay.seekTo(0);
+				mplay.start();
+				Toast.makeText(context, "Start Sound ", Toast.LENGTH_SHORT);
+			} catch (Exception e) {
+				Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
 			}
-			mplay.seekTo(0);
-			mplay.start();
-			Toast.makeText(context, "Start Sound ", Toast.LENGTH_SHORT);
-		} catch (Exception e) {
-			Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
 		}
 		
 
@@ -257,7 +265,7 @@ public class WifiReceiver extends BroadcastReceiver{
 			 context.startActivity( intent);
 			
 			 //start vibrator
-			 startVibrator(context);							// ..............add setting vibrate
+			 startVibrate(context);							// ..............add setting vibrate
 			 
 			 //start alarm
 			 startSound(context, R.raw.dingdong);     	// ..............add select sound
@@ -267,9 +275,12 @@ public class WifiReceiver extends BroadcastReceiver{
 		WifiState = false;
 	}
 	
-	public static void startVibrator(Context mContext){
-		 Vibrator vibrator = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
-		 vibrator.vibrate(VIBRATOR_TIME);  //2sec
+	public static void startVibrate(Context mContext){
+		  boolean vibrateState = WifiReceiver.getCheckBoxPrefence(mContext,KEY_VIBRATE);
+		  if(vibrateState){
+			 Vibrator vibrator = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
+			 vibrator.vibrate(VIBRATE_TIME);  //2sec
+		  }
 	}
 	
 	
@@ -305,4 +316,21 @@ public class WifiReceiver extends BroadcastReceiver{
 		return wifiBSSID;
 	}
 	// WIFI Info  END
+	
+	
+	//checkbox sharedPreference START
+	public static void setCheckBoxPrefence(Context mContext, String key, boolean check){
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(key,Context.MODE_PRIVATE);
+		Editor editor = sharedPrefs.edit();
+        
+        editor.putBoolean(key, check); 
+        editor.commit();
+	}
+	
+	public static boolean getCheckBoxPrefence(Context mContext,String key){
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(key,Context.MODE_PRIVATE);
+		boolean checkBoxState = sharedPrefs.getBoolean(key, false);
+		return checkBoxState;
+	}
+	//set checkbox sharedPreference END
 }
