@@ -33,6 +33,7 @@
         <activity android:name=".SettingListActivity" />
         <activity android:name=".LiveListAddActivity" />
         <activity android:name=".LIveListDelActivity" />
+        <activity android:name=".LIveListDelActivity2" />
         <activity android:name=".TestDialogActivity" />
         
         <activity android:name=".FlipperView" >
