@@ -69,7 +69,7 @@ public class PreviewListActivity extends Activity implements OnClickListener{
     	previewTV.setText(previewList);
     }
 
-	@Override
+	
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.preview_ok_btn:
