@@ -1,28 +1,35 @@
 package com.smartschool.tenversion;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class LIveListDelActivity extends ListActivity implements
+public class LIveListDelActivity2 extends ListActivity implements
 		View.OnClickListener {
-	private String[] cars = { "SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL",
-			"K5", "K7" };
+	private CheckListAdapter checkListAdapter = null;
+	private ArrayList<CheckListProfile> checkListItem = null;
 	private TextView selected;
 
+	private Button checkListAllcheckBtn = null; 
+	private Button checkListDelBtn = null;
+
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.livedellist);
 
-		setListAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_multiple_choice, cars));
+//		setListAdapter(new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_multiple_choice, cars));
 
 		ListView listView = getListView();
 		// listView.setItemsCanFocus(false);
@@ -39,38 +46,18 @@ public class LIveListDelActivity extends ListActivity implements
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		selected.setText(cars[position]);
+//		selected.setText(cars[position]);
 	}
 
 	public void onClick(View v) {
-		ListView list = getListView();
-		int cnt = 0;
-		Log.v("onClick start cnt =========", "" + cnt);
-		for (int i = 0; i < list.getCount(); i++) {
-			
-			if (list.isItemChecked(i) == false) {
-				Log.v("list.isItemChecked(" + i + ")", " ------- " + cnt );
-				cnt++;
-			}
-
-		}
 
 		switch (v.getId()) {
 		case R.id.allcheck:
-			if (cnt > 0) {
-				Log.v("allcheck true cnt =========", "" + cnt);
-				// 전체 선택
-				for (int i = 0; i < list.getCount(); i++)
-					list.setItemChecked(i, true);
-
-			} else {
-				Log.v("allcheck false cnt =========", "" + cnt);
-				// 선택 해제
-				
-				for (int i = 0; i < list.getCount(); i++)
-					list.setItemChecked(i, false);
-
-			}
+			// intent = new Intent(this, LiveListAddActivity.class);
+			// startActivity(intent);
+			new AlertDialog.Builder(this).setTitle("전체선택")
+					.setMessage("전체선택하시겠습니까?").setNeutralButton("확인", null)
+					.setNegativeButton("취소", null).show();
 			break;
 
 		case R.id.del_btn:
