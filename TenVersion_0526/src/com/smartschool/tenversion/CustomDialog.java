@@ -97,12 +97,12 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 			String addText =  addEditTxt.getText().toString();
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).addCheckList(addText);
-			}
-//			}else if(MODE ==2){ 	//live
-//				((LiveListActivity)mContext).addCheckList(addText);
+			
+			}else if(MODE ==2){ 	//live
+				((LiveListActivity)mContext).addCheckList(addText);
 //			}else if(MODE ==3){	 //etc
 //				((EtcListActivity)mContext).addCheckList(addText);
-//			}
+			}
 			
 			addEditTxt.setText("");
 			this.dismiss();
@@ -113,12 +113,12 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		case R.id.dellist_deleteBtn:
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).delCheckList();
-			}
-//			}else if(MODE ==2){ 	//live
-//				((LiveListActivity)mContext).addCheckList(addText);
+			
+			}else if(MODE ==2){ 	//live
+				((LiveListActivity)mContext).delCheckList();
 //			}else if(MODE ==3){	 //etc
-//				((EtcListActivity)mContext).addCheckList(addText);
-//			}
+//				((EtcListActivity)mContext).delCheckList();
+			}
 			this.dismiss();
 			break;
 		case R.id.dellist_cancelBtn:
