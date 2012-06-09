@@ -56,7 +56,7 @@ public class PreviewListActivity extends Activity implements OnClickListener{
 				String listData = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_LIST_DATA));  			    		
 				Log.v(TAG,"mode  :: "+mode+ "   ,listData  :: "+listData );
 				checkListItem.add(new CheckListProfile(id, mode, listData));
-				previewList = num+". "+listData+"\n";
+				previewList += num+". "+listData+"\n";
 			} while(mDBcursor.moveToNext());
 		}
     	mDBcursor.close();
