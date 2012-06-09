@@ -93,25 +93,16 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 	public boolean onPreferenceClick(Preference preference) {
 		Log.v(TAG,"onPreferenceClick()" );
 
-		switch (preference.getKey() ){
-		case KEY_WIFI_MODE: 
+		if(preference.getKey().equals(KEY_WIFI_MODE)){
 			Log.v(TAG,"KEY_WIFI_MODE" );
-			WifiReceiver.initWifiSetting(this);
-			break;
-		case KEY_ALARM:
+		}else if(preference.getKey().equals(KEY_ALARM)){
 			Log.v(TAG,"KEY_ALARM" );
-			break;
-		case KEY_HELP:
+		}else if(preference.getKey().equals(KEY_HELP)){
 			Log.v(TAG,"KEY_HELP" );
-			break;
-			
-		case KEY_VIBRATOR:
+		}else if(preference.getKey().equals(KEY_VIBRATOR)){
 			Log.v(TAG,"KEY_VIBRATOR" );
-			break;
-			
-			
 		}
-	
+
 		return false;
 	}
 	
