@@ -9,5 +9,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="preview" />
-    
+    <Button 
+        android:id="@+id/preview_ok_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ok" 
+        />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.smartschool.tenversion;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,7 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.flipper);
-
+		
 		flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 		flipper.setOnTouchListener(this);
 
@@ -82,11 +83,15 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 	    flipper.setInAnimation(AnimationUtils.loadAnimation(this,R.anim.push_right_in));
 	    flipper.setOutAnimation(AnimationUtils.loadAnimation(this,R.anim.push_right_out));
 	  }
-	  
+	  int requestCode=100;
 	  //TODO showPreview
 	  private void showPreview(){ 
-		  
+			Intent intent = new Intent(this, PreviewListActivity.class);
+			startActivityForResult(intent, requestCode);
+			finish();
 	  }
+
+
 	}
 
 
