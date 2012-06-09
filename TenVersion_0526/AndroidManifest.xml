@@ -40,6 +40,7 @@
                 <action android:name="smartplus.tenversion.action.flipper" />
             </intent-filter>
         </activity>
+        <activity android:name=".PreviewListActivity" />
 
 		<receiver android:name=".WifiReceiver" >
             <intent-filter>

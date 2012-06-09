@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <TextView
+<!--         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="첫번째 페이지"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="세번째 페이지"
             android:textColor="#FFFFFF00"
-            android:textStyle="bold" />
+            android:textStyle="bold" /> -->
     </ViewFlipper>
 
 </LinearLayout>
