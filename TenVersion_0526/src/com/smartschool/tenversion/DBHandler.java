@@ -24,14 +24,13 @@ public class DBHandler {
 	public static final String LIVEMODE = "2";	
 	public static final String ETCMODE = "3";	
 	
-    public DBHandler(Context ctx) {
-    	this.helper =  DBHelper.getInstance(ctx);  //db [true,false] check
+    private DBHandler(Context ctx) {
+    	this.helper =  new DBHelper(ctx);
     	this.db = helper.getWritableDatabase();
     }
 
-    public DBHandler open(Context ctx) throws SQLException {
-        DBHandler handler = new DBHandler(ctx);        
-        return handler;    
+    public static DBHandler open(Context ctx) throws SQLException {
+        return new DBHandler(ctx);        
 	}
 
 	public void close() {
@@ -102,8 +101,31 @@ public class DBHandler {
 		Log.v(TAG, "selectAll() ");
 		String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
 
-		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
-				null, null, null);
+//		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
+//				null, null, null);
+		
+		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
+				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
+				new String[] { SAFEMODE }, null, null, null,
+				null);
+		
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		return cursor;
+	}
+	public Cursor selectAll3() throws SQLException {
+		Log.v(TAG, "selectAll() ");
+		String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
+
+//		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
+//				null, null, null);
+		
+		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
+				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
+				new String[] { LIVEMODE }, null, null, null,
+				null);
+		
 		if (cursor != null) {
 			cursor.moveToFirst();
 		}

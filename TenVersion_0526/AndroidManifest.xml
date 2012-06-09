@@ -11,6 +11,7 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.VIBRATE" />
 	
     <application
         android:icon="@drawable/ic_launcher"
@@ -39,6 +40,7 @@
                 <action android:name="smartplus.tenversion.action.flipper" />
             </intent-filter>
         </activity>
+        <activity android:name=".PreviewListActivity" />
 
 		<receiver android:name=".WifiReceiver" >
             <intent-filter>

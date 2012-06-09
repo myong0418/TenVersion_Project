@@ -22,15 +22,6 @@ private static DBHelper mInstance = null;
 	public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-	
-	static synchronized DBHelper getInstance(Context context) {
-		if (mInstance == null) {
-			Log.v(TAG, "DBHelper ==null");
-			mInstance = new DBHelper(context);
-		}
-		Log.v(TAG, "DBHelper !=null");
-		return mInstance;
-	}
 
 	private static final String DATABASE_CREATE =
 			"CREATE TABLE "+TABLE_NAME+" ("+

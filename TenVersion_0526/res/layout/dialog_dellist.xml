@@ -6,7 +6,7 @@
  >
  <LinearLayout
      android:id="@+id/dellist_btnlayout"
-     android:layout_width="wrap_content"
+     android:layout_width="fill_parent"
      android:layout_height="wrap_content"
      android:layout_alignParentBottom="true"
      android:orientation="horizontal" >
@@ -15,12 +15,14 @@
          android:id="@+id/dellist_deleteBtn"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_weight="1"
          android:text="삭제" />
 
      <Button
          android:id="@+id/dellist_cancelBtn"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_weight="1"
          android:text="취소" />
  </LinearLayout>
  
