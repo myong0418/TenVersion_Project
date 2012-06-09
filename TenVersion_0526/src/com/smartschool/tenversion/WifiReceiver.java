@@ -32,11 +32,15 @@ public class WifiReceiver extends BroadcastReceiver{
 	private static NotificationManager notiMgr = null;
 	private List<ScanResult> mScanResult; // ScanResult List
 	private static Context mContext;
+	
 	//wifi state
 	public static  boolean WifiState = false;
 	
 	//alarm
 	private static MediaPlayer mplay = null;
+	
+	//vibrator
+	private static int VIBRATOR_TIME = 1000;
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -265,7 +269,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	
 	public static void startVibrator(Context mContext){
 		 Vibrator vibrator = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
-		 vibrator.vibrate(2000);  //2sec
+		 vibrator.vibrate(VIBRATOR_TIME);  //2sec
 	}
 	
 	

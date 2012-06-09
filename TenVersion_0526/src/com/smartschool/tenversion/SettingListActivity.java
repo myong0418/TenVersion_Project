@@ -9,11 +9,13 @@ import android.content.SharedPreferences.Editor;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,7 +26,17 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 	public static final String KEY_WIFISSID = "wifi_ssid";
 	public static final String KEY_WIFIBSSID = "wifi_bssid";
 	
+	public static final String KEY_ALARM = "alarm_mode";
+	public static final String KEY_VIBRATOR = "vibrator_mode";
+	
+	public static final String KEY_HELP = "help_mode";
+	
 	public static ListPreference wifiListPref = null;
+	
+	public static CheckBoxPreference alarmPref = null;
+	public static CheckBoxPreference vibratorPref = null;
+	
+	public static PreferenceScreen helpPref = null;
 	
 //	private SharedPreferences sharedPrefs = null;
 	
@@ -50,6 +62,20 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 			wifiListPref.setValue(wifimode);
 
 		}
+		
+		alarmPref = (CheckBoxPreference) findPreference(KEY_ALARM);  // (R.id.wifi_listpref);
+		alarmPref.setOnPreferenceClickListener(this);
+        alarmPref.setOnPreferenceChangeListener(this);
+        
+        vibratorPref = (CheckBoxPreference) findPreference(KEY_VIBRATOR);  // (R.id.wifi_listpref);
+        vibratorPref.setOnPreferenceClickListener(this);
+        vibratorPref.setOnPreferenceChangeListener(this);
+		
+		
+        
+        helpPref = (PreferenceScreen) findPreference(KEY_HELP);  // (R.id.wifi_listpref);
+        helpPref.setOnPreferenceClickListener(this);
+        helpPref.setOnPreferenceChangeListener(this);
 
     }
 
@@ -66,8 +92,26 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 
 	public boolean onPreferenceClick(Preference preference) {
 		Log.v(TAG,"onPreferenceClick()" );
-		
-		WifiReceiver.initWifiSetting(this);
+
+		switch (preference.getKey() ){
+		case KEY_WIFI_MODE: 
+			Log.v(TAG,"KEY_WIFI_MODE" );
+			WifiReceiver.initWifiSetting(this);
+			break;
+		case KEY_ALARM:
+			Log.v(TAG,"KEY_ALARM" );
+			break;
+		case KEY_HELP:
+			Log.v(TAG,"KEY_HELP" );
+			break;
+			
+		case KEY_VIBRATOR:
+			Log.v(TAG,"KEY_VIBRATOR" );
+			break;
+			
+			
+		}
+	
 		return false;
 	}
 	
