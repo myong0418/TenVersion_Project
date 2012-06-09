@@ -33,8 +33,13 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 	
 	public static ListPreference wifiListPref = null;
 	
+	//checkBoxPref alarm,vibrator setting
 	public static CheckBoxPreference alarmPref = null;
-	public static CheckBoxPreference vibratorPref = null;
+	public static CheckBoxPreference vibratePref = null;
+	public static final String alram_str = "알람";
+	public static final String vibrate_str = "진동";
+	public static String checkStateStr =  " off";
+	
 	
 	public static PreferenceScreen helpPref = null;
 	
@@ -66,10 +71,17 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 		alarmPref = (CheckBoxPreference) findPreference(KEY_ALARM);  // (R.id.wifi_listpref);
 		alarmPref.setOnPreferenceClickListener(this);
         alarmPref.setOnPreferenceChangeListener(this);
+        boolean alarmState = WifiReceiver.getCheckBoxPrefence(this,KEY_ALARM);
+        alarmPref.setChecked(alarmState);
+    	setCheckBoxSummary(alarmPref,alram_str,String.valueOf(alarmState));
         
-        vibratorPref = (CheckBoxPreference) findPreference(KEY_VIBRATOR);  // (R.id.wifi_listpref);
-        vibratorPref.setOnPreferenceClickListener(this);
-        vibratorPref.setOnPreferenceChangeListener(this);
+        vibratePref = (CheckBoxPreference) findPreference(KEY_VIBRATOR);  // (R.id.wifi_listpref);
+        vibratePref.setOnPreferenceClickListener(this);
+        vibratePref.setOnPreferenceChangeListener(this);
+        boolean vibratorState = WifiReceiver.getCheckBoxPrefence(this,KEY_VIBRATOR);
+        vibratePref.setChecked(vibratorState);
+        setCheckBoxSummary(vibratePref,vibrate_str,String.valueOf(vibratorState));
+    
 		
 		
         
@@ -95,12 +107,21 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 
 		if(preference.getKey().equals(KEY_WIFI_MODE)){
 			Log.v(TAG,"KEY_WIFI_MODE" );
+			
 		}else if(preference.getKey().equals(KEY_ALARM)){
 			Log.v(TAG,"KEY_ALARM" );
-		}else if(preference.getKey().equals(KEY_HELP)){
-			Log.v(TAG,"KEY_HELP" );
+	        boolean alarmState = WifiReceiver.getCheckBoxPrefence(this,KEY_ALARM);
+	        WifiReceiver.setCheckBoxPrefence(this,KEY_ALARM,!alarmState);
+	        alarmPref.setChecked(!alarmState);  //set checkBox
+	        
 		}else if(preference.getKey().equals(KEY_VIBRATOR)){
 			Log.v(TAG,"KEY_VIBRATOR" );
+	        boolean vibratorState = WifiReceiver.getCheckBoxPrefence(this,KEY_VIBRATOR);
+	        WifiReceiver.setCheckBoxPrefence(this,KEY_VIBRATOR,!vibratorState);
+	        vibratePref.setChecked(!vibratorState);  //set checkBox
+	        
+		}else if(preference.getKey().equals(KEY_HELP)){
+			Log.v(TAG,"KEY_HELP" );
 		}
 
 		return false;
@@ -130,10 +151,7 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 				}
 			}
 			Log.v(TAG,"=======================================\n");
-			
-			
-			
-			
+
 			String connectedWifi = WifiReceiver.getConnectedWifiBSSID(this);
 			String wifimode = WifiReceiver.getWifiSettingBSSID(this);
 			Log.e(TAG, "connectedWifi::"+connectedWifi+", wifimode"+wifimode);
@@ -153,8 +171,25 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 			}else{
 				WifiReceiver.cancleNotification(this);
 			}
+		}else if(preference == alarmPref){
+			setCheckBoxSummary(alarmPref,alram_str,objValue.toString());
 			
+		}else if(preference == vibratePref){
+			setCheckBoxSummary(vibratePref,vibrate_str,objValue.toString());
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return false;
 	}
 	
@@ -162,7 +197,7 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
 	
 
 	
-	//set sharedPreference
+	//set wifi sharedPreference
 	public void setWifiSetting(String wifiSSID,String wifiBSSID){
 		SharedPreferences sharedPrefs = this.getSharedPreferences(KEY_WIFI_MODE,Context.MODE_PRIVATE);
 		Editor editor = sharedPrefs.edit();
@@ -172,4 +207,26 @@ public class SettingListActivity extends PreferenceActivity  implements OnPrefer
        
         editor.commit();
 	}
+	//set checkBoxPreference Summary
+	public void setCheckBoxSummary(Preference pref ,String hwMode, String checkState){
+		if(checkState.equals("true")){
+			checkStateStr =  " on";
+		}else{
+			checkStateStr =  " off";
+		}
+		pref.setSummary(hwMode + checkStateStr);
+	}
+//		//set checkbox sharedPreference
+//		public void setCheckBoxPrefence(String key, boolean check){
+//			SharedPreferences sharedPrefs = this.getSharedPreferences(key,Context.MODE_PRIVATE);
+//			Editor editor = sharedPrefs.edit();
+//	        
+//	        editor.putBoolean(key, check); 
+//	        editor.commit();
+//		}
+//		public boolean getCheckBoxPrefence(String key){
+//			SharedPreferences sharedPrefs = this.getSharedPreferences(key,Context.MODE_PRIVATE);
+//			boolean checkBoxState = sharedPrefs.getBoolean(key, false);
+//			return checkBoxState;
+//		}
 }
