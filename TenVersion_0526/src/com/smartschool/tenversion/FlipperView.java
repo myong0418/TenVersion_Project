@@ -17,7 +17,6 @@ import android.widget.ViewFlipper;
 
 public class FlipperView extends Activity  implements View.OnTouchListener {
 	private static final String TAG = "TestFlipperviewActivity";
-	private static final String Safemode ="1";
     ViewFlipper flipper;
      
      float xAtDown;
@@ -89,37 +88,61 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 	    flipper.setOutAnimation(AnimationUtils.loadAnimation(this,R.anim.push_right_out));
 	  }
 	  
-	  //add FlipperChild View
-	    public void addFlipperChildView(){
-	    	Log.v(TAG,"addFlipperChildView()");
-	        DBHandler mDBHandler = DBHandler.open(this);
-	    	Cursor mDBcursor = mDBHandler.selectAllList(Safemode);
-//	    	listNum =  mDBcursor.getCount();
-	    	Log.v(TAG,"listNum  :: "+listNum);
-	    	int num = 0;
-	    	if(mDBcursor.moveToNext()){
-				do {
-					num++;
-					//String id = mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
-					long id = mDBcursor.getLong(mDBcursor.getColumnIndex(DBHelper.KEY_ROWID));
-					String mode = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_MODE));
-					String listData = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_LIST_DATA));  			    		
-					Log.v(TAG,"mode  :: "+mode+ "   ,listData  :: "+listData );
-					
-					TextView tv = new TextView(this);
-					tv.setText("View :: " + num + "\n  listData :: "+listData);
-					tv.setTextColor(Color.CYAN);
-					tv.setTag(num);
-					flipper.addView(tv);
-					
-					//num++;
-				} while(mDBcursor.moveToNext());
+//	// add FlipperChild View
+//	public void addFlipperChildView() {
+//		Log.v(TAG, "addFlipperChildView()");
+//		DBHandler mDBHandler = DBHandler.open(this);
+//		Cursor mDBcursor = mDBHandler.dbSelectAll();
+//		// listNum = mDBcursor.getCount();
+//		Log.v(TAG, "listNum  :: " + listNum);
+//		int num = 0;
+//		if (mDBcursor.moveToNext()) {
+//			do {
+//				num++;
+//				// String id =
+//				// mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
+//				long id = mDBcursor.getLong(mDBcursor.getColumnIndex(DBHelper.KEY_ROWID));
+//				String mode = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_MODE));
+//				String listData = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_LIST_DATA));
+//				Log.v(TAG, "mode  :: " + mode + "   ,listData  :: " + listData);
+//
+//				TextView tv = new TextView(this);
+//				tv.setText("View :: " + num + "\n  listData :: " + listData);
+//				tv.setTextColor(Color.CYAN);
+//				tv.setTag(num);
+//				flipper.addView(tv);
+//
+//				// num++;
+//			} while (mDBcursor.moveToNext());
+//		}
+//		mDBcursor.close();
+//		listNum = num;
+//	}
+	  
+	  
+	// add FlipperChild View
+		public boolean addFlipperChildView() {
+			Log.v(TAG, "addFlipperChildView()");
+
+			DBHandler mDBHandler = DBHandler.open(this);
+			ArrayList<CheckListProfile> checkList = mDBHandler.dbSelectAllList();
+			listNum = checkList.size();
+			Log.v(TAG, "listNum  :: " +listNum);
+			
+			if(listNum == 0){
+				return false;
 			}
-	    	mDBcursor.close();
-	    	listNum =  num;
-	    }
-	  
-	  
+			for(int i=0; i<checkList.size(); i++){
+				TextView tv = new TextView(this);
+				
+				tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents() );
+				tv.setTextColor(Color.CYAN);
+				tv.setTag(i);
+				flipper.addView(tv);
+			}
+			mDBHandler.close();
+			return true;
+		}
 	  
 	  //showPreview
 	  private void showPreview(){ 
@@ -127,8 +150,6 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 			startActivity(intent);
 			finish();
 	  }
-
-
 	}
 
 

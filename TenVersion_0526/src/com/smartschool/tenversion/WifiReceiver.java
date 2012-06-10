@@ -35,7 +35,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	private static WifiManager wifiManager =null;
 	private static NotificationManager notiMgr = null;
 	private List<ScanResult> mScanResult; // ScanResult List
-	private static Context mContext;
+	//private static Context mContext;
 	
 	//wifi state
 	public static  boolean WifiState = false;
@@ -50,7 +50,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	public void onReceive(Context context, Intent intent) {
 		Log.d(TAG, "onReceive() context ::" + context);
 
-		mContext = context;
+		//mContext = context;
 
 		String action = intent.getAction();
 
@@ -78,7 +78,7 @@ public class WifiReceiver extends BroadcastReceiver{
 
 					if (connectedWifi == null || wifimode == null) {
 						Log.e(TAG, "failed wifi info");
-						Toast.makeText(mContext, "failed wifi info",Toast.LENGTH_SHORT);
+						Toast.makeText(context, "failed wifi info",Toast.LENGTH_SHORT);
 					}
 					if (connectedWifi.equals(wifimode)) { 						// connected wifi mode
 						Log.d(TAG, "noti.start");
@@ -107,82 +107,25 @@ public class WifiReceiver extends BroadcastReceiver{
 
 					// cancel notification
 					cancleNotification(context);
-
 					// alarm
 					ringAlam(context);
 				}
 			} catch (Exception e) {
 				Log.e(TAG, "Exception e ::" + e);
 				Log.e(TAG, "failed wifi ");
-				Toast.makeText(mContext, "failed wifi state",Toast.LENGTH_SHORT);
 				// cancel notification
 				cancleNotification(context);
 			}
-			
-
 		} else if (action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
 			Log.d(TAG, "WIFI_STATE_CHANGED_ACTION");
-//			wifiManager = (WifiManager) context
-//					.getSystemService(Context.WIFI_SERVICE);
-//			// wifiManager.getScanResults();
-//			getWIFIScanResult();
 		}
 	}
 	
-	
-	public static boolean initWifiSetting(Context mContext){
-		Log.v(TAG,"initWifiSetting()" );
-		
-		if(SettingListActivity.wifiListPref == null){
-			SettingListActivity.wifiListPref.setEnabled(false);
-			return false;
-		}
-		
-        WifiManager	wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-        if(wifiManager==null){
-        	SettingListActivity.wifiListPref.setEnabled(false);
-        	return false;
-        }
-        
-        int scanCount = 0;
-        
-        // init WIFISCAN
-        List<ScanResult> mScanResult; // ScanResult List
-        mScanResult = wifiManager.getScanResults(); // ScanResult
-        if(mScanResult==null){
-        	Log.v(TAG,"mScanResult==null" );
-        	SettingListActivity.wifiListPref.setEnabled(false);
-        	return false;
-        }else{
-        	Log.v(TAG,"mScanResult!=null" );
-        	SettingListActivity.wifiListPref.setEnabled(true);
-        }
-		CharSequence[] entries = new CharSequence[mScanResult.size()];
-		CharSequence[] entryValues = new CharSequence[mScanResult.size()];
-        
-        // Scan count
-		Log.v(TAG,"Scan count is \t" + ++scanCount + " times \n");
 
-		Log.v(TAG,"=======================================\n");
-		for (int i = 0; i < mScanResult.size(); i++) {
-			ScanResult result = mScanResult.get(i);
-			Log.v(TAG,(i + 1) + ". SSID : " + result.SSID.toString()+ "\t\t RSSI : " + result.level + " dBm\n");
-			
-			entries[i] = result.SSID.toString();
-			entryValues[i] = result.BSSID.toString();
-			
-			Log.d(TAG,(i + 1) + ". entries : "+entries[i]);
-			Log.d(TAG,(i + 1) + ". entryValues : "+entryValues[i]);
-		}
-		Log.v(TAG,"=======================================\n");
-		
-        
-		SettingListActivity.wifiListPref.setEntries(entries);
-		SettingListActivity.wifiListPref.setEntryValues(entryValues);
-        return true;
-	}
 	
 	
+	
+/**Notification START**/	
 	public static void setNotification(Context mContext){
 		notiMgr = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
 		Intent goIntent = new Intent(mContext,TenVersionActivity.class);
@@ -194,48 +137,15 @@ public class WifiReceiver extends BroadcastReceiver{
 		notiMgr.notify(0, notification);
 	}
 	
-	public static void cancleNotification(Context mContext){
-		notiMgr = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
+	public static void cancleNotification(Context context){
+		notiMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 		notiMgr.cancel(0);
 	}
-	//set Sound
-	public void startSound(Context context, int id) {
-		Log.v(TAG, "soundPlay()");
-		boolean alramState = WifiReceiver.getCheckBoxPrefence(mContext, KEY_ALARM);
-		if (alramState) {
-
-			try {
-				MediaPlayer mplay = MediaPlayer.create(context, id);
-				if (mplay == null) {
-					mplay = MediaPlayer.create(context, R.raw.dingdong);
-				}
-				mplay.seekTo(0);
-				mplay.start();
-				Toast.makeText(context, "Start Sound ", Toast.LENGTH_SHORT);
-			} catch (Exception e) {
-				Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
-			}
-		}
-		
-
-	}
-
-	public void stopSound(Context context, int id) {
-		Log.v(TAG, "soundPlay()");
-        try {
-            if(mplay == null) {
-            	mplay = MediaPlayer.create(context,  R.raw.dingdong);
-            }
-            mplay.stop();
-            mplay = null;
-        }catch( Exception e ) {
-            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
-        }
-	}
-
-
-
+/**Notification END**/
 	
+	
+	
+/**SOUND START**/
 	//ringing alarm
 	public void ringAlam(Context context) {
 		Log.v(TAG, "ringAlam()");
@@ -275,6 +185,7 @@ public class WifiReceiver extends BroadcastReceiver{
 		WifiState = false;
 	}
 	
+	//set vibrate
 	public static void startVibrate(Context mContext){
 		  boolean vibrateState = WifiReceiver.getCheckBoxPrefence(mContext,KEY_VIBRATE);
 		  if(vibrateState){
@@ -282,43 +193,135 @@ public class WifiReceiver extends BroadcastReceiver{
 			 vibrator.vibrate(VIBRATE_TIME);  //2sec
 		  }
 	}
+	//set Sound
+	public void startSound(Context context, int id) {
+		Log.v(TAG, "startSound()");
+		boolean alramState = WifiReceiver.getCheckBoxPrefence(context, KEY_ALARM);
+		if (alramState) {
+
+			try {
+				MediaPlayer mplay = MediaPlayer.create(context, id);
+				if (mplay == null) {
+					mplay = MediaPlayer.create(context, R.raw.dingdong);
+				}
+				mplay.seekTo(0);
+				mplay.start();
+		
+			} catch (Exception e) {
+				Log.v(TAG, "e::"+e);
+			}
+		}
+		
+
+	}
+
+	public void stopSound(Context context, int id) {
+		Log.v(TAG, "soundPlay()");
+        try {
+            if(mplay == null) {
+            	mplay = MediaPlayer.create(context,  R.raw.dingdong);
+            }
+            mplay.stop();
+            mplay = null;
+        }catch( Exception e ) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+	}
+/**SOUND END**/
+
+
+	
+
 	
 	
 	
 	
-	// WIFI Info  START
-	public static String getConnectedWifiSSID(Context mContext){
+
+/**WIFI START**/
+	public static boolean initWifiSetting(Context context) {
+		Log.v(TAG, "initWifiSetting()");
+
+		if (SettingListActivity.wifiListPref == null) {
+			SettingListActivity.wifiListPref.setEnabled(false);
+			return false;
+		}
+
+		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		if (wifiManager == null) {
+			SettingListActivity.wifiListPref.setEnabled(false);
+			return false;
+		}
+
+		int scanCount = 0;
+
+		// init WIFISCAN
+		List<ScanResult> mScanResult; // ScanResult List
+		mScanResult = wifiManager.getScanResults(); // ScanResult
+		if (mScanResult == null) {
+			Log.v(TAG, "mScanResult==null");
+			SettingListActivity.wifiListPref.setEnabled(false);
+			return false;
+			
+		} else {
+			Log.v(TAG, "mScanResult!=null");
+			SettingListActivity.wifiListPref.setEnabled(true);
+		}
+		CharSequence[] entries = new CharSequence[mScanResult.size()];
+		CharSequence[] entryValues = new CharSequence[mScanResult.size()];
+
+		// Scan count
+		Log.v(TAG, "Scan count is \t" + ++scanCount + " times \n");
+
+		Log.v(TAG, "=======================================\n");
+		for (int i = 0; i < mScanResult.size(); i++) {
+			ScanResult result = mScanResult.get(i);
+			Log.v(TAG, (i + 1) + ". SSID : " + result.SSID.toString()
+					+ "\t\t RSSI : " + result.level + " dBm\n");
+
+			entries[i] = result.SSID.toString();
+			entryValues[i] = result.BSSID.toString();
+
+			Log.d(TAG, (i + 1) + ". entries : " + entries[i]);
+			Log.d(TAG, (i + 1) + ". entryValues : " + entryValues[i]);
+		}
+		Log.v(TAG, "=======================================\n");
+
+		SettingListActivity.wifiListPref.setEntries(entries);
+		SettingListActivity.wifiListPref.setEntryValues(entryValues);
+		return true;
+	}
+
+	public static String getConnectedWifiSSID(Context mContext) {
 		Log.v(TAG, "getConnectedWifiSSID()");
 		wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 		String connectedWifiSSID = wifiManager.getConnectionInfo().getSSID();
 
 		return connectedWifiSSID;
 	}
-	
-	public static String getConnectedWifiBSSID(Context mContext){
+
+	public static String getConnectedWifiBSSID(Context mContext) {
 		Log.v(TAG, "getConnectedWifiBSSID()");
 		wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 		String connectedWifiBSSID = wifiManager.getConnectionInfo().getBSSID();
-		
-		Log.v(TAG, "connectedWifiBSSID::"+connectedWifiBSSID);
+
 		return connectedWifiBSSID;
 	}
 
-	public static String getWifiSettingSSID(Context mContext){
-		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_WIFI_MODE,Context.MODE_PRIVATE);
+	public static String getWifiSettingSSID(Context mContext) {
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_WIFI_MODE, Context.MODE_PRIVATE);
 		String wifiSSID = sharedPrefs.getString(KEY_WIFISSID, null);
 		return wifiSSID;
 	}
-	
-	public static String getWifiSettingBSSID(Context mContext){
-		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_WIFI_MODE,Context.MODE_PRIVATE);
+
+	public static String getWifiSettingBSSID(Context mContext) {
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_WIFI_MODE, Context.MODE_PRIVATE);
 		String wifiBSSID = sharedPrefs.getString(KEY_WIFIBSSID, null);
 		return wifiBSSID;
 	}
-	// WIFI Info  END
+/**WIFI END**/
 	
 	
-	//checkbox sharedPreference START
+/**checkbox sharedPreference START**/
 	public static void setCheckBoxPrefence(Context mContext, String key, boolean check){
 		SharedPreferences sharedPrefs = mContext.getSharedPreferences(key,Context.MODE_PRIVATE);
 		Editor editor = sharedPrefs.edit();
@@ -332,5 +335,5 @@ public class WifiReceiver extends BroadcastReceiver{
 		boolean checkBoxState = sharedPrefs.getBoolean(key, false);
 		return checkBoxState;
 	}
-	//set checkbox sharedPreference END
+/**set checkbox sharedPreference END**/
 }

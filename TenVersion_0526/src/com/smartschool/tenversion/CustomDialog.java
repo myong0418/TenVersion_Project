@@ -18,35 +18,21 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 	private static final String TAG = "CustomDialog";
 
 	private Context mContext = null; 
+	private int MODE ;
 	
-	private static final int ALARM_DLG = 1;
-	private static final int DEL_DLG = 2;
-	private static final int PICTURE_DLG = 10;
+	//add ListDialog
+	private EditText addEditTxt = null;
+	//modify ListDialog
+	private EditText modifyEditTxt = null;
 	
-	private static final int REQ_PICK_PICTURE = 11;
-	private static final int REQ_TAKE_PICTURE = 12;
-	private TextView TextMessage;
 	
 	public CustomDialog(Context context, int theme) {
 		super(context, theme);
 		mContext = context;
-		//mainActivity = (KTFreezoneApp)context;
 	}
 
-//	public void create() {
-//		WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();    
-//		lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-//		lpWindow.dimAmount = 0.75f;
-//		getWindow().setAttributes(lpWindow);
-//
-//		setContentView(R.layout.dialog_free);
-//		Button freeCallBtn = (Button)findViewById(R.id.free_callBtn);
-//		freeCallBtn.setOnClickListener(this);
-//		Button freeSMSBtn = (Button)findViewById(R.id.free_smsBtn);
-//		freeSMSBtn.setOnClickListener(this);
-//	}
-	EditText addEditTxt = null;
-	int MODE ;
+
+
 	//addList dialog  safe,live,etc Activity
 	public void addListDialog(int mode) {
 		WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();    
@@ -84,6 +70,28 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		cancelBtn.setOnClickListener(this);
 		
 	}
+	
+	public void modifyListDialog(int mode, String contents){
+		WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();    
+		lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+		lpWindow.dimAmount = 0.75f;
+		getWindow().setAttributes(lpWindow);
+
+		MODE = mode;
+		setContentView(R.layout.dialog_modifylist);
+		
+		modifyEditTxt = (EditText)findViewById(R.id.modifylist_editview);
+		modifyEditTxt.setText(contents);
+				
+//	    TextView contentsTxt = (TextView)findViewById(R.id.modifylist_textview);
+//	    contentsTxt.setText(contents);
+	    
+		Button modifyBtn = (Button)findViewById(R.id.modifylist_modifyBtn);
+		modifyBtn.setOnClickListener(this);
+		Button cancelBtn = (Button)findViewById(R.id.modifylist_cancelBtn);
+		cancelBtn.setOnClickListener(this);
+		
+	}
 
 	@Override
 	public void dismiss() {
@@ -97,7 +105,6 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 			String addText =  addEditTxt.getText().toString();
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).addCheckList(addText);
-			
 			}else if(MODE ==2){ 	//live
 				((LiveListActivity)mContext).addCheckList(addText);
 //			}else if(MODE ==3){	 //etc
@@ -110,10 +117,10 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		case R.id.addlist_cancelBtn:
 			this.dismiss();
 			break;
+			
 		case R.id.dellist_deleteBtn:
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).delCheckList();
-			
 			}else if(MODE ==2){ 	//live
 				((LiveListActivity)mContext).delCheckList();
 //			}else if(MODE ==3){	 //etc
@@ -122,6 +129,21 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 			this.dismiss();
 			break;
 		case R.id.dellist_cancelBtn:
+			this.dismiss();
+			break;
+			
+		case R.id.modifylist_modifyBtn:
+			String modifyText =  modifyEditTxt.getText().toString();
+			if(MODE ==1){ 			//safe
+				((SafeListActivity)mContext).modifyCheckList(modifyText);
+//			}else if(MODE ==2){ 	//live
+//				((LiveListActivity)mContext).modifyCheckList(modifyText);
+//			}else if(MODE ==3){	 //etc
+//				((EtcListActivity)mContext).addCheckList(addText);
+			}
+			this.dismiss();
+			break;
+		case R.id.modifylist_cancelBtn:
 			this.dismiss();
 			break;
 

@@ -1,72 +1,36 @@
 package com.smartschool.tenversion;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
-
-import android.R.integer;
-import android.app.Dialog;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements
-		OnClickListener {
+public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements OnClickListener ,OnLongClickListener{
 	private static final String TAG = "CheckListAdapter";
 	private final LayoutInflater mInflater;
 	// private static int MODE; //safe,live,etc
-	private static final int DEL_DLG = 1;
 	private boolean DEL_MODE = false;
-	private static final int KEY_ID = 55;
-	private static final int KEY_MODE = 66;
-
 	ArrayList<CheckListProfile> checkListProfileList;
-
 	private Context mContext;
-	private SafeListActivity safeListActivity;
-	private LiveListActivity liveListActivity;
-
-	private boolean[] isChecked;
-	private String mselectAll;
-	private String munselectAll;
-	private String sortOrder;
-
-	private final int HIDE_CODE = 92728202;
-	private boolean[] checkFlag;
-	private boolean[] loadingFlag;
-
+	
 	// List<ContacstData> contacts;
 
-	public CheckListAdapter(Context context, int textViewResourceId,
-			ArrayList<CheckListProfile> objects, boolean del_mode) {
+	public CheckListAdapter(Context context, int textViewResourceId,ArrayList<CheckListProfile> objects, boolean del_mode) {
 		super(context, textViewResourceId, objects);
 		this.mContext = context;
 		mInflater = LayoutInflater.from(context);
 		checkListProfileList = objects;
 
 		DEL_MODE = del_mode;
-//		safeListActivity = (SafeListActivity) context;
-//		liveListActivity = (LiveListActivity) context;
 
 	}
 
@@ -79,16 +43,13 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.checklist_item_row, null);
 			holder = new ViewHolder();
-			holder.mRLayout = (RelativeLayout) convertView
-					.findViewById(R.id.buddy_rayout);
+			holder.mRLayout = (RelativeLayout) convertView.findViewById(R.id.buddy_rayout);
 			// holder.mImage
 			// =(ImageView)convertView.findViewById(R.id.buddy_image);
 			// holder.mMode = (TextView) convertView.findViewById(R.id.mode);
-			holder.mContents = (TextView) convertView
-					.findViewById(R.id.contents);
+			holder.mContents = (TextView) convertView.findViewById(R.id.contents);
 
-			holder.mDelBtn = (ImageButton) convertView
-					.findViewById(R.id.mindelBtn);
+			holder.mDelBtn = (ImageButton) convertView.findViewById(R.id.mindelBtn);
 			if (DEL_MODE) {
 				holder.mDelBtn.setVisibility(View.VISIBLE);
 			} else {
@@ -113,8 +74,13 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements
 		holder.mDelBtn.setTag(R.id.tag_id, item.getId());
 		holder.mDelBtn.setTag(R.id.tag_mode, item.getMode());
 		holder.mDelBtn.setTag(R.id.tag_contents, item.getContents());
-
 		holder.mDelBtn.setOnClickListener(this);
+		
+		convertView.setTag(R.id.tag_id, item.getId());
+		convertView.setTag(R.id.tag_mode, item.getMode());
+		convertView.setTag(R.id.tag_contents, item.getContents());
+		convertView.setOnLongClickListener(this);
+		
 		return convertView;
 	}
 
@@ -148,6 +114,46 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements
 			break;
 		}
 
+	}	
+	
+	  //modify List Item
+		public boolean listLongClick(View v) {
+			Log.v(TAG,"listLongClick()  ");
+			long rowId = Long.valueOf(v.getTag(R.id.tag_id).toString());
+			String contents = v.getTag(R.id.tag_contents).toString();
+			int mode = Integer.parseInt(v.getTag(R.id.tag_mode).toString());
+			Log.v(TAG, "id :" + rowId+" , contents : "+contents+ ", mode :" + mode);
+			
+			if (mode == 1) { // safe
+				((SafeListActivity) mContext).modifyCheckListDialog(rowId,contents);
+
+//			} else if (mode == 2) { // live
+//				((LiveListActivity) mContext).delCheckListDialog(id, contents);
+//	 		}else if(MODE ==3){ //etc
+//	 			((EtcListActivity)mContext).addCheckList(addText);
+			}
+
+			return false;
+		}
+
+	@Override
+	public boolean onLongClick(View v) {
+		Log.v(TAG,"listLongClick()  ");
+		long rowId = Long.valueOf(v.getTag(R.id.tag_id).toString());
+		String contents = v.getTag(R.id.tag_contents).toString();
+		int mode = Integer.parseInt(v.getTag(R.id.tag_mode).toString());
+		
+		if (mode == 1) { // safe
+			((SafeListActivity) mContext).modifyCheckListDialog(rowId,contents);
+
+//		} else if (mode == 2) { // live
+//			((LiveListActivity) mContext).modifyCheckListDialog(id, contents);
+// 		}else if(MODE ==3){ //etc
+// 			((EtcListActivity)mContext).modifyCheckListDialog(addText);
+		}
+
+		return false;
 	}
+
 
 }

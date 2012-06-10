@@ -18,12 +18,10 @@ import android.widget.ViewFlipper;
 
 public class PreviewListActivity extends Activity implements OnClickListener{
 	private static final String TAG = "TestFlipperviewActivity";
-	private static final String Safemode ="1";
-	TextView previewTV = null;
-	private static DBHandler mDBHandler = null;
-	Cursor mDBcursor = null;
-	private ArrayList<CheckListProfile> checkListItem = null;
 	
+	private TextView previewTV = null;
+	private Cursor mDBcursor = null;
+
 	Bundle flipperViewbundle ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +33,7 @@ public class PreviewListActivity extends Activity implements OnClickListener{
 		okBtn.setOnClickListener(this);
 		
 		previewTV = (TextView)findViewById(R.id.preview_tv);
-		checkListItem = new ArrayList<CheckListProfile>();
-		mDBHandler = DBHandler.open(this);
+
 		
         updateListview();
 	}
@@ -44,23 +41,14 @@ public class PreviewListActivity extends Activity implements OnClickListener{
     public void updateListview(){
     	Log.v(TAG,"updateListview()");
     	String previewList = "";
-    	checkListItem.clear();
-    	mDBcursor = mDBHandler.selectAllList(Safemode);//mode = safe = 1
-    	int num = 0;
-    	if(mDBcursor.moveToNext()){
-			do {
-				num++;
-				//String id = mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
-				long id = mDBcursor.getLong(mDBcursor.getColumnIndex(DBHelper.KEY_ROWID));
-				String mode = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_MODE));
-				String listData = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_LIST_DATA));  			    		
-				Log.v(TAG,"mode  :: "+mode+ "   ,listData  :: "+listData );
-				checkListItem.add(new CheckListProfile(id, mode, listData));
-				previewList += num+". "+listData+"\n";
-			} while(mDBcursor.moveToNext());
+    	DBHandler mDBHandler = DBHandler.open(this);
+	    ArrayList<CheckListProfile> checkList = mDBHandler.dbSelectAllList();
+	    
+	    for(int i=0; i<checkList.size(); i++){
+	    	previewList += i+". "+checkList.get(i).getContents()+"\n";
 		}
-    	mDBcursor.close();
-    	
+	    
+		mDBHandler.close();
     	setPreviewText(previewList);
     }
     

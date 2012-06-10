@@ -156,5 +156,85 @@ public class DBHandler {
 	//
 	// return cursor;
 	// }
+	
+	
+	
+	//120610_MyoHyun_SelectAll method START
+		public Cursor dbSelectAll() throws SQLException {
+			Log.v(TAG, "dbSelectAll() ");
+			String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
 
+			Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,null, null, null);
+		
+			if (cursor != null) {
+				cursor.moveToFirst();
+			}
+			return cursor;
+		}
+		
+		public Cursor dbSafeSelectAll() throws SQLException {
+			Log.v(TAG, "dbSafeSelectAll() ");
+			String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
+
+			Cursor cursor = db.query(true, TABLE_NAME,from, KEY_MODE + "=?",
+					new String[] { SAFEMODE }, null, null, null,
+					null);
+			if (cursor != null) {
+				cursor.moveToFirst();
+			}
+			return cursor;
+		}
+		
+		
+		public ArrayList<CheckListProfile> dbSelectAllList() throws SQLException {
+			Log.v(TAG, "dbSelectAllList() ");
+			ArrayList<CheckListProfile> checkList = new ArrayList<CheckListProfile>();
+			//safe
+			Cursor cursor = db.query(true, TABLE_NAME, 
+					new String[] { KEY_ROWID,KEY_MODE, KEY_LIST_DATA }, 
+					KEY_MODE + "=?",new String[] { SAFEMODE }, null, null, null,null);
+			if (cursor.moveToFirst()) {
+				do {
+					checkList.add(new CheckListProfile(
+							cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), 
+							cursor.getString(cursor.getColumnIndex(KEY_MODE)), 
+							cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
+					Log.v(TAG,"Safe KEY_LIST_DATA) :: "+ cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA)));
+
+				} while (cursor.moveToNext());
+			}
+			
+			//live
+			cursor = db.query(true, TABLE_NAME, 
+					new String[] { KEY_ROWID,KEY_MODE, KEY_LIST_DATA }, 
+					KEY_MODE + "=?",new String[] { LIVEMODE }, null, null, null,null);
+			if (cursor.moveToFirst()) {
+				do {
+					checkList.add(new CheckListProfile(
+							cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), 
+							cursor.getString(cursor.getColumnIndex(KEY_MODE)), 
+							cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
+					Log.v(TAG,"Live KEY_LIST_DATA) :: "+ cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA)));
+
+				} while (cursor.moveToNext());
+			}
+			
+			//etc
+			cursor = db.query(true, TABLE_NAME, 
+					new String[] { KEY_ROWID,KEY_MODE, KEY_LIST_DATA }, 
+					KEY_MODE + "=?",new String[] { ETCMODE }, null, null, null,null);
+			if(cursor.moveToFirst()){
+				do {
+					checkList.add(new CheckListProfile(
+							cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), 
+							cursor.getString(cursor.getColumnIndex(KEY_MODE)), 
+							cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
+					Log.v(TAG, "Etc KEY_LIST_DATA) :: "+cursor.getString(cursor.getColumnIndex(KEY_LIST_DATA)));
+					
+				} while(cursor.moveToNext());
+			}
+			return checkList;
+		}
+		
+	//120610_MyoHyun_SelectAll method END
 }
