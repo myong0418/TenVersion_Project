@@ -7,20 +7,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import java.util.ArrayList;
 import android.app.Dialog;
-import android.content.Intent;
 import android.database.Cursor;
-
 import android.util.Log;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 public class SafeListActivity extends Activity implements OnClickListener{
 	private static final String TAG ="SafeListActivity";
 	/**  UI  **/
+	//String
+	 String allDelSelectTxt ;
+	 String allDelDeselectTxt;
 	private static final int MODE = 1; //safe
 	private static final String safeMode="1"; //safe
 	private boolean DEL_MODE = false; 
+	private boolean ALL_DEL_MODE = false; 
 	//setListView 
 	private ListView safeListView = null;
 	private CheckListAdapter checkListAdapter = null;
@@ -28,7 +28,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
 	//set Button
 	private Button checkListAddBtn = null; 
 	private Button checkListDelBtn = null;
-	private Button requastbuddylistBtn = null;
+	private Button checkListAllDelBtn = null;
     //dialog
     private CustomDialog checkLlistDialog = null ;
     long delId;
@@ -44,14 +44,22 @@ public class SafeListActivity extends Activity implements OnClickListener{
         setContentView(R.layout.safelist);
         
 		/**  UI  **/
+        //String
+        allDelSelectTxt = getResources().getString(R.string.all_del_select_txt);
+        allDelDeselectTxt = getResources().getString(R.string.all_del_deselect_txt);
 		//button
-        requastbuddylistBtn = (Button)findViewById(R.id.testBtn);
-        requastbuddylistBtn.setOnClickListener(this);
         checkListAddBtn =(Button)findViewById(R.id.addBtn);
         checkListAddBtn.setOnClickListener(this);
         checkListDelBtn = (Button)findViewById(R.id.deleteBtn);
         checkListDelBtn.setOnClickListener(this);
-        
+        checkListAllDelBtn = (Button)findViewById(R.id.testBtn);
+        checkListAllDelBtn.setOnClickListener(this);
+       if(DEL_MODE){ 
+    	//   checkListAllDelBtn.setVisibility(View.VISIBLE);
+    	   checkListAllDelBtn.setEnabled(true);
+       }else{
+    	   checkListAllDelBtn.setEnabled(false);
+       }
         //listView
         safeListView = (ListView)findViewById(R.id.listView);
         checkListItem = new ArrayList<CheckListProfile>();
@@ -77,7 +85,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
 		}
     	mDBcursor.close();
     	
-		checkListAdapter = new CheckListAdapter(this,  R.layout.checklist_item_row, checkListItem, DEL_MODE); 
+		checkListAdapter = new CheckListAdapter(this,  R.layout.checklist_item_row, checkListItem, DEL_MODE,ALL_DEL_MODE); 
 		safeListView.setAdapter(checkListAdapter);
     }
     
@@ -132,26 +140,47 @@ public class SafeListActivity extends Activity implements OnClickListener{
 /**Custom dialog END**/    			
   
     public void onClick(View v) {
-    	Intent intent = null;
+    	//Intent intent = null;
 		switch(v.getId()){
 		case R.id.addBtn: 		//add list Item
 			Log.v(TAG,"chekListAddBtn Click");
 			addCheckListDialog();
 			break;
 		case R.id.deleteBtn:  	//Delete list Item
-			Log.v(TAG,"buddylistDeleteBtn Click");
+			Log.v(TAG,"deleteBtn Click");
 			if(DEL_MODE){
 				DEL_MODE = false;
+				ALL_DEL_MODE = false;
+			    checkListAllDelBtn.setEnabled(false);
+			    
+			    ArrayList<CheckListProfile> delList = checkListAdapter.getAllDelList();
+			    if(delList != null && delList.size() != 0){
+			    	for(int i=0; i<delList.size(); i++){
+			    		 Log.v(TAG,"[delList] delId :: "+ delList.get(i).getId()+",   contents"+ delList.get(i).getContents());
+			    		 mDBHandler.delete(delList.get(i).getId());
+			    	}
+			    }
 				updateListview();
+				
 			}else{
 				DEL_MODE= true;
+				checkListAllDelBtn.setEnabled(true);
 				updateListview();
 			}
 			
 			break;
 		case R.id.testBtn:  	//test
-			intent = new Intent(this, LIveListDelActivity.class);
-			startActivity(intent);
+			Log.v(TAG,"testBtn Click");
+			if(ALL_DEL_MODE){
+				ALL_DEL_MODE = false;
+				checkListAllDelBtn.setText(allDelSelectTxt);
+				
+				updateListview();
+			}else{
+				ALL_DEL_MODE= true;
+				checkListAllDelBtn.setText(allDelDeselectTxt);
+				updateListview();
+			}
 			break;
 		}
 	}

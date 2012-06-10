@@ -235,6 +235,6 @@ public class DBHandler {
 			}
 			return checkList;
 		}
-		
+
 	//120610_MyoHyun_SelectAll method END
 }

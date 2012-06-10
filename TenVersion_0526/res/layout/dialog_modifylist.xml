@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="180dip"
+  android:layout_height="120dip"
+ >
+ <LinearLayout
+     android:id="@+id/modifylist_btnlayout"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:orientation="horizontal" >
+
+     <Button
+         android:id="@+id/modifylist_modifyBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="수정" />
+
+     <Button
+         android:id="@+id/modifylist_cancelBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="취소" />
+ </LinearLayout>
+ 
+<!--   <TextView
+     android:id="@+id/modifylist_textview"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_above="@id/modifylist_btnlayout"
+      /> -->
+   
+   <EditText
+     android:id="@+id/modifylist_editview"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_above="@id/modifylist_btnlayout"
+      />
+
+
+</RelativeLayout>
+

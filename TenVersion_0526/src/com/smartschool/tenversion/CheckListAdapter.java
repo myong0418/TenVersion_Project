@@ -19,11 +19,13 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 	private final LayoutInflater mInflater;
 	// private static int MODE; //safe,live,etc
 	private boolean DEL_MODE = false;
-	ArrayList<CheckListProfile> checkListProfileList;
+	private boolean ALL_DEL_MODE = false;
+	private ArrayList<CheckListProfile> checkListProfileList;
 	private Context mContext;
+	private ViewHolder holder;
 	
+	private  ArrayList<CheckListProfile> delChecListProfileList;
 	// List<ContacstData> contacts;
-
 	public CheckListAdapter(Context context, int textViewResourceId,ArrayList<CheckListProfile> objects, boolean del_mode) {
 		super(context, textViewResourceId, objects);
 		this.mContext = context;
@@ -31,10 +33,22 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 		checkListProfileList = objects;
 
 		DEL_MODE = del_mode;
-
+	}
+	
+	public CheckListAdapter(Context context, int textViewResourceId,ArrayList<CheckListProfile> objects, boolean del_mode,boolean all_del_mode) {
+		super(context, textViewResourceId, objects);
+		this.mContext = context;
+		mInflater = LayoutInflater.from(context);
+		checkListProfileList = objects;
+		delChecListProfileList =  new ArrayList<CheckListProfile>();
+		DEL_MODE = del_mode;
+		ALL_DEL_MODE = all_del_mode;
+		if(ALL_DEL_MODE){
+			delChecListProfileList = objects;
+		}
 	}
 
-	ViewHolder holder;
+	
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -48,12 +62,26 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			// =(ImageView)convertView.findViewById(R.id.buddy_image);
 			// holder.mMode = (TextView) convertView.findViewById(R.id.mode);
 			holder.mContents = (TextView) convertView.findViewById(R.id.contents);
-
 			holder.mDelBtn = (ImageButton) convertView.findViewById(R.id.mindelBtn);
+			
+//			if (DEL_MODE) {
+//				holder.mDelBtn.setVisibility(View.VISIBLE);
+//			} else {
+//				holder.mDelBtn.setVisibility(View.GONE);
+//			}
+			
 			if (DEL_MODE) {
 				holder.mDelBtn.setVisibility(View.VISIBLE);
 			} else {
 				holder.mDelBtn.setVisibility(View.GONE);
+			}
+			
+			if (ALL_DEL_MODE) { //all Select
+				holder.mDelBtn.setBackgroundResource(R.drawable.ic_launcher);
+				holder.mDelBtn.setTag(R.id.tag_del_satate, true);
+			} else { //all deSelect
+				holder.mDelBtn.setBackgroundResource(R.drawable.androidmarker);
+				holder.mDelBtn.setTag(R.id.tag_del_satate, false);
 			}
 
 			convertView.setTag(holder);
@@ -96,45 +124,43 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			Log.v(TAG, "mDelBtn [onClick]");
 			long id = Long.valueOf(v.getTag(R.id.tag_id).toString());
 			Log.v(TAG, "id " + id);
-
 			int mode = Integer.parseInt(v.getTag(R.id.tag_mode).toString());
 			Log.v(TAG, "mode " + mode);
-
 			String contents = v.getTag(R.id.tag_contents).toString();
 			Log.v(TAG, "contents " + contents);
-
-			if (mode == 1) { // safe
-				((SafeListActivity) mContext).delCheckListDialog(id, contents);
-
-			} else if (mode == 2) { // live
-				((LiveListActivity) mContext).delCheckListDialog(id, contents);
-				// }else if(MODE ==3){ //etc
-				// ((EtcListActivity)mContext).addCheckList(addText);
+			
+			
+			boolean delState= (Boolean) v.getTag(R.id.tag_del_satate);
+			
+			if (delState) { //checked -> uncheck
+				delState = false;
+				v.setTag(R.id.tag_del_satate, false);
+				v.setBackgroundResource(R.drawable.androidmarker);
+				for(int i=0; i<delChecListProfileList.size(); i++){
+					if(delChecListProfileList.get(i).getId() == id){
+						delChecListProfileList.remove(i);//(new CheckListProfile(id, String.valueOf(mode),contents));
+					}
+				}
+			} else {  //unchecked -> check
+				delState = true;
+				v.setTag(R.id.tag_del_satate, true);
+				v.setBackgroundResource(R.drawable.ic_launcher);
+				delChecListProfileList.add(new CheckListProfile(id, String.valueOf(mode),contents));
 			}
+			
+			
+//			if (mode == 1) { 				// safe
+//				((SafeListActivity) mContext).delCheckListDialog(id, contents);
+//
+//			} else if (mode == 2) { 	// live
+//				((LiveListActivity) mContext).delCheckListDialog(id, contents);
+//				// }else if(MODE ==3){ //etc
+//				// ((EtcListActivity)mContext).addCheckList(addText);
+//			}
 			break;
 		}
-
 	}	
 	
-	  //modify List Item
-		public boolean listLongClick(View v) {
-			Log.v(TAG,"listLongClick()  ");
-			long rowId = Long.valueOf(v.getTag(R.id.tag_id).toString());
-			String contents = v.getTag(R.id.tag_contents).toString();
-			int mode = Integer.parseInt(v.getTag(R.id.tag_mode).toString());
-			Log.v(TAG, "id :" + rowId+" , contents : "+contents+ ", mode :" + mode);
-			
-			if (mode == 1) { // safe
-				((SafeListActivity) mContext).modifyCheckListDialog(rowId,contents);
-
-//			} else if (mode == 2) { // live
-//				((LiveListActivity) mContext).delCheckListDialog(id, contents);
-//	 		}else if(MODE ==3){ //etc
-//	 			((EtcListActivity)mContext).addCheckList(addText);
-			}
-
-			return false;
-		}
 
 	@Override
 	public boolean onLongClick(View v) {
@@ -153,6 +179,12 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 		}
 
 		return false;
+	}
+	public  ArrayList<CheckListProfile> getAllDelList (){
+		Log.v(TAG,"getAllDelList()  ");
+		
+		return delChecListProfileList;
+		
 	}
 
 
