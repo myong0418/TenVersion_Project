@@ -18,7 +18,7 @@ import android.widget.ViewFlipper;
 
 public class PreviewListActivity extends Activity implements OnClickListener{
 	private static final String TAG = "TestFlipperviewActivity";
-	
+	private static final String Safemode ="1";
 	TextView previewTV = null;
 	private static DBHandler mDBHandler = null;
 	Cursor mDBcursor = null;
@@ -45,7 +45,7 @@ public class PreviewListActivity extends Activity implements OnClickListener{
     	Log.v(TAG,"updateListview()");
     	String previewList = "";
     	checkListItem.clear();
-    	mDBcursor = mDBHandler.selectAll2();//mode = safe = 1
+    	mDBcursor = mDBHandler.selectAllList(Safemode);//mode = safe = 1
     	int num = 0;
     	if(mDBcursor.moveToNext()){
 			do {

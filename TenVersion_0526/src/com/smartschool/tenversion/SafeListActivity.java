@@ -24,6 +24,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
 	private static final String TAG ="SafeListActivity";
 	/**  UI  **/
 	 private static final int MODE = 1; //safe
+	 private static final String Safemode ="1";
 	private boolean DEL_MODE = false; 
 	//setListView 
 	private ListView buddyListView = null;
@@ -102,7 +103,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
     public void updateListview(){
     	Log.v(TAG,"updateListview()");
     	checkListItem.clear();
-    	mDBcursor = mDBHandler.selectAll2();//mode = safe = 1
+    	mDBcursor = mDBHandler.selectAllList(Safemode);//mode = safe = 1
     	if(mDBcursor.moveToNext()){
 			do {
 				//String id = mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
@@ -159,7 +160,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
     }
     public  void  addCheckList(String contents){
 	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
-	   	 mDBHandler.insert("1", contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.insert(Safemode, contents); 
 	   	 updateListview();
    	
    }
@@ -287,6 +288,7 @@ public class SafeListActivity extends Activity implements OnClickListener, OnIte
 	}
 	@Override
 	protected void onDestroy() {
+		Log.v(TAG,"onDestroy()");
 		super.onDestroy();
 		mDBHandler.close();
 	}

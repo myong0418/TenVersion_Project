@@ -17,6 +17,7 @@ import android.widget.ViewFlipper;
 
 public class FlipperView extends Activity  implements View.OnTouchListener {
 	private static final String TAG = "TestFlipperviewActivity";
+	private static final String Safemode ="1";
     ViewFlipper flipper;
      
      float xAtDown;
@@ -92,7 +93,7 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 	    public void addFlipperChildView(){
 	    	Log.v(TAG,"addFlipperChildView()");
 	        DBHandler mDBHandler = DBHandler.open(this);
-	    	Cursor mDBcursor = mDBHandler.selectAll2();
+	    	Cursor mDBcursor = mDBHandler.selectAllList(Safemode);
 //	    	listNum =  mDBcursor.getCount();
 	    	Log.v(TAG,"listNum  :: "+listNum);
 	    	int num = 0;

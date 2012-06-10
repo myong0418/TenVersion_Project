@@ -22,4 +22,14 @@ public class Lists {
 	public String getListdata() {
 		return listdata;
 	}
+	
+	//-- USER TODO --//
+	private boolean checked = false;
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
 }
