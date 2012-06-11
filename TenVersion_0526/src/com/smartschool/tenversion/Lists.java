@@ -1,17 +1,17 @@
 package com.smartschool.tenversion;
 
 public class Lists {
-	private int id;
+	private long id;
 	private String mode;
 	private String listdata;
 	
-	public Lists (int id, String mode, String listdata) {
+	public Lists (long id, String mode, String listdata) {
 		this.id = id; 
 		this.mode = mode;
 		this.listdata = listdata;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

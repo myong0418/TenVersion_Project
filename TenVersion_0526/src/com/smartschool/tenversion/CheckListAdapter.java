@@ -162,7 +162,6 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 	}	
 	
 
-	@Override
 	public boolean onLongClick(View v) {
 		Log.v(TAG,"listLongClick()  ");
 		long rowId = Long.valueOf(v.getTag(R.id.tag_id).toString());

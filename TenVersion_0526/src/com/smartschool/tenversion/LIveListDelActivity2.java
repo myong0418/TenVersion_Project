@@ -27,26 +27,16 @@ public class LIveListDelActivity2 extends ListActivity implements
 	private static final String TAG = "LIveListDelActivity";
 
 	List<Lists> liveList = null;
-	private checkAdapter checkAdapter = null;
+	private CheckAdapter checkAdapter = null;
 	/** UI **/
 	private static final int MODE = 2; // live
 	private static final String Livemode = "2";
-	private boolean DEL_MODE = false;
 	// setListView
 	private ListView buddyListView = null;
-	private CheckListAdapter checkListAdapter = null;
-	private ArrayList<CheckListProfile> checkListItem = null;
 	// set Button
 	private Button allcheckBtn = null;
 	private Button delbtn = null;
 
-	// activity result
-	private static final int REQ_BUDDYLIST_ADD = 1;
-	private static final int REQ_PICK_PICTURE = 2;
-	// dialog
-	// private static final int FREE_DLG = 1;
-	private static final int ADD_DLG = 1;
-	private static final int DEL_DLG = 2;
 	/** DB **/
 	private static DBHandler mDBHandler = null;
 	Cursor mDBcursor = null;
@@ -59,43 +49,7 @@ public class LIveListDelActivity2 extends ListActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.livedellist);
 		mDBHandler = DBHandler.open(this);
-//		int ins = 0;
-//		mDBcursor = mDBHandler.selectAllList(Livemode);
-//		
-//		 car = mDBHandler.selectAll();// mode = live = 2
-//		 cars = new String[car.size()];
-//		// Iterator<Lists> it = car.iterator();
-//		// while (it.hasNext()) {
-//		// String listData = mDBcursor.getString(mDBcursor
-//		// .getColumnIndex(DBHelper.KEY_LIST_DATA));
-//		// Log.v(TAG, listData);
-//		// cars[ins] = listData;
-//		// ins++;
-//		//
-//		// }
-//		// mDBcursor.close();
-//
-//		if (mDBcursor.moveToNext()) {
-//			do {
-//				// String id =
-//				// mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
-//				long id = mDBcursor.getLong(mDBcursor
-//						.getColumnIndex(DBHelper.KEY_ROWID));
-//				String mode = mDBcursor.getString(mDBcursor
-//						.getColumnIndex(DBHelper.KEY_MODE));
-//				String listData = mDBcursor.getString(mDBcursor
-//						.getColumnIndex(DBHelper.KEY_LIST_DATA));
-//				Log.v(TAG, "mode  :: " + mode + "   ,listData  :: " + listData);
-//				// checkListItem.add(new CheckListProfile(id, mode, listData));
-//				cars[ins] = listData;
-//				ins++;
-//
-//			} while (mDBcursor.moveToNext());
-//		}
-//		mDBcursor.close();
-//
-//		setListAdapter(new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_multiple_choice, cars));
+		liveList = new ArrayList<Lists>();
 
 		selected = (TextView) findViewById(R.id.selected);
 
@@ -106,22 +60,16 @@ public class LIveListDelActivity2 extends ListActivity implements
 		delbtn = (Button) findViewById(R.id.del_btn);
 		delbtn.setOnClickListener(this);
 
-		// buddyListView.setOnItemClickListener(this);
-
-		checkListItem = new ArrayList<CheckListProfile>();
 
 		/** DB **/
-		// contactsDBHelper = new ContactsDBHelper(this);
-		// mDBHandler = new DBHandler(this);
-		// mDBHandler.open(this);
-
-		// requastBuddylist();
 
 
 		// listView
+		
 		buddyListView = (ListView) findViewById(R.id.listView);
+		buddyListView = getListView();
 //		buddyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//		buddyListView.setOnItemLongClickListener(this);
+		buddyListView.setOnItemLongClickListener(this);
 
 		updateListview();
 	}
@@ -129,7 +77,7 @@ public class LIveListDelActivity2 extends ListActivity implements
 	public void updateListview() {
 		Log.v(TAG, "updateListview()");
 
-		checkListItem.clear();
+		liveList.clear();
 		mDBcursor = mDBHandler.selectAllList(Livemode);// mode = live = 2
 		if (mDBcursor.moveToNext()) {
 			do {
@@ -142,19 +90,14 @@ public class LIveListDelActivity2 extends ListActivity implements
 				String listData = mDBcursor.getString(mDBcursor
 						.getColumnIndex(DBHelper.KEY_LIST_DATA));
 				Log.v(TAG, "mode  :: " + mode + "   ,listData  :: " + listData);
-				checkListItem.add(new CheckListProfile(id, mode, listData));
-
+//				checkListItem.add(new CheckListProfile(id, mode, listData));
+				liveList.add(new Lists(id, mode, listData));
 			} while (mDBcursor.moveToNext());
 		}
 		mDBcursor.close();
-		// buddylistView.setListData(checkListItem);
-		checkListAdapter = new CheckListAdapter(this,
-				R.layout.checklist_item_row,
-				checkListItem, DEL_MODE);
-		buddyListView.setAdapter(checkListAdapter);
 		
-//		checkAdapter = new checkAdapter(this);
-//		setListAdapter(checkAdapter);
+		checkAdapter = new CheckAdapter(this);
+		buddyListView.setAdapter(checkAdapter);
 
 	}
 
@@ -163,29 +106,38 @@ public class LIveListDelActivity2 extends ListActivity implements
 	}
 
 	public void onClick(View v) {
-		ListView list = getListView();
 		int cnt = 0;
+		for (int i = 0; i < liveList.size(); i++) {
+			
+			if (liveList.get(i).isChecked() == false ) {
+				cnt++;
+			}
+
+		}
 
 		switch (v.getId()) {
 		case R.id.allcheck:
 			if (cnt > 0) {
 				Log.v(TAG, "allcheck true cnt =========" + cnt);
 				// 전체 선택
-				for (int i = 0; i < list.getCount(); i++)
-					list.setItemChecked(i, true);
+				for (int i = 0; i < liveList.size(); i++)
+					liveList.get(i).setChecked(true);
 
 			} else {
 				Log.v(TAG, "allcheck false cnt =========" + cnt);
 				// 선택 해제
-				for (int i = 0; i < list.getCount(); i++)
-					list.setItemChecked(i, false);
+				for (int i = 0; i < liveList.size(); i++)
+					liveList.get(i).setChecked(false);
 			}
+			checkAdapter.notifyDataSetChanged();
 			break;
 
 		case R.id.del_btn:
-			new AlertDialog.Builder(this).setTitle("삭제")
-					.setMessage("삭제하시겠습니까?").setNeutralButton("확인", null)
-					.setNegativeButton("취소", null).show();
+//			new AlertDialog.Builder(this).setTitle("삭제")
+//					.setMessage("삭제하시겠습니까?").setNeutralButton("확인", null)
+//					.setNegativeButton("취소", null).show();
+			Log.v(TAG, "delete : " + cnt);
+			
 			break;
 
 		}
@@ -196,25 +148,18 @@ public class LIveListDelActivity2 extends ListActivity implements
 		Log.v(TAG, "view " + v + " position :: " + position);
 		return false;
 	}
-
-	protected void onDestroy() {
-		Log.v(TAG, "onDestroy()");
-		super.onDestroy();
-		mDBHandler.close();
-	}
-
 	/**
 	 * ListView Adapter
 	 * 
 	 * @author Administrator
 	 * 
 	 */
-	class checkAdapter extends ArrayAdapter {
+	class CheckAdapter extends ArrayAdapter {
 
 		Activity context;
 
 		@SuppressWarnings("unchecked")
-		checkAdapter(Activity context) {
+		CheckAdapter(Activity context) {
 			super(context, R.layout.check_row, liveList);
 			this.context = context;
 		}
@@ -241,9 +186,11 @@ public class LIveListDelActivity2 extends ListActivity implements
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
 			checkBox.setChecked(lives.isChecked());
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
 				// 클릭할때 마다 상태 저장
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
+					Log.v(TAG, "isChecked()");
 					liveList.get(pos).setChecked(isChecked);
 				}
 
@@ -252,5 +199,13 @@ public class LIveListDelActivity2 extends ListActivity implements
 			return row;
 		}
 	}
+
+	protected void onDestroy() {
+		Log.v(TAG, "onDestroy()");
+		super.onDestroy();
+		mDBHandler.close();
+	}
+
+
 	
 }
