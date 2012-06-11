@@ -28,6 +28,7 @@ public class LIveListDelActivity2 extends ListActivity implements
 
 	List<Lists> liveList = null;
 	private CheckAdapter checkAdapter = null;
+	Lists live = null;
 	/** UI **/
 	private static final int MODE = 2; // live
 	private static final String Livemode = "2";
@@ -40,18 +41,14 @@ public class LIveListDelActivity2 extends ListActivity implements
 	/** DB **/
 	private static DBHandler mDBHandler = null;
 	Cursor mDBcursor = null;
-	String[] cars = null;
-	ArrayList<Lists> car = new ArrayList<Lists>();
-	private TextView selected;
+	ArrayList<Lists> delIds = new ArrayList<Lists>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.livedellist);
-		mDBHandler = DBHandler.open(this);
+		
 		liveList = new ArrayList<Lists>();
-
-		selected = (TextView) findViewById(R.id.selected);
 
 		/** UI **/
 		// button
@@ -60,16 +57,14 @@ public class LIveListDelActivity2 extends ListActivity implements
 		delbtn = (Button) findViewById(R.id.del_btn);
 		delbtn.setOnClickListener(this);
 
-
-		/** DB **/
-
-
 		// listView
-		
 		buddyListView = (ListView) findViewById(R.id.listView);
 		buddyListView = getListView();
 //		buddyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		buddyListView.setOnItemLongClickListener(this);
+
+		/** DB **/
+		mDBHandler = DBHandler.open(this);
 
 		updateListview();
 	}
@@ -120,9 +115,10 @@ public class LIveListDelActivity2 extends ListActivity implements
 			if (cnt > 0) {
 				Log.v(TAG, "allcheck true cnt =========" + cnt);
 				// 전체 선택
-				for (int i = 0; i < liveList.size(); i++)
+				for (int i = 0; i < liveList.size(); i++){
 					liveList.get(i).setChecked(true);
-
+				}
+				
 			} else {
 				Log.v(TAG, "allcheck false cnt =========" + cnt);
 				// 선택 해제
@@ -170,7 +166,7 @@ public class LIveListDelActivity2 extends ListActivity implements
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Log.v(TAG, "getView()");
 			// 멤버 정보
-			Lists lives = liveList.get(position);
+			final Lists lives = liveList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.check_row, null);
@@ -183,6 +179,7 @@ public class LIveListDelActivity2 extends ListActivity implements
 			textView2.setText(lives.getListdata());
 			// 체크박스 상태
 			final int pos = position;
+			final long id = lives.getId();
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
 			checkBox.setChecked(lives.isChecked());
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -190,8 +187,13 @@ public class LIveListDelActivity2 extends ListActivity implements
 				// 클릭할때 마다 상태 저장
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
-					Log.v(TAG, "isChecked()");
 					liveList.get(pos).setChecked(isChecked);
+					if ( isChecked == false ){
+						Log.v(TAG, "isChecked false " + id );
+//						delIds.add(lives.getId());
+					}else{
+						Log.v(TAG, "isChecked true " + id );
+					}
 				}
 
 			});
