@@ -183,7 +183,7 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 		Log.v(TAG,"getAllDelList()  ");
 		
 		return delChecListProfileList;
-		
+		    
 	}
 
 
