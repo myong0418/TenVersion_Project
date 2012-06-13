@@ -12,4 +12,20 @@
 		<item>어디가니~?</item>
 		<item>99</item>
 </string-array>
+
+<string-array name="set_safe_dbdata">
+        <item>내방 불끄기</item>
+		<item>가스밸브 잠그기</item>
+		<item>티비 끄기</item>
+</string-array>
+<string-array name="set_live_dbdata">
+        <item>뽀삐 밥주기</item>
+		<item>난초에 물주기</item>
+		<item>물고기 밥주기</item>
+</string-array>
+<string-array name="set_etc_dbdata">
+        <item>내방 창문 닫기</item>
+		<item>빨래 널기</item>
+		<item>설거지 하기</item>
+</string-array>
 </resources>
