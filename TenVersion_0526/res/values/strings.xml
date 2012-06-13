@@ -31,7 +31,8 @@
     <!-- FlipperViewActivity.java -->
     <string name="testFlipper_btn_txt">test flipper View </string>
     
-    
+    <!-- PreviewListActivity.java -->
+    <string name="preview_okbtn_txt">OK</string>
     
      <!-- List Tag id -->
     <item type="id" name="tag_id"></item> 

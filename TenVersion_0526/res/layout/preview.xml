@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-    <TextView
-        android:id="@+id/preview_tv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="preview" />
+  
+
+      <ScrollView 
+        android:id="@+id/preview_scrollview"
+        	android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        >
+	    <TextView
+	        android:id="@+id/preview_tv"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="preview" 
+	        android:textSize="20sp"
+	        android:textColor="@android:color/secondary_text_light"/>
+	    </ScrollView>
     <Button 
         android:id="@+id/preview_ok_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="ok" 
+        android:layout_alignParentBottom="true"
+        android:text="@string/preview_okbtn_txt" 
         />
-
-</LinearLayout>
+</RelativeLayout>

@@ -266,23 +266,26 @@ public class WifiReceiver extends BroadcastReceiver{
 			Log.v(TAG, "mScanResult!=null");
 			SettingListActivity.wifiListPref.setEnabled(true);
 		}
-		CharSequence[] entries = new CharSequence[mScanResult.size()];
-		CharSequence[] entryValues = new CharSequence[mScanResult.size()];
+		CharSequence[] entries = new CharSequence[mScanResult.size()+1];
+		CharSequence[] entryValues = new CharSequence[mScanResult.size()+1];
 
 		// Scan count
 		Log.v(TAG, "Scan count is \t" + ++scanCount + " times \n");
 
+		entries[0] = "설정안함";
+		entryValues[0] = "";
+		
 		Log.v(TAG, "=======================================\n");
 		for (int i = 0; i < mScanResult.size(); i++) {
 			ScanResult result = mScanResult.get(i);
 			Log.v(TAG, (i + 1) + ". SSID : " + result.SSID.toString()
 					+ "\t\t RSSI : " + result.level + " dBm\n");
 
-			entries[i] = result.SSID.toString();
-			entryValues[i] = result.BSSID.toString();
+			entries[i+1] = result.SSID.toString();
+			entryValues[i+1] = result.BSSID.toString();
 
-			Log.d(TAG, (i + 1) + ". entries : " + entries[i]);
-			Log.d(TAG, (i + 1) + ". entryValues : " + entryValues[i]);
+			Log.d(TAG, (i + 1) + ". entries : " + entries[i+1]);
+			Log.d(TAG, (i + 1) + ". entryValues : " + entryValues[i+1]);
 		}
 		Log.v(TAG, "=======================================\n");
 

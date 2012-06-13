@@ -35,12 +35,15 @@
         <activity android:name=".LIveListDelActivity2" />
         <activity android:name=".TestDialogActivity" />
         
-        <activity android:name=".FlipperView" >
+        <activity android:name=".FlipperView"
+           			android:theme="@android:style/Theme.Translucent"> 
             <intent-filter>
                 <action android:name="smartplus.tenversion.action.flipper" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreviewListActivity" />
+        
+        <activity android:name=".PreviewListActivity"
+            		android:theme="@android:style/Theme.Translucent" />
 
 		<receiver android:name=".WifiReceiver" >
             <intent-filter>
