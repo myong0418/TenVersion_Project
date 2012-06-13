@@ -19,166 +19,178 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class LiveListActivity extends Activity implements OnClickListener,
-		OnItemLongClickListener {
+public class LiveListActivity extends Activity implements OnClickListener {
 	private static final String TAG = "LiveListActivity";
-	/** UI **/
-	private static final int MODE = 2; // live
-	private static final String Livemode = "2";
-	private boolean DEL_MODE = false;
-	// setListView
-	private ListView buddyListView = null;
+	/**  UI  **/
+	//String
+	 String allDelSelectTxt ;
+	 String allDelDeselectTxt;
+	private static final int MODE = 2; //safe
+	private static final String liveMode="2"; //safe
+	private boolean DEL_MODE = false; 
+	private boolean ALL_DEL_MODE = false; 
+	//setListView 
+	private ListView liveListView = null;
 	private CheckListAdapter checkListAdapter = null;
 	private ArrayList<CheckListProfile> checkListItem = null;
-	// set Button
-	private Button checkListAddBtn = null;
+	//set Button
+	private Button checkListAddBtn = null; 
 	private Button checkListDelBtn = null;
-	private Button requastbuddylistBtn = null;
-
-	// activity result
-	private static final int REQ_BUDDYLIST_ADD = 1;
-	private static final int REQ_PICK_PICTURE = 2;
-	// dialog
-	// private static final int FREE_DLG = 1;
-	private static final int ADD_DLG = 1;
-	private static final int DEL_DLG = 2;
-	/** DB **/
+	private Button checkListAllDelBtn = null;
+    //dialog
+    private CustomDialog checkLlistDialog = null ;
+    long delId;
+    long modifyId;
+    
+    /**  DB  **/
 	private static DBHandler mDBHandler = null;
 	Cursor mDBcursor = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.livelist);
+		setContentView(R.layout.list);
 
-		// ListView list = (ListView) findViewById(R.id.live_listview);
-		// list.setAdapter(adapter);
-		/** UI **/
-		// button
-		requastbuddylistBtn = (Button) findViewById(R.id.testBtn);
-		requastbuddylistBtn.setOnClickListener(this);
-		checkListAddBtn = (Button) findViewById(R.id.add_btn);
-		checkListAddBtn.setOnClickListener(this);
-		checkListDelBtn = (Button) findViewById(R.id.del_btn);
-		checkListDelBtn.setOnClickListener(this);
+		/**  UI  **/
+        //String
+        allDelSelectTxt = getResources().getString(R.string.all_del_select_txt);
+        allDelDeselectTxt = getResources().getString(R.string.all_del_deselect_txt);
+		//button
+        checkListAddBtn =(Button)findViewById(R.id.addBtn);
+        checkListAddBtn.setOnClickListener(this);
+        checkListDelBtn = (Button)findViewById(R.id.deleteBtn);
+        checkListDelBtn.setOnClickListener(this);
+        checkListAllDelBtn = (Button)findViewById(R.id.allCheckBtn);
+        checkListAllDelBtn.setOnClickListener(this);
+       if(DEL_MODE){ 
+    	//   checkListAllDelBtn.setVisibility(View.VISIBLE);
+    	   checkListAllDelBtn.setEnabled(true);
+       }else{
+    	   checkListAllDelBtn.setEnabled(false);
+       }
+        //listView
+        liveListView = (ListView)findViewById(R.id.listView);
+        checkListItem = new ArrayList<CheckListProfile>();
 
-		// listView
-		buddyListView = (ListView) findViewById(R.id.listView);
-		// buddyListView.setOnItemClickListener(this);
-		buddyListView.setOnItemLongClickListener(this);
-		checkListItem = new ArrayList<CheckListProfile>();
-
-		/** DB **/
-		// contactsDBHelper = new ContactsDBHelper(this);
-		// mDBHandler = new DBHandler(this);
-		// mDBHandler.open(this);
-		mDBHandler = DBHandler.open(this);
-
-		// requastBuddylist();
-		updateListview();
-
+		/**  DB  **/
+        mDBHandler = DBHandler.open(this);
+        updateListview();
 	}
 
 	public void updateListview() {
-		Log.v(TAG, "updateListview()");
-		checkListItem.clear();
-		mDBcursor = mDBHandler.selectAllList(Livemode);// mode = live = 2
-		if (mDBcursor.moveToNext()) {
+    	Log.v(TAG,"updateListview()");
+    	checkListItem.clear();
+    	mDBcursor = mDBHandler.selectAllList(liveMode);//mode = safe = 1
+    	if(mDBcursor.moveToFirst()){
 			do {
-				// String id =
-				// mDBcursor.getString(mDBcursor.getColumnIndex(ContactsContract.Contacts._ID));
-				long id = mDBcursor.getLong(mDBcursor
-						.getColumnIndex(DBHelper.KEY_ROWID));
-				String mode = mDBcursor.getString(mDBcursor
-						.getColumnIndex(DBHelper.KEY_MODE));
-				String listData = mDBcursor.getString(mDBcursor
-						.getColumnIndex(DBHelper.KEY_LIST_DATA));
-				Log.v(TAG, "mode  :: " + mode + "   ,listData  :: " + listData);
+				long id = mDBcursor.getLong(mDBcursor.getColumnIndex(DBHelper.KEY_ROWID));
+				String mode = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_MODE));
+				String listData = mDBcursor.getString(mDBcursor.getColumnIndex(DBHelper.KEY_LIST_DATA));  			    		
+				Log.v(TAG,"mode  :: "+mode+ "   ,listData  :: "+listData );
 				checkListItem.add(new CheckListProfile(id, mode, listData));
-
-			} while (mDBcursor.moveToNext());
+				
+			} while(mDBcursor.moveToNext());
 		}
-		mDBcursor.close();
-
-		// buddylistView.setListData(checkListItem);
-		checkListAdapter = new CheckListAdapter(this,
-				R.layout.checklist_item_row, checkListItem, DEL_MODE);
-		buddyListView.setAdapter(checkListAdapter);
+    	mDBcursor.close();
+    	
+		checkListAdapter = new CheckListAdapter(this,  R.layout.checklist_item_row, checkListItem, DEL_MODE,ALL_DEL_MODE); 
+		liveListView.setAdapter(checkListAdapter);
 	}
 
-	public void addCheckListDialog() {
-		Log.v(TAG, "[addCheckListDialog]");
-		// delListDialog(number);
-		CustomDialog checkLlistDialog = new CustomDialog(this, R.style.Dialog);
-		checkLlistDialog.addListDialog(MODE);
-		checkLlistDialog.show();
-	}
-
-	public void addCheckList(String contents) {
-		Log.v(TAG, "[addCheckList] contents :: " + contents);
-		mDBHandler.insert(Livemode, contents);
-		updateListview();
-
-	}
-
-	long delId;
-
-	public void delCheckListDialog(long id, String contents) {
-		Log.v(TAG, "[delListDialog] id :: " + id);
-		delId = id;
-		CustomDialog checkLlistDialog = new CustomDialog(this, R.style.Dialog);
-		checkLlistDialog.delListDialog(MODE, contents);
-		checkLlistDialog.show();// showDialog(DEL_DLG);
-
-	}
-
-	public void delCheckList() {
-		Log.v(TAG, "[delCheckList] delId :: " + delId);
-		// delListDialog.dismiss();
-		mDBHandler.delete(delId);
-		updateListview();
-
-	}
-
-	CustomDialog checkLlistDialog;
-
+	/**Custom dialog START**/    
+    @Override
 	protected Dialog onCreateDialog(int id) {
-		checkLlistDialog = new CustomDialog(this, R.style.Dialog);
-		return checkLlistDialog;
-	}
+    	checkLlistDialog =  new CustomDialog(this, R.style.Dialog);
+    	return checkLlistDialog;
+    }
+    
+    
+    public void addCheckListDialog(){ 
+    	Log.v(TAG,"[addCheckListDialog]");
+    	CustomDialog checkLlistDialog =  new CustomDialog(this, R.style.Dialog);
+   	 	checkLlistDialog.addListDialog(MODE);
+   	 	checkLlistDialog.show();
+    }
+    public  void  addCheckList(String contents){
+	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
+	   	 mDBHandler.insert(liveMode, contents);  //1=safe, 2=live, 3=etc
+	   	 updateListview();
+   	
+   }
+
+    public void delCheckListDialog(long id,String contents){
+    	 Log.v(TAG,"[delListDialog] id :: "+ id);
+    	 delId = id;
+    	 CustomDialog checkLlistDialog =  new CustomDialog(this, R.style.Dialog);
+    	 checkLlistDialog.delListDialog(MODE, contents);
+    	 checkLlistDialog.show();
+    }
+    public void delCheckList(){
+	   	 Log.v(TAG,"[delCheckList] delId :: "+ delId);
+	   	 mDBHandler.delete(delId);
+	   	 updateListview();
+    }
+    
+    public void modifyCheckListDialog(long id,String contents){ 
+    	Log.v(TAG,"[modifyCheckListDialog]");
+    	modifyId = id;
+    	CustomDialog checkLlistDialog =  new CustomDialog(this, R.style.Dialog);
+   	 	checkLlistDialog.modifyListDialog(MODE,contents);
+   	 	checkLlistDialog.show();
+    }
+    public  void  modifyCheckList(String contents){
+	   	 Log.v(TAG,"[modifyCheckList] contents :: "+ contents);
+	   	 mDBHandler.update(modifyId, liveMode, contents);  //1=safe, 2=live, 3=etc
+	   	 updateListview();
+  	
+    }
+
+/**Custom dialog END**/    			
 
 	public void onClick(View v) {
-		Intent intent = null;
-		switch (v.getId()) {
-		case R.id.add_btn:
-			Log.v(TAG, "chekListAddBtn Click");
+    	//Intent intent = null;
+		switch(v.getId()){
+		case R.id.addBtn: 		//add list Item
+			Log.v(TAG,"chekListAddBtn Click");
 			addCheckListDialog();
 			break;
-
-		case R.id.del_btn:
-			Log.v(TAG, "buddylistDeleteBtn Click");
-			/*
-			 * mDBHandler.deleteMemberAllRows(); updateListview();
-			 */
-			if (DEL_MODE) {
+		case R.id.deleteBtn:  	//Delete list Item
+			Log.v(TAG,"deleteBtn Click");
+			if(DEL_MODE){
 				DEL_MODE = false;
+				ALL_DEL_MODE = false;
+			    checkListAllDelBtn.setEnabled(false);
+			    
+			    ArrayList<CheckListProfile> delList = checkListAdapter.getAllDelList();
+			    if(delList != null && delList.size() != 0){
+			    	for(int i=0; i<delList.size(); i++){
+			    		 Log.v(TAG,"[delList] delId :: "+ delList.get(i).getId()+",   contents"+ delList.get(i).getContents());
+			    		 mDBHandler.delete(delList.get(i).getId());
+			    	}
+			    }
 				updateListview();
-			} else {
-				DEL_MODE = true;
+				
+			}else{
+				DEL_MODE= true;
+				checkListAllDelBtn.setEnabled(true);
+				updateListview();
+			}
+			
+			break;
+		case R.id.allCheckBtn:  	//test
+			Log.v(TAG,"allCheckBtn Click");
+			if(ALL_DEL_MODE){
+				ALL_DEL_MODE = false;
+				checkListAllDelBtn.setText(allDelSelectTxt);
+				
+				updateListview();
+			}else{
+				ALL_DEL_MODE= true;
+				checkListAllDelBtn.setText(allDelDeselectTxt);
 				updateListview();
 			}
 			break;
-		case R.id.testBtn: // reques tbuddylist
-			intent = new Intent(this, LIveListDelActivity2.class);
-			startActivity(intent);
-			break;
 		}
-	}
-
-	public boolean onItemLongClick(AdapterView<?> arg0, View v, int position,
-			long id) {
-		Log.v(TAG, "view " + v + " position :: " + position);
-		return false;
 	}
 
 	protected void onDestroy() {

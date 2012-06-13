@@ -41,7 +41,7 @@
    android:layout_width="wrap_content"
    android:layout_height="fill_parent" 
     android:textColor="#cccccc"
-   android:textSize="15sp"
+   android:textSize="20sp"
   /> 
   </LinearLayout>
   <ImageButton android:id="@+id/mindelBtn"

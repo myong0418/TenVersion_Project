@@ -41,7 +41,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.safelist);
+        setContentView(R.layout.list);
         
 		/**  UI  **/
         //String
@@ -52,7 +52,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
         checkListAddBtn.setOnClickListener(this);
         checkListDelBtn = (Button)findViewById(R.id.deleteBtn);
         checkListDelBtn.setOnClickListener(this);
-        checkListAllDelBtn = (Button)findViewById(R.id.testBtn);
+        checkListAllDelBtn = (Button)findViewById(R.id.allCheckBtn);
         checkListAllDelBtn.setOnClickListener(this);
        if(DEL_MODE){ 
     	//   checkListAllDelBtn.setVisibility(View.VISIBLE);
@@ -72,7 +72,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
     public void updateListview(){
     	Log.v(TAG,"updateListview()");
     	checkListItem.clear();
-    	mDBcursor = mDBHandler.dbSafeSelectAll();//mode = safe = 1
+    	mDBcursor = mDBHandler.selectAllList(safeMode);//mode = safe = 1
     	if(mDBcursor.moveToFirst()){
 			do {
 				long id = mDBcursor.getLong(mDBcursor.getColumnIndex(DBHelper.KEY_ROWID));
@@ -124,14 +124,14 @@ public class SafeListActivity extends Activity implements OnClickListener{
     }
     
     public void modifyCheckListDialog(long id,String contents){ 
-    	Log.v(TAG,"[addCheckListDialog]");
+    	Log.v(TAG,"[modifyCheckListDialog]");
     	modifyId = id;
     	CustomDialog checkLlistDialog =  new CustomDialog(this, R.style.Dialog);
    	 	checkLlistDialog.modifyListDialog(MODE,contents);
    	 	checkLlistDialog.show();
     }
     public  void  modifyCheckList(String contents){
-	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
+	   	 Log.v(TAG,"[modifyCheckList] contents :: "+ contents);
 	   	 mDBHandler.update(modifyId, safeMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
   	
@@ -169,8 +169,8 @@ public class SafeListActivity extends Activity implements OnClickListener{
 			}
 			
 			break;
-		case R.id.testBtn:  	//test
-			Log.v(TAG,"testBtn Click");
+		case R.id.allCheckBtn:  	//test
+			Log.v(TAG,"allCheckBtn Click");
 			if(ALL_DEL_MODE){
 				ALL_DEL_MODE = false;
 				checkListAllDelBtn.setText(allDelSelectTxt);

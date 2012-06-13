@@ -14,7 +14,7 @@
 	android:layout_alignParentBottom="true"
 	>
 	<LinearLayout
-		android:id="@+id/btnlayout_buddylist"
+		android:id="@+id/btnlayout_list"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -35,10 +35,10 @@
 		android:layout_weight="1"
 		/>
 	<Button
-		android:id="@+id/testBtn"
+		android:id="@+id/allCheckBtn"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
-		android:text="전체삭제"
+		android:text="전체선택"
 		android:layout_weight="1"
 		
 		/>

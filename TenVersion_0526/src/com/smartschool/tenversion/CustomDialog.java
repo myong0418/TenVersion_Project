@@ -107,8 +107,8 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 				((SafeListActivity)mContext).addCheckList(addText);
 			}else if(MODE ==2){ 	//live
 				((LiveListActivity)mContext).addCheckList(addText);
-//			}else if(MODE ==3){	 //etc
-//				((EtcListActivity)mContext).addCheckList(addText);
+			}else if(MODE ==3){	 //etc
+				((EtcListActivity)mContext).addCheckList(addText);
 			}
 			
 			addEditTxt.setText("");
@@ -123,8 +123,8 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 				((SafeListActivity)mContext).delCheckList();
 			}else if(MODE ==2){ 	//live
 				((LiveListActivity)mContext).delCheckList();
-//			}else if(MODE ==3){	 //etc
-//				((EtcListActivity)mContext).delCheckList();
+			}else if(MODE ==3){	 //etc
+				((EtcListActivity)mContext).delCheckList();
 			}
 			this.dismiss();
 			break;
@@ -136,10 +136,10 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 			String modifyText =  modifyEditTxt.getText().toString();
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).modifyCheckList(modifyText);
-//			}else if(MODE ==2){ 	//live
-//				((LiveListActivity)mContext).modifyCheckList(modifyText);
-//			}else if(MODE ==3){	 //etc
-//				((EtcListActivity)mContext).addCheckList(addText);
+			}else if(MODE ==2){ 	//live
+				((LiveListActivity)mContext).modifyCheckList(modifyText);
+			}else if(MODE ==3){	 //etc
+				((EtcListActivity)mContext).modifyCheckList(modifyText);
 			}
 			this.dismiss();
 			break;
