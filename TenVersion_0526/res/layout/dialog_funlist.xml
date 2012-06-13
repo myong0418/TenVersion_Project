@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dip"
+    android:layout_height="120dip" >
+
+ <LinearLayout
+     android:id="@+id/funlist_btnlayout"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:orientation="horizontal" >
+
+     <Button
+         android:id="@+id/fundialog_okBtn"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="@string/funlist_okbtn_txt" />
+
+
+ </LinearLayout>
+ 
+  <TextView
+     android:id="@+id/fundialog_textview"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_above="@id/funlist_btnlayout"
+      />
+   
+</RelativeLayout>

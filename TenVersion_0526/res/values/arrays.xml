@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="fun_list">
+        <item>거울보세요!</item>
+		<item>바지는 입었나요?</item>
+		<item>머리는 감았나요?</item>
+		<item>양말에 구멍은?</item>
+		<item>핸드폰 챙겨!!!</item>
+		<item>교통카드 챙기세요</item>
+		<item>가방은 들고가야지!</item>
+		<item>화장 좀 하고가세요</item>
+		<item>어디가니~?</item>
+		<item>99</item>
+</string-array>
+</resources>

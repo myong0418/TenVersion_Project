@@ -63,10 +63,16 @@ public class PreviewListActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.preview_ok_btn:
-			finish();
+			funListDialog();
 			break;
 		}
 	}
-    
+	
+	public void funListDialog() {
+		Log.v(TAG, "[funListDialog]");
+		CustomDialog funListDialog = new CustomDialog(this, R.style.Dialog);
+		funListDialog.funDialog();
+		funListDialog.show();
+	}
     
 }
