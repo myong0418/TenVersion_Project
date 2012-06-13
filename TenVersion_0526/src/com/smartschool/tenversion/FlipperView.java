@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,12 +23,15 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
      float xAtDown;
      float xAtUp;
 
-     private int listNum =0;      //TODO add list length
+     private int listNum = 0;      //TODO add list length
      
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.flipper);
+		
+		//background blur
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 		
 		flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 		flipper.setOnTouchListener(this);
@@ -136,7 +140,8 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 				TextView tv = new TextView(this);
 				
 				tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents() );
-				tv.setTextColor(Color.CYAN);
+				tv.setTextSize(30);
+				tv.setTextColor(Color.BLUE);
 				tv.setTag(i);
 				flipper.addView(tv);
 			}

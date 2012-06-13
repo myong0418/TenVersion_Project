@@ -21,19 +21,23 @@
         android:id="@+id/live_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/live_btn_txt" />
+        android:text="@string/live_btn_txt"
+        android:background="@drawable/dog" />
 
     <Button
         android:id="@+id/etc_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/etc_btn_txt" />
+        android:text="@string/etc_btn_txt"
+        android:background="@drawable/plant" />
 
     <Button
         android:id="@+id/setting_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_btn_txt" />
+        android:text="@string/setting_btn_txt"
+        android:background="@drawable/light"
+        />
     
     <Button
         android:id="@+id/testdailog_btn"
