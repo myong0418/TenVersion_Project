@@ -1,5 +1,7 @@
 package com.smartschool.tenversion;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import android.content.Context;
 import android.content.Intent;
@@ -80,8 +82,7 @@ public class SettingListActivity extends PreferenceActivity implements
 
 		helpPref = (PreferenceScreen) findPreference(KEY_HELP); // (R.id.wifi_listpref);
 		helpPref.setOnPreferenceClickListener(this);
-		helpPref.setOnPreferenceChangeListener(this);
-
+		helpPref.setOnPreferenceChangeListener(this);	
 	}
 
 	@Override

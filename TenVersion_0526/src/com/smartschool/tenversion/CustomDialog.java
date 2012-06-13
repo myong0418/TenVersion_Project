@@ -1,10 +1,16 @@
 package com.smartschool.tenversion;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -31,7 +37,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		mContext = context;
 	}
 
-
+	
 
 	//addList dialog  safe,live,etc Activity
 	public void addListDialog(int mode) {
@@ -92,6 +98,34 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		cancelBtn.setOnClickListener(this);
 		
 	}
+	
+	public void funDialog(){
+		WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();    
+		lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+		lpWindow.dimAmount = 0.75f;
+		getWindow().setAttributes(lpWindow);
+
+		setContentView(R.layout.dialog_funlist);
+
+		String[] funlistArray= mContext.getResources().getStringArray(R.array.fun_list);
+		ArrayList<String> funList =new ArrayList<String>(funlistArray.length);  
+		
+		for(int i=0; i <funlistArray.length; i++){
+			Log.v(TAG,"funList "+i+" :: "+funlistArray[i].toString());
+			funList.add(funlistArray[i].toString());
+		}
+		Collections.shuffle(funList);
+				
+	    TextView funTxt = (TextView)findViewById(R.id.fundialog_textview);
+	    funTxt.setText(funList.get(1).toString());
+	    
+		Button okBtn = (Button)findViewById(R.id.fundialog_okBtn);
+		okBtn.setOnClickListener(this);
+	}
+	
+
+
+
 
 	@Override
 	public void dismiss() {
@@ -101,6 +135,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 	
 	public void onClick(View v) {
 		switch (v.getId()) {
+/**Add Dialog**/		
 		case R.id.addlist_okBtn:
 			String addText =  addEditTxt.getText().toString();
 			if(MODE ==1){ 			//safe
@@ -117,7 +152,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		case R.id.addlist_cancelBtn:
 			this.dismiss();
 			break;
-			
+/**Delete Dialog**/					
 		case R.id.dellist_deleteBtn:
 			if(MODE ==1){ 			//safe
 				((SafeListActivity)mContext).delCheckList();
@@ -131,7 +166,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		case R.id.dellist_cancelBtn:
 			this.dismiss();
 			break;
-			
+/**Modify Dialog**/				
 		case R.id.modifylist_modifyBtn:
 			String modifyText =  modifyEditTxt.getText().toString();
 			if(MODE ==1){ 			//safe
@@ -146,8 +181,12 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		case R.id.modifylist_cancelBtn:
 			this.dismiss();
 			break;
-
 		
+/**Fun Dialog**/		
+		case R.id.fundialog_okBtn:
+			this.dismiss();
+			((PreviewListActivity) mContext).finish();
+			break;
 		}
 	}
 }
