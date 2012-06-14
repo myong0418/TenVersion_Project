@@ -23,6 +23,7 @@ private static DBHelper mInstance = null;
 
 	public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext = context;
     }
 
 	private static final String DATABASE_CREATE =
