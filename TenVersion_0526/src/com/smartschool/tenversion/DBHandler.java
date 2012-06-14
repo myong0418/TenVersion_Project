@@ -66,37 +66,6 @@ public class DBHandler {
 		return db.update(TABLE_NAME, values, KEY_ROWID + "=" + rowID, null) > 0;
 	}
 
-	public Cursor select(int id) throws SQLException {
-		Log.v(TAG, "select()  id::" + id);
-		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
-				KEY_MODE, KEY_LIST_DATA }, KEY_ROWID + "=" + id, null, null,
-				null, null, null);
-		if (cursor != null) {
-			cursor.moveToFirst();
-		}
-
-		return cursor;
-	}
-
-	public ArrayList<Lists> selectAll() throws SQLException {
-		Log.v(TAG, "selectAll() ");
-		ArrayList<Lists> lists = new ArrayList<Lists>();
-		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
-				KEY_MODE, KEY_LIST_DATA }, null, null, null, null, null, null);
-
-		if (cursor != null) {
-			cursor.moveToFirst();
-		}
-		while (cursor.moveToNext()) {
-			lists.add(new Lists(
-					cursor.getInt(cursor.getColumnIndex(KEY_ROWID)), cursor
-							.getString(cursor.getColumnIndex(KEY_MODE)), cursor
-							.getString(cursor.getColumnIndex(KEY_LIST_DATA))));
-		}
-
-		return lists;
-	}
-
 	public Cursor selectAllList(String mode) throws SQLException {
 		Log.v(TAG, "selectAllList() ");
 
@@ -110,54 +79,6 @@ public class DBHandler {
 		}
 		return cursor;
 	}
-//	public Cursor selectAll2() throws SQLException {
-//		Log.v(TAG, "selectAll() ");
-//		String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
-//
-////		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
-////				null, null, null);
-//		
-//		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
-//				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
-//				new String[] { SAFEMODE }, null, null, null,
-//				null);
-//		
-//		if (cursor != null) {
-//			cursor.moveToFirst();
-//		}
-//		return cursor;
-//	}
-//	public Cursor selectAll3() throws SQLException {
-//		Log.v(TAG, "selectAll() ");
-//		String[] from = new String[] { KEY_ROWID, KEY_MODE, KEY_LIST_DATA };
-//
-////		Cursor cursor = db.query(true, TABLE_NAME, from, null, null, null,
-////				null, null, null);
-//		
-//		Cursor cursor = db.query(true, TABLE_NAME, new String[] { KEY_ROWID,
-//				KEY_MODE, KEY_LIST_DATA }, KEY_MODE + "=?",
-//				new String[] { LIVEMODE }, null, null, null,
-//				null);
-//		
-//		if (cursor != null) {
-//			cursor.moveToFirst();
-//		}
-//		return cursor;
-//	}
-	
-	// public Cursor selectAll() throws SQLException {
-	// Log.v(TAG,"selectAll() ");
-	// Cursor cursor = db.query(true,TABLE_NAME,
-	// new String[] {KEY_ROWID, KEY_MODE, KEY_LIST_DATA},
-	// null,
-	// null,null, null, null, null);
-	//
-	// if (cursor != null) { cursor.moveToFirst(); }
-	//
-	// return cursor;
-	// }
-	
-	
 	
 	//120610_MyoHyun_SelectAll method START
 		public Cursor dbSelectAll() throws SQLException {
