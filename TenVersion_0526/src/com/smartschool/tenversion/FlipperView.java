@@ -136,14 +136,20 @@ public class FlipperView extends Activity  implements View.OnTouchListener {
 			if(listNum == 0){
 				return false;
 			}
+			flipper.removeAllViews(); // 추가한 부분
 			for(int i=0; i<checkList.size(); i++){
 				TextView tv = new TextView(this);
-				
-				tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents() );
+//				TextView tv = (TextView) findViewById(R.id.info);
+//				tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents() );
+				tv.setText( checkList.get(i).getContents() );
 				tv.setTextSize(30);
 				tv.setTextColor(Color.BLUE);
 				tv.setTag(i);
+				// Todo 그림자 효과 주려는 부분인데 에러나서 일단 막아 놓음
+//				tv.setTextAppearance(this,  
+//						R.style.AudioFileInfoOverlayText);
 				flipper.addView(tv);
+				
 			}
 			mDBHandler.close();
 			return true;

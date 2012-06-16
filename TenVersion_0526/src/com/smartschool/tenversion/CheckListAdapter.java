@@ -85,9 +85,9 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 
 		// set background
 		if (position % 2 == 0) {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_2);
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_4);
 		} else {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_1);
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_3);
 		}
 
 		CheckListProfile item = checkListProfileList.get(position);
