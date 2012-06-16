@@ -3,24 +3,17 @@ package com.smartschool.tenversion;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 
-public class CustomDialog extends Dialog implements android.view.View.OnClickListener{
+public class CustomDialog extends Dialog implements View.OnClickListener{
 	private static final String TAG = "CustomDialog";
 
 	private Context mContext = null; 
@@ -55,6 +48,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 		okBtn.setOnClickListener(this);
 		Button cancelBtn = (Button)findViewById(R.id.addlist_cancelBtn);
 		cancelBtn.setOnClickListener(this);
+			
 	}
 	
 	

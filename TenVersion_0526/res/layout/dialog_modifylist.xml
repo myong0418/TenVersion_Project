@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="180dip"
-  android:layout_height="120dip"
+  android:layout_width="240dip"
+  android:layout_height="160dip"
+  android:background="#FFFACD"
+  >
+  <TextView 
+      android:id="@+id/text01"
+     android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="#0000CD"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="수정할 이름"/>
  >
  <LinearLayout
      android:id="@+id/modifylist_btnlayout"
@@ -32,14 +44,19 @@
      android:layout_height="wrap_content"
      android:layout_above="@id/modifylist_btnlayout"
       /> -->
-   
-   <EditText
-     android:id="@+id/modifylist_editview"
-     android:layout_width="fill_parent"
-     android:layout_height="wrap_content"
-     android:layout_above="@id/modifylist_btnlayout"
-      />
 
+   <EditText
+       android:id="@+id/modifylist_editview"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_below="@+id/text01"
+       android:layout_marginTop="14dp"
+       android:ems="10"
+       android:hint="수정할 이름의 입력하세요 ^^" >
+
+       <requestFocus />
+   </EditText>
 
 </RelativeLayout>
 
