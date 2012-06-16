@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="180dip"
-  android:layout_height="120dip"
- >
- <EditText
-        android:id="@+id/addlist_edittxt"
-        android:layout_width="fill_parent"
+  android:layout_width="240dip"
+  android:layout_height="160dip"
+  android:background="#FFFACD"
+  >
+  <TextView 
+      android:id="@+id/text01"
+     android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="입력하세요" />
+        android:textSize="22sp"
+        android:textColor="#0000CD"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="List 추가"/>
     
 <LinearLayout
   android:layout_width="fill_parent"
@@ -30,4 +36,18 @@
 	android:text="cancel"
 	/>
 </LinearLayout>
+
+<EditText
+    android:id="@+id/addlist_edittxt"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/text01"
+    android:layout_marginTop="16dp"
+    android:ems="10"
+    android:hint="추가할 이름를 입력하세요^^" >
+
+    <requestFocus />
+</EditText>
+
 </RelativeLayout>
