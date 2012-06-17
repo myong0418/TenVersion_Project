@@ -26,14 +26,14 @@
 	android:layout_width ="wrap_content"
 	android:layout_height ="wrap_content"
 	android:layout_weight="1"
-	android:text="OK"
+	android:text="확인"
 	/>
   <Button
 	android:id="@+id/addlist_cancelBtn"
 	android:layout_width ="wrap_content"
 	android:layout_height ="wrap_content"
 	android:layout_weight="1"
-	android:text="cancel"
+	android:text="취소"
 	/>
 </LinearLayout>
 
