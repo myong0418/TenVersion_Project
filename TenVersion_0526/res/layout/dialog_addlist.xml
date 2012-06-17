@@ -44,6 +44,7 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/text01"
     android:layout_marginTop="16dp"
+    android:maxLength="20"
     android:ems="10"
     android:hint="추가할 내용을 입력하세요^^" >
 

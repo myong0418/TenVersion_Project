@@ -113,7 +113,7 @@ public class LiveListActivity extends Activity implements OnClickListener {
     }
     public  void  addCheckList(String contents){
 	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
-	   	 mDBHandler.insert(liveMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.insert(this, liveMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
    	
    }
@@ -140,7 +140,7 @@ public class LiveListActivity extends Activity implements OnClickListener {
     }
     public  void  modifyCheckList(String contents){
 	   	 Log.v(TAG,"[modifyCheckList] contents :: "+ contents);
-	   	 mDBHandler.update(modifyId, liveMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.update(this, modifyId, liveMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
   	
     }

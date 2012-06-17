@@ -104,7 +104,7 @@ public class EtcListActivity extends Activity  implements OnClickListener{
     }
     public  void  addCheckList(String contents){
 	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
-	   	 mDBHandler.insert(etcMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.insert(this, etcMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
    	
    }
@@ -131,7 +131,7 @@ public class EtcListActivity extends Activity  implements OnClickListener{
     }
     public  void  modifyCheckList(String contents){
 	   	 Log.v(TAG,"[modifyCheckList] contents :: "+ contents);
-	   	 mDBHandler.update(modifyId, etcMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.update(this, modifyId, etcMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
   	
     }

@@ -105,7 +105,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
     }
     public  void  addCheckList(String contents){
 	   	 Log.v(TAG,"[addCheckList] contents :: "+ contents);
-	   	 mDBHandler.insert(safeMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.insert(this, safeMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
    	
    }
@@ -132,7 +132,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
     }
     public  void  modifyCheckList(String contents){
 	   	 Log.v(TAG,"[modifyCheckList] contents :: "+ contents);
-	   	 mDBHandler.update(modifyId, safeMode, contents);  //1=safe, 2=live, 3=etc
+	   	 mDBHandler.update(this, modifyId, safeMode, contents);  //1=safe, 2=live, 3=etc
 	   	 updateListview();
   	
     }

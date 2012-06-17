@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DBHandler {
 	public static final String TAG = "DBHandler";
@@ -37,11 +38,16 @@ public class DBHandler {
 		helper.close();
 	}
 
-	public long insert(String mode, String listData) {
+	public long insert(Context ctx,  String mode, String listData) {
 		Log.v(TAG, "insert()  mode::" + mode + " , list_data ::" + listData);
 		ContentValues values = new ContentValues();
-		values.put(KEY_MODE, mode);
-		values.put(KEY_LIST_DATA, listData);
+		if(listData.equals(null) || listData.equals("")){
+			Toast.makeText(ctx, "빈 값은 입력 할 수 없습니다", Toast.LENGTH_LONG).show();
+		}
+		else{
+			values.put(KEY_MODE, mode);
+			values.put(KEY_LIST_DATA, listData);
+		}
 
 		return db.insert(TABLE_NAME, null, values);
 	}
@@ -56,14 +62,20 @@ public class DBHandler {
 		return db.delete(TABLE_NAME, KEY_ROWID + "=" + rowID, null) > 0;
 	}
 
-	public boolean update(long rowID, String mode, String listData) {
+	public boolean update(Context ctx, long rowID, String mode, String listData) {
 		Log.v(TAG, "update()  rowID::" + rowID + ", mode::" + mode
 				+ " ,listData::" + listData);
 		ContentValues values = new ContentValues();
-		values.put(KEY_MODE, mode);
-		values.put(KEY_LIST_DATA, listData);
-
-		return db.update(TABLE_NAME, values, KEY_ROWID + "=" + rowID, null) > 0;
+		if(listData.equals(null) || listData.equals("")){
+			Toast.makeText(ctx, "빈 값은 입력 할 수 없습니다", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		else{
+			values.put(KEY_MODE, mode);
+			values.put(KEY_LIST_DATA, listData);
+			return db.update(TABLE_NAME, values, KEY_ROWID + "=" + rowID, null) > 0;
+		}
+		
 	}
 
 	public Cursor selectAllList(String mode) throws SQLException {
