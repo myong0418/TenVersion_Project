@@ -14,8 +14,7 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:text="수정할 이름"/>
- >
+        android:text="수정할 내용"/>
  <LinearLayout
      android:id="@+id/modifylist_btnlayout"
      android:layout_width="fill_parent"
@@ -53,7 +52,7 @@
        android:layout_below="@+id/text01"
        android:layout_marginTop="14dp"
        android:ems="10"
-       android:hint="수정할 이름의 입력하세요 ^^" >
+       android:hint="수정할 내용을 입력하세요 ^^" >
 
        <requestFocus />
    </EditText>
