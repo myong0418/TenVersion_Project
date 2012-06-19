@@ -32,7 +32,9 @@ public class SettingListActivity extends PreferenceActivity implements
 	public static final String KEY_VIBRATOR = "vibrator_mode";
 
 	public static final String KEY_HELP = "help_mode";
-
+	public static final String KEY_VERSION = "version_mode";
+	public static final String KEY_CREATE = "creater_mode";
+	
 	public static ListPreference wifiListPref = null;
 
 	// checkBoxPref alarm,vibrator setting
@@ -43,7 +45,8 @@ public class SettingListActivity extends PreferenceActivity implements
 	public static String checkStateStr = " off";
 
 	public static PreferenceScreen helpPref = null;
-
+	public static PreferenceScreen versionPref = null;
+	public static PreferenceScreen createPref = null;
 	// private SharedPreferences sharedPrefs = null;
 
 	@Override
@@ -61,7 +64,10 @@ public class SettingListActivity extends PreferenceActivity implements
 			Log.v(TAG, "wifimode != null ::" + wifimode);
 			wifiListPref.setSummary(wifimode);
 			wifiListPref.setValue(wifimode);
-
+		}
+		else{
+			Log.v(TAG, "wifimode is null ::" + wifimode);
+			Toast.makeText(this, "연결할 Wi-Fi가 없습니다.", Toast.LENGTH_LONG).show();
 		}
 
 		alarmPref = (CheckBoxPreference) findPreference(KEY_ALARM); // (R.id.wifi_listpref);
@@ -83,6 +89,14 @@ public class SettingListActivity extends PreferenceActivity implements
 		helpPref = (PreferenceScreen) findPreference(KEY_HELP); // (R.id.wifi_listpref);
 		helpPref.setOnPreferenceClickListener(this);
 		helpPref.setOnPreferenceChangeListener(this);	
+		
+		versionPref = (PreferenceScreen) findPreference(KEY_VERSION); // (R.id.wifi_listpref);
+		versionPref.setOnPreferenceClickListener(this);
+		versionPref.setOnPreferenceChangeListener(this);
+		
+		createPref = (PreferenceScreen) findPreference(KEY_CREATE); // (R.id.wifi_listpref);
+		createPref.setOnPreferenceClickListener(this);
+		createPref.setOnPreferenceChangeListener(this);
 	}
 
 	@Override
@@ -116,6 +130,13 @@ public class SettingListActivity extends PreferenceActivity implements
 
 		} else if (preference.getKey().equals(KEY_HELP)) {
 			Log.v(TAG, "KEY_HELP");
+			Toast.makeText(this, "도움말 화면입니다.", Toast.LENGTH_LONG).show();
+		} else if (preference.getKey().equals(KEY_CREATE)) {
+			Log.v(TAG, "KEY_CREATE");
+			Toast.makeText(this, "개발자정보 화면입니다.", Toast.LENGTH_LONG).show();
+		}else if (preference.getKey().equals(KEY_VERSION)) {
+			Log.v(TAG, "KEY_VERSION");
+			Toast.makeText(this, "버전정보 화면입니다.", Toast.LENGTH_LONG).show();
 		}
 
 		return false;

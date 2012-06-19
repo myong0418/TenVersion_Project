@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="fun_list">
-        <item>거울보세요! 이빨에 고춧가루가!</item>
+        <item>이빨에 고춧가루 낀 거 알아요?</item>
 		<item>바지는 입었나요?</item>
 		<item>머리는 감았나요?</item>
 		<item>신발은 신었어요?</item>
-		<item>핸드폰 챙겨!!!</item>
-		<item>교통카드 챙기세요</item>
-		<item>가방은 들고가야지!</item>
-		<item>화장 좀 하고가세요!</item>
-		<item>안경은 꼈어요?</item>
+		<item>핸드폰 챙겼어요?</item>
+		<item>교통카드 챙겼어요?</item>
+		<item>가방은 챙겼어요?</item>
+		<item>화장한 거 맞아요?</item>
+		<item>우산은 챙겼어요?</item>
 		<item>개념은 챙겼어요?</item>
 </string-array>
 
 <string-array name="set_safe_dbdata">
         <item>내방 불끄기</item>
 		<item>가스밸브 잠그기</item>
-		<item>티비 끄기</item>
 		<item>창문 닫기</item>
-		<item>콘센트 뽑기</item>
 </string-array>
 <string-array name="set_live_dbdata">
         <item>뽀삐 밥주기</item>
-		<item>난초에 물주기</item>
-		<item>물고기 밥주기</item>
-		<item>상추밭에 물주기</item>
-		<item>양이 밥주기</item>
+		<item>화분에 물주기</item>
 </string-array>
 <string-array name="set_etc_dbdata">
         <item>지갑 챙기기</item>
-		<item>빨래 걷기</item>
-		<item>우산 챙기기</item>
-		<item>차키 챙기기</item>
+		<item>열쇠 챙기기</item>
 		<item>약 먹기</item>
 </string-array>
 </resources>

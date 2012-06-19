@@ -71,10 +71,10 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			}
 			
 			if (ALL_DEL_MODE) { //all Select
-				holder.mDelBtn.setBackgroundResource(R.drawable.checked);
+				holder.mDelBtn.setBackgroundResource(R.drawable.check2);
 				holder.mDelBtn.setTag(R.id.tag_del_satate, true);
 			} else { //all deSelect
-				holder.mDelBtn.setBackgroundResource(R.drawable.unchecked);
+				holder.mDelBtn.setBackgroundResource(R.drawable.check1);
 				holder.mDelBtn.setTag(R.id.tag_del_satate, false);
 			}
 
@@ -85,9 +85,9 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 
 		// set background
 		if (position % 2 == 0) {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_4);
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_2);
 		} else {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_3);
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_1);
 		}
 
 		CheckListProfile item = checkListProfileList.get(position);
@@ -129,7 +129,7 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			if (delState) { //checked -> uncheck
 				delState = false;
 				v.setTag(R.id.tag_del_satate, false);
-				v.setBackgroundResource(R.drawable.unchecked);
+				v.setBackgroundResource(R.drawable.check1);
 				for(int i=0; i<delChecListProfileList.size(); i++){
 					if(delChecListProfileList.get(i).getId() == id){
 						delChecListProfileList.remove(i);//(new CheckListProfile(id, String.valueOf(mode),contents));
@@ -138,7 +138,7 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			} else {  //unchecked -> check
 				delState = true;
 				v.setTag(R.id.tag_del_satate, true);
-				v.setBackgroundResource(R.drawable.checked);
+				v.setBackgroundResource(R.drawable.check2);
 				delChecListProfileList.add(new CheckListProfile(id, String.valueOf(mode),contents));
 			}
 			

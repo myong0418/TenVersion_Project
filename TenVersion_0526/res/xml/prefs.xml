@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="Wi-Fi 및 네트워크 설정" >
+    <PreferenceCategory android:title="Wi-Fi및 네트워크 설정" >
         <ListPreference
-            android:title="wifi 설정" 
-            android:dialogTitle="Wi-Fi설정"
+            android:title="Wi-Fi 선택" 
+            android:dialogTitle="Wi-Fi 선택"
             android:enabled="true"
             android:key="wifi_mode"
-            android:summary="원하는 wifi를 설정해야 알람이 가능합니다."
+            android:summary="사용 할  Wi-Fi 선택"
             />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="알람설정" >
         <CheckBoxPreference
-            android:title="알람설정"
+            android:title="알람 On/Off"
             android:enabled="true"
             android:key="alarm_mode"
             android:defaultValue="true"
@@ -23,10 +23,10 @@
             android:title="알람시간 설정"
             android:enabled="true"
             android:key="alarm_time_mode"
-            android:summary="" />
+            android:summary="시간 설정으로 사용" />
          
         <CheckBoxPreference
-            android:title="진동설정"
+            android:title="진동  On/Off"
             android:enabled="true"
             android:key="vibrator_mode"
             android:defaultValue="true"
@@ -34,19 +34,24 @@
             />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="Help" >
+    <PreferenceCategory android:title="도움말" >
         <PreferenceScreen
-            android:title="무엇을 도와드릴깝숑"
+            android:title="도움말 정보"
             android:enabled="true"
             android:key="help_mode"
-            android:summary="help보기가 가능합니다." />
+            android:summary="어플 사용방법 확인" />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="version Info" >
-        <Preference
-            android:title="버전확인"
+    <PreferenceCategory android:title="기타정보" >
+        <PreferenceScreen
+            android:title="버전정보 확인"
             android:enabled="true"
             android:key="version_mode"
+            android:summary="" />
+        <PreferenceScreen
+            android:title="개발자정보"
+            android:enabled="true"
+            android:key="creater_mode"
             android:summary="" />
     </PreferenceCategory>
 </PreferenceScreen>

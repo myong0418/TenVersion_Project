@@ -40,16 +40,15 @@
   <TextView android:id="@+id/contents"
    android:layout_width="wrap_content"
    android:layout_height="fill_parent" 
-    android:textColor="#ffffff"
+    android:textColor="#000000"
    android:textSize="20sp"
   /> 
   </LinearLayout>
   <ImageButton android:id="@+id/mindelBtn"
-   android:layout_width="wrap_content"
-   android:layout_height="fill_parent" 
+   android:layout_width="50dp"
+   android:layout_height="50dp" 
    android:background="@drawable/ic_launcher"
-   android:drawableLeft="@drawable/ic_launcher"
-   android:layout_alignParentRight="true"
-   android:layout_marginRight="5dip"
+   android:layout_alignParentLeft="true"
+   android:layout_marginLeft="5dip"
   />
 </RelativeLayout>
