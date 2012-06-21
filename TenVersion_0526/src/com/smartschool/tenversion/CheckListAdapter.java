@@ -17,13 +17,11 @@ import android.widget.TextView;
 public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements OnClickListener ,OnLongClickListener{
 	private static final String TAG = "CheckListAdapter";
 	private final LayoutInflater mInflater;
-	// private static int MODE; //safe,live,etc
 	private boolean DEL_MODE = false;
 	private boolean ALL_DEL_MODE = false;
 	private ArrayList<CheckListProfile> checkListProfileList;
 	private Context mContext;
 	private ViewHolder holder;
-	
 	private  ArrayList<CheckListProfile> delChecListProfileList;
 	// List<ContacstData> contacts;
 	public CheckListAdapter(Context context, int textViewResourceId,ArrayList<CheckListProfile> objects, boolean del_mode) {
@@ -84,11 +82,11 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 		}
 
 		// set background
-		if (position % 2 == 0) {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_2);
-		} else {
-			holder.mRLayout.setBackgroundResource(R.drawable.panal_1);
-		}
+//		if (position % 2 == 0) {
+//			holder.mRLayout.setBackgroundResource(color_1);
+//		} else {
+//			holder.mRLayout.setBackgroundResource(color_2);
+//		}
 
 		CheckListProfile item = checkListProfileList.get(position);
 		holder.mContents.setText(item.getContents());

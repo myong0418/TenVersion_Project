@@ -28,6 +28,8 @@
   android:layout_marginLeft="72dip"
   android:orientation="horizontal"
   android:layout_centerVertical="true"
+  android:paddingTop="13dp"
+  android:paddingBottom="13dp"
 
 >
 <!--   <TextView android:id="@+id/buddy_name"
@@ -45,8 +47,8 @@
   /> 
   </LinearLayout>
   <ImageButton android:id="@+id/mindelBtn"
-   android:layout_width="50dp"
-   android:layout_height="50dp" 
+   android:layout_width="40dp"
+   android:layout_height="40dp" 
    android:background="@drawable/ic_launcher"
    android:layout_alignParentLeft="true"
    android:layout_marginLeft="5dip"
