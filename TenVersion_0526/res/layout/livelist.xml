@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background ="@drawable/dog"
+    android:background ="@drawable/dog_in"
     >
     
 <!-- button -->
@@ -22,8 +22,7 @@
 		android:id="@+id/btnlayout_list"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:layout_alignParentBottom="true">
+		android:orientation="horizontal">
 	<Button
 		android:id="@+id/addBtn"
 		android:layout_width="0dip"

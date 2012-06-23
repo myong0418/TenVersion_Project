@@ -2,13 +2,11 @@
 <resources>
     
     <!-- TenVersionActivity.java -->
-    <string name="hello">Hello World, TenVersionActivity!</string>
     <string name="app_name">TenVersion</string>
-    <string name="safe_btn_txt">안전  </string>
-    <string name="live_btn_txt">생명  </string>
-    <string name="etc_btn_txt">기타  </string>
+    <string name="safe_btn_txt">안전 리스트 </string>
+    <string name="live_btn_txt">생명 리스트 </string>
+    <string name="etc_btn_txt">기타 리스트 </string>
     <string name="setting_btn_txt">Setting  </string>
-    <string name="testdailog_btn_txt">test dialog </string>
 
     <!-- SafeListActivity.java -->
  	<string name="all_del_select_txt">전체선택</string>

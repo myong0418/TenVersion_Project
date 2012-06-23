@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+ 	
+<RelativeLayout 
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background ="@drawable/fire_out"
+    >
+    
+<!-- button -->
+<LinearLayout
+	android:id="@+id/btnlayout"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:layout_alignParentBottom="true"	>
+	<LinearLayout
+		android:id="@+id/btnlayout_list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+	<Button
+		android:id="@+id/addBtn"
+		android:layout_width="0dip"
+		android:layout_height="wrap_content"
+		android:text="추가"
+		android:layout_weight="1"
+		/>
+	<Button
+		android:id="@+id/deleteBtn"
+		android:layout_width="0dip"
+		android:layout_height="wrap_content"
+		android:text="삭제"
+		android:layout_weight="1"
+		/>
+	<Button
+		android:id="@+id/allCheckBtn"
+		android:layout_width="0dip"
+		android:layout_height="wrap_content"
+		android:text="전체선택"
+		android:layout_weight="1"
+		
+		/>
+	</LinearLayout>                      
+</LinearLayout>
+
+
+<!-- select number Bar -->
+<!-- <LinearLayout
+	android:id="@+id/search_NumberBar_layout"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:layout_alignParentTop="true"
+	>
+	<EditText
+		android:id="@+id/searchNum_edittx"
+		android:layout_width="230dip"
+		android:layout_height="wrap_content"
+		android:hint="전화번호 검색"
+		/>
+	<Button
+		android:id="@+id/searchNumBtn"
+		android:layout_width="80dip"
+		android:layout_height="wrap_content"
+		android:text="검색"
+		android:textColor="#ffffff"
+		android:layout_marginLeft="5dip"
+		/>
+		 -->
+	<!--<Button
+		android:id="@+id/searchNumBtn"
+		android:layout_width="30dip"
+		android:layout_height="wrap_content"
+		android:text="검색"
+		android:textColor="#ffffff"
+		android:background="@layout/selector_searchbtn" 
+		/>
+		-->
+		
+<!-- </LinearLayout> -->
+
+
+
+<!-- List view -->
+<!-- <LinearLayout
+		android:id="@+id/buddylistview_layout"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_above="@id/btnlayout"
+		android:layout_below="@id/topBar_layout"
+		
+		> -->
+<ListView
+	android:id="@+id/listView"
+	android:layout_width ="fill_parent"
+	android:layout_height= "fill_parent"
+	android:layout_above="@id/btnlayout"
+	/>
+
+<!-- </LinearLayout> -->
+
+</RelativeLayout>
+</LinearLayout>

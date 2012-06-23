@@ -14,9 +14,12 @@
 	        android:id="@+id/preview_tv"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="preview" 
-	        android:textSize="20sp"
-	        android:textColor="@android:color/secondary_text_light"/>
+	        android:textSize="25sp"
+	        android:textColor="@android:color/white"
+	        android:shadowColor="#000000"
+	        android:shadowRadius="3"
+	        android:shadowDx="3"
+	        android:shadowDy="3"/>
 	    </ScrollView>
     <Button 
         android:id="@+id/preview_ok_btn"

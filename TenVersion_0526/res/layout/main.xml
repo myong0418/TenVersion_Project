@@ -1,49 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background ="@drawable/all">
-    
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+
     <Button
         android:id="@+id/safe_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:text="@string/safe_btn_txt" 
-        android:background="@drawable/fire" />
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/fire_in" />
+    <TextView
+        android:id="@+id/safe_btn_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_toRightOf="@id/safe_btn"
+        android:text="@string/safe_btn_txt"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/live_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/dog_in" />
+     <TextView
+        android:id="@+id/live_btn_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/live_btn"
         android:text="@string/live_btn_txt"
-        android:background="@drawable/dog" />
-
-    <Button
+        android:textColor="#000000" />
+     <Button
         android:id="@+id/etc_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:text="@string/etc_btn_txt"
-        android:background="@drawable/plant" />
-
-    <Button
-        android:id="@+id/setting_btn"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:text="@string/setting_btn_txt"
-        android:background="@drawable/light"
-        />
-    
-    <Button
-        android:id="@+id/testdailog_btn"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="58dp"
+        android:background="@drawable/plants_in" />
+     <TextView
+        android:id="@+id/etc_btn_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/testdailog_btn_txt" />
+        android:layout_marginTop="275dp"
+        android:layout_toRightOf="@id/etc_btn"
+        android:text="@string/etc_btn_txt"
+        android:textColor="#000000" />
+     
+    <Button
+        android:id="@+id/setting_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginLeft="72dp"
+        android:background="@drawable/light_in" />
+     
+     <TextView
+        android:id="@+id/setting_btn_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="130dp"
+        android:text="@string/setting_btn_txt"
+        android:textColor="#000000" />
     
-      <Button
+    <Button
         android:id="@+id/testFlipper_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60dp"
         android:text="@string/testFlipper_btn_txt" />
 
-</LinearLayout>
+
+     
+
+</RelativeLayout>

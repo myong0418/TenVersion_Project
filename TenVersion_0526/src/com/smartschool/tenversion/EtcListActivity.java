@@ -41,7 +41,7 @@ public class EtcListActivity extends Activity  implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list);
+        setContentView(R.layout.etclist);
 		/**  UI  **/
         //String
         allDelSelectTxt = getResources().getString(R.string.all_del_select_txt);

@@ -41,7 +41,7 @@ public class SafeListActivity extends Activity implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list);
+        setContentView(R.layout.safelist);
         
 		/**  UI  **/
         //String
