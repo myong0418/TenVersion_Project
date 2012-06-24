@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class TenVersionActivity extends Activity  implements OnClickListener{
     /** Called when the activity is first created. */
@@ -16,15 +17,15 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
         setContentView(R.layout.main);
         
         //list btn
-        Button safeBtn = (Button)findViewById(R.id.safe_btn);
+        ImageButton safeBtn = (ImageButton)findViewById(R.id.safe_btn);
         safeBtn.setOnClickListener(this);
-        Button liveBtn = (Button)findViewById(R.id.live_btn);
+        ImageButton liveBtn = (ImageButton)findViewById(R.id.live_btn);
         liveBtn.setOnClickListener(this);
-        Button etcBtn = (Button)findViewById(R.id.etc_btn);
+        ImageButton etcBtn = (ImageButton)findViewById(R.id.etc_btn);
         etcBtn.setOnClickListener(this);
         
         //setting btn
-        Button settingBtn = (Button)findViewById(R.id.setting_btn);
+        ImageButton settingBtn = (ImageButton)findViewById(R.id.setting_btn);
         settingBtn.setOnClickListener(this);
                 
        //test Flipper btn

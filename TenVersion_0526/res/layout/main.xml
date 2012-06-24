@@ -5,14 +5,14 @@
     android:background="@drawable/background"
     android:orientation="vertical" >
 
-
-    <Button
+    <ImageButton
         android:id="@+id/safe_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/fire_in" />
+        android:background="@drawable/safe_btn_change" />    
+        
     <TextView
         android:id="@+id/safe_btn_txt"
         android:layout_width="wrap_content"
@@ -22,13 +22,13 @@
         android:text="@string/safe_btn_txt"
         android:textColor="#000000" />
 
-    <Button
+    <ImageButton
         android:id="@+id/live_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="170dp"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/dog_in" />
+        android:background="@drawable/live_btn_change" />
      <TextView
         android:id="@+id/live_btn_txt"
         android:layout_width="wrap_content"
@@ -37,13 +37,13 @@
         android:layout_toRightOf="@id/live_btn"
         android:text="@string/live_btn_txt"
         android:textColor="#000000" />
-     <Button
+     <ImageButton
         android:id="@+id/etc_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="240dp"
         android:layout_marginLeft="58dp"
-        android:background="@drawable/plants_in" />
+        android:background="@drawable/etc_btn_change" />
      <TextView
         android:id="@+id/etc_btn_txt"
         android:layout_width="wrap_content"
@@ -53,13 +53,13 @@
         android:text="@string/etc_btn_txt"
         android:textColor="#000000" />
      
-    <Button
+    <ImageButton
         android:id="@+id/setting_btn"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="310dp"
         android:layout_marginLeft="72dp"
-        android:background="@drawable/light_in" />
+        android:background="@drawable/setting_btn_change" />
      
      <TextView
         android:id="@+id/setting_btn_txt"
