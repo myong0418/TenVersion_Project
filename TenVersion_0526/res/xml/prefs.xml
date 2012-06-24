@@ -19,10 +19,10 @@
             android:defaultValue="true"
             android:summary="알람 on"/>
         
-         <Preference
+         <PreferenceScreen
             android:title="알람시간 설정"
             android:enabled="true"
-            android:key="alarm_time_mode"
+            android:key="alarmTimeSet_mode"
             android:summary="시간 설정으로 사용" />
          
         <CheckBoxPreference

@@ -30,6 +30,7 @@ public class SettingListActivity extends PreferenceActivity implements
 
 	public static final String KEY_ALARM = "alarm_mode";
 	public static final String KEY_VIBRATOR = "vibrator_mode";
+	public static final String KEY_AlarmTimeSet = "alarmTimeSet_mode";
 
 	public static final String KEY_HELP = "help_mode";
 	public static final String KEY_VERSION = "version_mode";
@@ -44,6 +45,7 @@ public class SettingListActivity extends PreferenceActivity implements
 	public static final String vibrate_str = "진동";
 	public static String checkStateStr = " off";
 
+	public static PreferenceScreen alramTimeSetPref = null;
 	public static PreferenceScreen helpPref = null;
 	public static PreferenceScreen versionPref = null;
 	public static PreferenceScreen createPref = null;
@@ -67,7 +69,7 @@ public class SettingListActivity extends PreferenceActivity implements
 		}
 		else{
 			Log.v(TAG, "wifimode is null ::" + wifimode);
-			Toast.makeText(this, "연결할 Wi-Fi가 없습니다.", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "연결 된 Wi-Fi가 없습니다.", Toast.LENGTH_LONG).show();
 		}
 
 		alarmPref = (CheckBoxPreference) findPreference(KEY_ALARM); // (R.id.wifi_listpref);
@@ -86,6 +88,11 @@ public class SettingListActivity extends PreferenceActivity implements
 		setCheckBoxSummary(vibratePref, vibrate_str,
 				String.valueOf(vibratorState));
 
+		alramTimeSetPref = (PreferenceScreen) findPreference(KEY_AlarmTimeSet); // (R.id.wifi_listpref);
+		alramTimeSetPref.setOnPreferenceClickListener(this);
+		alramTimeSetPref.setOnPreferenceChangeListener(this);	
+
+		
 		helpPref = (PreferenceScreen) findPreference(KEY_HELP); // (R.id.wifi_listpref);
 		helpPref.setOnPreferenceClickListener(this);
 		helpPref.setOnPreferenceChangeListener(this);	
@@ -114,11 +121,16 @@ public class SettingListActivity extends PreferenceActivity implements
 			Log.v(TAG, "KEY_WIFI_MODE");
 
 		} else if (preference.getKey().equals(KEY_ALARM)) {
-			Log.v(TAG, "KEY_ALARM");
+			Log.v(TAG, "onPreferenceClick() alarmPref");
 			boolean alarmState = WifiReceiver.getCheckBoxPrefence(this,
 					KEY_ALARM);
 			WifiReceiver.setCheckBoxPrefence(this, KEY_ALARM, !alarmState);
 			alarmPref.setChecked(!alarmState); // set checkBox
+
+		} else if (preference.getKey().equals(KEY_AlarmTimeSet)) {
+			Log.v(TAG, "onPreferenceClick() alarmTimeSet");
+			Intent intent = new Intent(this, AlramActivity.class);
+			startActivity(intent);
 
 		} else if (preference.getKey().equals(KEY_VIBRATOR)) {
 			Log.v(TAG, "KEY_VIBRATOR");
@@ -191,6 +203,7 @@ public class SettingListActivity extends PreferenceActivity implements
 				WifiReceiver.cancleNotification(this);
 			}
 		} else if (preference == alarmPref) {
+			Log.v(TAG, "onPreferenceChange() alarmPref");
 			setCheckBoxSummary(alarmPref, alram_str, objValue.toString());
 
 		} else if (preference == vibratePref) {

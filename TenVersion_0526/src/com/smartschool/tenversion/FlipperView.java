@@ -29,6 +29,7 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 	// set Button
 	private Button leftBtn = null;
 	private Button rightBtn = null;
+	private Button skipBtn = null;
 
 	private int listNum = 0; // TODO add list length
 
@@ -49,7 +50,10 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 		
 		rightBtn = (Button)findViewById(R.id.right_Btn);
 		rightBtn.setOnClickListener(this);
-		
+
+		skipBtn = (Button)findViewById(R.id.skip_Btn);
+		skipBtn.setOnClickListener(this);
+
 		// add view
 		addFlipperChildView();
 		// }
@@ -158,7 +162,7 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 			TextView tv = new TextView(this);
 			// tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents()
 			// );
-			tv.setText(checkList.get(i).getContents());
+			tv.setText(i + " : " + checkList.get(i).getContents());
 			tv.setTextSize(30);
 			tv.setTextColor(Color.WHITE);
 			tv.setShadowLayer(3, 3, 3, Color.BLACK);
@@ -181,18 +185,21 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
 		switch(v.getId()){
 		case R.id.left_Btn: 		//add list Item
-			Log.v(TAG,"left_Btn Click");
+			Log.v(TAG,"left_Btn Click : " + listNum);
 			right();
 			flipper.showPrevious();
 			
 			break;
 		case R.id.right_Btn: 		//add list Item
-			Log.v(TAG,"right_Btn Click");
+			Log.v(TAG,"right_Btn Click : " + listNum);
 			left();
 			flipper.showNext();
+			break;
+		case R.id.skip_Btn: 		//add list Item
+			Log.v(TAG,"right_Btn Click : " + listNum);
+			showPreview();			
 			break;
 			
 		}

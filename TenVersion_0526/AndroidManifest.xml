@@ -34,6 +34,7 @@
         <activity android:name=".LIveListDelActivity" />
         <activity android:name=".LIveListDelActivity2" />
         <activity android:name=".TestDialogActivity" />
+        <activity android:name=".AlramActivity" />
         
         <activity android:name=".FlipperView"
            			android:theme="@android:style/Theme.Translucent"> 
