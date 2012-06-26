@@ -18,8 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class FlipperView extends Activity implements View.OnTouchListener,
-		OnClickListener {
+public class FlipperView extends Activity implements View.OnTouchListener {
 	private static final String TAG = "TestFlipperviewActivity";
 	ViewFlipper flipper;
 
@@ -44,15 +43,6 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 
 		flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 		flipper.setOnTouchListener(this);
-
-		leftBtn = (Button)findViewById(R.id.left_Btn);
-		leftBtn.setOnClickListener(this);
-		
-		rightBtn = (Button)findViewById(R.id.right_Btn);
-		rightBtn.setOnClickListener(this);
-
-		skipBtn = (Button)findViewById(R.id.skip_Btn);
-		skipBtn.setOnClickListener(this);
 
 		// add view
 		addFlipperChildView();
@@ -158,7 +148,8 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 			return false;
 		}
 		flipper.removeAllViews(); // 추가한 부분
-		for (int i = 0; i < checkList.size(); i++) {
+		
+		for (int i = 0; i < listNum; i++) {
 			TextView tv = new TextView(this);
 			// tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents()
 			// );
@@ -182,26 +173,4 @@ public class FlipperView extends Activity implements View.OnTouchListener,
 		finish();
 	}
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch(v.getId()){
-		case R.id.left_Btn: 		//add list Item
-			Log.v(TAG,"left_Btn Click : " + listNum);
-			right();
-			flipper.showPrevious();
-			
-			break;
-		case R.id.right_Btn: 		//add list Item
-			Log.v(TAG,"right_Btn Click : " + listNum);
-			left();
-			flipper.showNext();
-			break;
-		case R.id.skip_Btn: 		//add list Item
-			Log.v(TAG,"right_Btn Click : " + listNum);
-			showPreview();			
-			break;
-			
-		}
-	}
 }

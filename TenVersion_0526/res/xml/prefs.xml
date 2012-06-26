@@ -11,7 +11,7 @@
             />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="알람설정" >
+    <PreferenceCategory android:title="알람및 진동설정" >
         <CheckBoxPreference
             android:title="알람 On/Off"
             android:enabled="true"
@@ -47,7 +47,8 @@
             android:title="버전정보 확인"
             android:enabled="true"
             android:key="version_mode"
-            android:summary="" />
+            android:summary="version 1.0"
+             />
         <PreferenceScreen
             android:title="개발자정보"
             android:enabled="true"
