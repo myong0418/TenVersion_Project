@@ -17,15 +17,15 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
         setContentView(R.layout.main);
         
         //list btn
-        ImageButton safeBtn = (ImageButton)findViewById(R.id.safe_btn);
+        Button safeBtn = (Button)findViewById(R.id.safe_btn);
         safeBtn.setOnClickListener(this);
-        ImageButton liveBtn = (ImageButton)findViewById(R.id.live_btn);
+        Button liveBtn = (Button)findViewById(R.id.live_btn);
         liveBtn.setOnClickListener(this);
-        ImageButton etcBtn = (ImageButton)findViewById(R.id.etc_btn);
+        Button etcBtn = (Button)findViewById(R.id.etc_btn);
         etcBtn.setOnClickListener(this);
         
         //setting btn
-        ImageButton settingBtn = (ImageButton)findViewById(R.id.setting_btn);
+        Button settingBtn = (Button)findViewById(R.id.setting_btn);
         settingBtn.setOnClickListener(this);
                 
        //test Flipper btn
