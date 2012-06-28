@@ -7,8 +7,9 @@
 
       <ScrollView 
         android:id="@+id/preview_scrollview"
-        	android:layout_width="fill_parent"
+        	android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
 	        >
 	    <TextView
 	        android:id="@+id/preview_tv"
@@ -19,13 +20,15 @@
 	        android:shadowColor="#000000"
 	        android:shadowRadius="3"
 	        android:shadowDx="3"
-	        android:shadowDy="3"/>
+	        android:shadowDy="3"
+	        />
 	    </ScrollView>
     <Button 
         android:id="@+id/preview_ok_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_selector"
         android:text="@string/preview_okbtn_txt" 
         />
 </RelativeLayout>

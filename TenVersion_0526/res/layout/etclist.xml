@@ -29,6 +29,7 @@
 		android:layout_height="wrap_content"
 		android:text="추가"
 		android:layout_weight="1"
+		android:background="@drawable/btn_selector"
 		/>
 	<Button
 		android:id="@+id/deleteBtn"
@@ -36,6 +37,7 @@
 		android:layout_height="wrap_content"
 		android:text="삭제"
 		android:layout_weight="1"
+		android:background="@drawable/btn_selector"
 		/>
 	<Button
 		android:id="@+id/allCheckBtn"
@@ -43,6 +45,7 @@
 		android:layout_height="wrap_content"
 		android:text="전체선택"
 		android:layout_weight="1"
+		android:background="@drawable/btn_selector"
 		
 		/>
 	</LinearLayout>                      

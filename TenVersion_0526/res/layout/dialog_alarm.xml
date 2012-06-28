@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#F5F8C0" >
+    android:background="@layout/dialog_shape" >
 
     <!-- Date -->
 <!-- 
