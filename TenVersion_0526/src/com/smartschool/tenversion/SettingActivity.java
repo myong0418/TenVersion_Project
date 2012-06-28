@@ -64,7 +64,7 @@ public class SettingActivity extends Activity implements OnClickListener{
 //        wifiLayout.setOnClickListener(this);
         
         TextView wifiTV = (TextView)findViewById(R.id.wifi_tv);
-        TextView wifiSummaryTV = (TextView)findViewById(R.id.wifi_summary_tv);
+        wifiSummaryTV = (TextView)findViewById(R.id.wifi_summary_tv);
         Button wifiBtn= (Button)findViewById(R.id.wifi_btn);
         wifiBtn.setOnClickListener(this);
                
