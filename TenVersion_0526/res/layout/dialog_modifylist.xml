@@ -3,18 +3,31 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="240dip"
   android:layout_height="160dip"
-  android:background="#FFFACD"
+  android:background="@layout/dialog_shape"
   >
-  <TextView 
-      android:id="@+id/text01"
-     android:layout_width="wrap_content"
+<LinearLayout
+  android:id="@+id/modifylist_title_layout"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+  <TextView
+        android:id="@+id/modifylist_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:text="@string/modifylist_title_txt"
+        android:textColor="#FF6954"
         android:textSize="22sp"
-        android:textColor="#0000CD"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:text="수정할 내용"/>
+        />
+ <View 
+  		android:layout_width="fill_parent"
+		android:layout_height="2dip"  
+		android:background="@android:color/white"
+	/>   
+</LinearLayout> 
+
  <LinearLayout
      android:id="@+id/modifylist_btnlayout"
      android:layout_width="fill_parent"
@@ -27,14 +40,16 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:text="수정" />
+         android:background="@drawable/btn_selector"
+         android:text="@string/modifybtn_txt" />
 
      <Button
          android:id="@+id/modifylist_cancelBtn"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:text="취소" />
+         android:background="@drawable/btn_selector"
+         android:text="@string/cancelbtn_txt" />
  </LinearLayout>
  
 <!--   <TextView
@@ -49,8 +64,8 @@
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:layout_alignParentLeft="true"
-       android:layout_below="@+id/text01"
-       android:layout_marginTop="14dp"
+       android:layout_below="@+id/modifylist_title_layout"
+       android:layout_marginTop="16dip"
        android:maxLength="20"
        android:ems="10" >
 

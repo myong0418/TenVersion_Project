@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#F5F8C0" >
 
     <!-- Date -->
 <!-- 
@@ -29,14 +30,18 @@
 
         <Button
             android:id="@+id/alarm_set_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
             android:text="set" />
 
         <Button
             android:id="@+id/alarm_reset_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
             android:text="설정안함" />
     </LinearLayout>
 </LinearLayout>

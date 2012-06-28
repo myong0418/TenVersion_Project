@@ -3,6 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="180dip"
   android:layout_height="120dip"
+  android:background="@layout/dialog_shape"
  >
  <LinearLayout
      android:id="@+id/dellist_btnlayout"
@@ -16,14 +17,16 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:text="삭제" />
+         android:background="@drawable/btn_selector"
+		 android:text="@string/deletebtn_txt" />
 
      <Button
          android:id="@+id/dellist_cancelBtn"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:text="취소" />
+         android:background="@drawable/btn_selector"
+		 android:text="@string/cancelbtn_txt" />
  </LinearLayout>
  
   <TextView

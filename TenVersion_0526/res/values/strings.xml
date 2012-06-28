@@ -58,10 +58,20 @@
     <item type="id" name="wifi_bssid"></item>
     
     <!-- CustomDialog.java -->
-    <!-- FunDialog List -->
-    <string name="funlist_okbtn_txt">확인</string>
+    <!-- dialog_addlist.xml -->
+    <string name="addlist_title_txt">항목 추가</string>
+    <string name="okbtn_txt">확인</string>
+    <string name="cancelbtn_txt">취소</string>
+    <string name="addlist_edittext_hint">추가할 내용을 입력하세요</string>
+    <!-- dialog_dellist.xml -->
+    <string name="deletebtn_txt">삭제</string>
+    <!-- dialog_funlist.xml -->
+    <string name="funlist_title_txt">!!마지막 체크!!</string>
+    <!-- dialog_modifylist.xml -->
+    <string name="modifylist_title_txt">항목 수정</string>
+    <string name="modifybtn_txt">수정</string>
+     
     <!-- Choose Wifi Dialog -->
-    <string name="choose_wifi_cancebtn_txt">취소</string>
     
     
      <!-- VersionInfo.java -->

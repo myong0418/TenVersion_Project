@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/choose_wifi_listview"
         android:layout_marginTop="2dip"
-        android:text="@string/choose_wifi_cancebtn_txt"
+        android:text="@string/cancelbtn_txt"
         android:background="@drawable/btn_selector" 
         /> 
 </RelativeLayout>

@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/buddy_rayout"
   android:layout_width="wrap_content"
-  android:layout_height="95px"
+  android:layout_height="50dip"
   >
 <!--  <RelativeLayout
   android:layout_width="60px"
@@ -16,7 +16,7 @@
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:layout_centerHorizontal="true"
-   android:layout_marginTop="5px"
+   android:layout_marginTop="5dip"
    android:scaleType="centerCrop"
    
  	/>
@@ -33,13 +33,6 @@
   android:paddingBottom="10dp"
 
 >
-<!--   <TextView android:id="@+id/buddy_name"
-   android:layout_width="80px"
-   android:layout_height="wrap_content"
-   android:textColor="#ffffff"
-   android:textSize="18sp"
-   
-  /> -->
   <TextView android:id="@+id/contents"
    android:layout_width="wrap_content"
    android:layout_height="fill_parent" 

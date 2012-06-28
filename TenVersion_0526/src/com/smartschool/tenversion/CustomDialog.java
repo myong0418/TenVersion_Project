@@ -90,7 +90,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 	public void modifyListDialog(int mode, String contents) {
 		WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();
 		lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-		lpWindow.dimAmount = 0.75f;
+		lpWindow.dimAmount = 0.75f;	
 		getWindow().setAttributes(lpWindow);
 
 		MODE = mode;
@@ -185,7 +185,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 		lpWindow.dimAmount = 0.75f;
 		getWindow().setAttributes(lpWindow);
 
-		setContentView(R.layout.dialog_alram);
+		setContentView(R.layout.dialog_alarm);
 		Calendar mCalendar = Calendar.getInstance();
 	
 		// 일시 설정 클래스로 현재 시각을 설정
