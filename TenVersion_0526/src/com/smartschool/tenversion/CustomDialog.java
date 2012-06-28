@@ -212,15 +212,12 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 		AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		Calendar mCalendar = Calendar.getInstance();
 		mCalendar.setTimeInMillis(System.currentTimeMillis());
-		mCalendar.add(Calendar.HOUR_OF_DAY, hour);
-		mCalendar.add(Calendar.MINUTE, minute);
-		mCalendar.add(Calendar.SECOND,0);
-		mCalendar.add(Calendar.MILLISECOND,0);
+		mCalendar.set(Calendar.HOUR_OF_DAY, hour);
+		mCalendar.set(Calendar.MINUTE, minute);
+		mCalendar.set(Calendar.SECOND,0);
+		mCalendar.set(Calendar.MILLISECOND,0);
 		Log.e(TAG, "mCalendar getTime :: "+mCalendar.getTime().toString());
-		
-		Log.e(TAG, "mCalendar getTimeInMillis:: "+mCalendar.getTimeInMillis());
-//		long triggerTime = SystemClock.elapsedRealtime() + 1000 * 60;
-		manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, mCalendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, padingIntent_Alarm);
+		manager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, padingIntent_Alarm);
 	}
 	public static void stopAlarm(Context context) {
 		AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
