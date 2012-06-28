@@ -45,6 +45,8 @@
         
         <activity android:name=".PreviewListActivity"
             		android:theme="@android:style/Theme.Translucent" />
+        
+        <activity android:name=".VersionInfo" />
 
 		<receiver android:name=".WifiReceiver" 
 		    	android:process=":remote">

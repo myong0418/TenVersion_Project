@@ -64,4 +64,10 @@
     <string name="choose_wifi_cancebtn_txt">취소</string>
     
     
+     <!-- VersionInfo.java -->
+      <string name="version_title_txt">버전 :</string>
+      <string name="version_code_title_txt">버전 코드 : </string>
+      <string name="developer_title_txt">개발자 : </string>
+      <string name="developer_txt"> Tenversion</string>
+    
 </resources>

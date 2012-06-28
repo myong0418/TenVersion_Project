@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -145,6 +146,8 @@ public class SettingActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.version_layout:
 			Log.v(TAG,"onclick() version_layout ");
+			Intent intent = new Intent(this,VersionInfo.class);
+			startActivity(intent);
 
 			break;
 		case R.id.sound_togglebtn:
