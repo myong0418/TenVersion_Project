@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.smartschool.tenversion.wifiChackableLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:smartschool="http://schemas.android.com/apk/res/com.smartschool.tenversion"
+  android:id="@+id/wifilist_relativelayout"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  smartschool:checkable="@+id/wifilist_radio_Btn"
+  >
+
+ 
+<LinearLayout
+  android:id="@+id/wifilist_text_linearlayout"
+  android:layout_width="180dip"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+
+>
+
+	<TextView
+   		android:id="@+id/wifilist_ssid_tv"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textSize="20sp" 
+    	android:textColor="#1B6B18"/>
+    <TextView
+        android:id="@+id/wifilist_bssid_summary_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#224307" />
+
+</LinearLayout>
+
+
+<RadioButton
+    android:id="@+id/wifilist_radio_Btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:clickable="false" 
+    android:focusable="false" 
+     />
+
+<ImageView
+    android:id="@+id/wifilist_rssi_imageview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toLeftOf="@id/wifilist_radio_Btn"
+    android:src="@drawable/wifi_not_enable"
+    android:layout_centerHorizontal="true" />
+
+
+</com.smartschool.tenversion.wifiChackableLayout>

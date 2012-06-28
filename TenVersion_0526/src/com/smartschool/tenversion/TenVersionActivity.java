@@ -53,7 +53,7 @@ public class TenVersionActivity extends Activity  implements OnClickListener{
 			break;
 			
 		case R.id.setting_btn:
-			intent = new Intent(this,SettingListActivity.class);
+			intent = new Intent(this,SettingActivity.class);
 			startActivity(intent);
 			break;
 			

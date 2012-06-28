@@ -69,10 +69,10 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			}
 			
 			if (ALL_DEL_MODE) { //all Select
-				holder.mDelBtn.setBackgroundResource(R.drawable.check2);
+				holder.mDelBtn.setBackgroundResource(R.drawable.checked);
 				holder.mDelBtn.setTag(R.id.tag_del_satate, true);
 			} else { //all deSelect
-				holder.mDelBtn.setBackgroundResource(R.drawable.check1);
+				holder.mDelBtn.setBackgroundResource(R.drawable.unchecked);
 				holder.mDelBtn.setTag(R.id.tag_del_satate, false);
 			}
 
@@ -127,7 +127,7 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			if (delState) { //checked -> uncheck
 				delState = false;
 				v.setTag(R.id.tag_del_satate, false);
-				v.setBackgroundResource(R.drawable.check1);
+				v.setBackgroundResource(R.drawable.unchecked);
 				for(int i=0; i<delChecListProfileList.size(); i++){
 					if(delChecListProfileList.get(i).getId() == id){
 						delChecListProfileList.remove(i);//(new CheckListProfile(id, String.valueOf(mode),contents));
@@ -136,7 +136,7 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 			} else {  //unchecked -> check
 				delState = true;
 				v.setTag(R.id.tag_del_satate, true);
-				v.setBackgroundResource(R.drawable.check2);
+				v.setBackgroundResource(R.drawable.checked);
 				delChecListProfileList.add(new CheckListProfile(id, String.valueOf(mode),contents));
 			}
 			
