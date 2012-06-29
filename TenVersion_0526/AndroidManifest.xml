@@ -7,12 +7,12 @@
     <uses-sdk android:minSdkVersion="7" />
 
     <!-- wifi change permission -->
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-	<uses-permission android:name="android.permission.VIBRATE" />
-	
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:icon="@drawable/goout"
         android:label="@string/app_name" >
@@ -25,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".SafeListActivity" />
         <activity android:name=".LiveListActivity" />
         <activity android:name=".EtcListActivity" />
@@ -35,30 +34,41 @@
         <activity android:name=".LIveListDelActivity" />
         <activity android:name=".LIveListDelActivity2" />
         <activity android:name=".TestDialogActivity" />
-        
-        <activity android:name=".FlipperView"
-           			android:theme="@android:style/Theme.Translucent"> 
+        <activity
+            android:name=".FlipperView"
+            android:theme="@android:style/Theme.Translucent" >
             <intent-filter>
                 <action android:name="smartplus.tenversion.action.flipper" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".PreviewListActivity"
-            		android:theme="@android:style/Theme.Translucent" />
-        
+        <activity
+            android:name=".PreviewListActivity"
+            android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".VersionInfo" />
 
-		<receiver android:name=".WifiReceiver" 
-		    	android:process=":remote">
+        <receiver
+            android:name=".WifiReceiver"
+            android:process=":remote" >
             <intent-filter>
-                <action android:name="com.smartschool.tenversion.ALARM_ACTION"/>
+                <action android:name="com.smartschool.tenversion.ALARM_ACTION" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.net.wifi.STATE_CHANGE"/> 
-
+                <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
-        
-        
+
+        <!-- 메인 액티비티 -->
+        <activity
+            android:name="MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 스플래시(로딩) 액티비티 -->
+        <activity android:name="SplashActivity" />
     </application>
 
 </manifest>

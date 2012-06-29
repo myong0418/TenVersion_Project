@@ -156,8 +156,9 @@ public class FlipperView extends Activity implements View.OnTouchListener {
 			tv.setText(i + " : " + checkList.get(i).getContents());
 			tv.setTextSize(30);
 			tv.setTextColor(Color.WHITE);
-			tv.setShadowLayer(3, 3, 3, Color.BLACK);
-			tv.setPadding(70, 300, 0, 0);
+			tv.setShadowLayer(3, 3, 3, Color.BLACK);	//그림자효과
+//			tv.setPadding(70, 300, 0, 0);
+			tv.setGravity(getWallpaperDesiredMinimumHeight());	//세로 중간에 위치시키기
 			tv.setTag(i);
 			flipper.addView(tv);
 
