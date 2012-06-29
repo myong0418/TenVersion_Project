@@ -82,11 +82,11 @@ public class CheckListAdapter extends ArrayAdapter<CheckListProfile> implements 
 		}
 
 		// set background
-//		if (position % 2 == 0) {
-//			holder.mRLayout.setBackgroundResource(color_1);
-//		} else {
-//			holder.mRLayout.setBackgroundResource(color_2);
-//		}
+		if (position % 2 == 0) {
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_2);
+		} else {
+			holder.mRLayout.setBackgroundResource(R.drawable.panal_1);
+		}
 
 		CheckListProfile item = checkListProfileList.get(position);
 		holder.mContents.setText(item.getContents());
