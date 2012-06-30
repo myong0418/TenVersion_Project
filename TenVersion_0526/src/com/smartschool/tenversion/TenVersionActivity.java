@@ -13,7 +13,8 @@ public class TenVersionActivity extends Activity implements OnClickListener {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		startActivity(new Intent(this, SplashActivity.class));
+		//이렇게 할 필요없어요..ㅠㅠ
+		//startActivity(new Intent(this, SplashActivity.class));
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -33,24 +34,24 @@ public class TenVersionActivity extends Activity implements OnClickListener {
 		// test Flipper btn
 		Button testFlipperBtn = (Button) findViewById(R.id.testFlipper_btn);
 		testFlipperBtn.setOnClickListener(this);
-		initialize(); // 시간이 걸리는 작업 처리
+//		initialize(); // 시간이 걸리는 작업 처리
 	}
-
-	private void initialize() {
-		InitializationRunnable init = new InitializationRunnable();
-		new Thread(init).start();
-	}
-
-	/**
-	 * 초기화 작업 처리
-	 * 
-	 */
-	class InitializationRunnable implements Runnable {
-		public void run() {
-			// 여기서부터 초기화 작업 처리
-			// do_something
-		}
-	}
+//
+//	private void initialize() {
+//		InitializationRunnable init = new InitializationRunnable();
+//		new Thread(init).start();
+//	}
+//
+//	/**
+//	 * 초기화 작업 처리
+//	 * 
+//	 */
+//	class InitializationRunnable implements Runnable {
+//		public void run() {
+//			// 여기서부터 초기화 작업 처리
+//			// do_something
+//		}
+//	}
 
 	public void onClick(View v) {
 		Intent intent = null;
