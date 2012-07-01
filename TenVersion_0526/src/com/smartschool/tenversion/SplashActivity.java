@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 
 public class SplashActivity extends Activity {
+	private Handler mHandler;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -15,36 +17,17 @@ public class SplashActivity extends Activity {
 		initialize();
 	}
 
-//	private void initialize() {
-//		Handler handler = new Handler() {
-//			@Override
-//			public void handleMessage(Message msg) {
-//				finish(); // 액티비티 종료
-//			}
-//		};
-//
-//		handler.sendEmptyMessageDelayed(0, 3000); // ms, 3초후 종료시킴
-//	}
-	Handler mHandler;
 	private void initialize() {
-	mHandler = new Handler() ;
-	
-	
-	mainThread mMainrThread = new mainThread();     
-	mMainrThread.start();
+		mHandler = new Handler();
 
-	
-	
+		mainThread mMainrThread = new mainThread();
+		mMainrThread.start();
 	}
 	
 	
 	
 	 class mainThread extends Thread {
 		 
-	        private int i = 0;
-	        private boolean isPlay = false;
-
-
 	        @Override
 	        public void run() {
 	            super.run();
@@ -59,21 +42,6 @@ public class SplashActivity extends Activity {
 	            	
 	            }
 	            
-	            
-//	            while (isPlay) {
-//	                try { 
-//	                	
-//	                	Thread.sleep(1000);
-//	                } catch (InterruptedException e) {
-//	                    e.printStackTrace();
-//	                }
-//	                mHandler.post(new Runnable() {
-//	                    @Override
-//	                    public void run() {
-//	                      //  mTvNumber.setText(""+i++);
-//	                    }
-//	                });
-//	            }
 	        }
 	 }
 

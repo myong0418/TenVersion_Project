@@ -35,7 +35,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	//wifi
 	private static WifiManager wifiManager =null;
 	private static NotificationManager notiMgr = null;
-	private List<ScanResult> mScanResult; // ScanResult List
+	
 	//private static Context mContext;
 	//wifi state
 	public static  boolean WifiState = false;
@@ -75,9 +75,11 @@ public class WifiReceiver extends BroadcastReceiver{
 				if (networkType == ConnectivityManager.TYPE_WIFI) {
 					// wifi network
 					Log.d(TAG, "wifi network");
-
-					//enable layout 
+					
+//					//enable layout 
 					if (SettingActivity.wifiLayout != null) {
+						Log.d(TAG, " SettingActivity :: ");
+						Log.d(TAG, "wifi network");
 						SettingActivity.wifiLayout.setEnabled(true);
 						SettingActivity.wifiLayout_disable.setVisibility(View.GONE);
 						for ( int i = 0; i < SettingActivity.wifiLayout.getChildCount();  i++ ){ 
@@ -115,7 +117,7 @@ public class WifiReceiver extends BroadcastReceiver{
 				} else if (networkType == ConnectivityManager.TYPE_MOBILE) {	// disconnected wifi mode
 					// mobile network
 					Log.d(TAG, "mobile network");
-
+			
 					//disable layout 
 					if (SettingActivity.wifiLayout != null) {
 						SettingActivity.wifiLayout.setEnabled(false);
@@ -125,6 +127,8 @@ public class WifiReceiver extends BroadcastReceiver{
 						    view.setEnabled(false);
 						} 
 					}
+					
+					
 					
 					
 					// cancel notification
@@ -150,7 +154,7 @@ public class WifiReceiver extends BroadcastReceiver{
 	
 
 	
-	
+
 	
 /**Notification START**/	
 	public static void setNotification(Context mContext, int notiState){

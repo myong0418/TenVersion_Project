@@ -51,12 +51,15 @@ public class SettingActivity extends Activity implements OnClickListener{
 	
 	//dialog
     private CustomDialog settingDialog = null ;
+   
+    
+    public static  Context mContext = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        
+        mContext= this;
 		/**  UI  **/
 		//wifi layout
         wifiLayout = (RelativeLayout)findViewById(R.id.wifi_layout);

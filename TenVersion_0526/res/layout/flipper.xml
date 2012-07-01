@@ -8,8 +8,8 @@
         android:id="@+id/view_flipper"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center_vertical|center_horizontal" >
-    </ViewFlipper>
+        android:layout_centerInParent="true" 
+    />
 
     <TextView
         android:id="@+id/arrow_txt"

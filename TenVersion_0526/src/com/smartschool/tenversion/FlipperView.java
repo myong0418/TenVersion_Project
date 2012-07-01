@@ -8,12 +8,14 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -151,14 +153,13 @@ public class FlipperView extends Activity implements View.OnTouchListener {
 		
 		for (int i = 0; i < listNum; i++) {
 			TextView tv = new TextView(this);
-			// tv.setText("View :: "+i+"   contents:"+checkList.get(i).getContents()
-			// );
 			tv.setText(i + " : " + checkList.get(i).getContents());
 			tv.setTextSize(30);
 			tv.setTextColor(Color.WHITE);
 			tv.setShadowLayer(3, 3, 3, Color.BLACK);	//그림자효과
 //			tv.setPadding(70, 300, 0, 0);
-			tv.setGravity(getWallpaperDesiredMinimumHeight());	//세로 중간에 위치시키기
+//			tv.setGravity(getWallpaperDesiredMinimumHeight());	//세로 중간에 위치시키기
+			tv.setGravity(Gravity.CENTER);
 			tv.setTag(i);
 			flipper.addView(tv);
 

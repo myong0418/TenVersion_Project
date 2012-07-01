@@ -47,8 +47,7 @@
         <activity android:name=".VersionInfo" />
 
         <receiver
-            android:name=".WifiReceiver"
-            android:process=":remote" >
+            android:name=".WifiReceiver" >
             <intent-filter>
                 <action android:name="com.smartschool.tenversion.ALARM_ACTION" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />

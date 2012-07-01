@@ -157,8 +157,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 
 		// ArrayList<WifiListProfile> wifiListItem = new
 		// ArrayList<WifiListProfile>();
-		WifiListAdapter wifiListAdapter = new WifiListAdapter(mContext,
-				R.layout.wifilist_item_row, wifiListItem);
+		WifiListAdapter wifiListAdapter = new WifiListAdapter(mContext,R.layout.wifilist_item_row, wifiListItem);
 		Log.v(TAG, "wifiListAdapter ::" + wifiListAdapter);
 		chooseWifiListview.setAdapter(wifiListAdapter);
 		chooseWifiListview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -309,11 +308,9 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 		}
 	}
 
-	public void onItemClick(AdapterView<?> listView, View view, int position,
-			long id) {
+	public void onItemClick(AdapterView<?> listView, View view, int position,long id) {
 
-		WifiListProfile item = (WifiListProfile) listView
-				.getItemAtPosition(position);
+		WifiListProfile item = (WifiListProfile) listView.getItemAtPosition(position);
 
 		String ssid = item.getSSID();
 		String bssid = item.getBSSID();
