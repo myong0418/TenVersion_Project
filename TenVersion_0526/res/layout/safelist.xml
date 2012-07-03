@@ -4,12 +4,18 @@
     android:layout_height="fill_parent"
     android:background="#ffffff">
  	
-<RelativeLayout 
+<!-- <RelativeLayout 
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background ="@drawable/fire_out"
-    >
+    > -->
+  <RelativeLayout 
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#F5F8C0"
+    > 
     
 <!-- button -->
 <LinearLayout

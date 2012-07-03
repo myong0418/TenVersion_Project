@@ -1,37 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/all"
+    android:background="@drawable/background"
     android:orientation="vertical"
      >
+
 
-       <Button
-            android:id="@+id/blank_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@android:color/transparent"
-             />
+    <Button
+        android:id="@+id/safe_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/safe_btn_change"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="90dip"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안전 "
+        android:textSize="18sp" 
+        android:layout_marginLeft="140dip"
+        android:layout_marginTop="150dip"/>
+
+
+
+    <Button
+         android:id="@+id/etc_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/etc_btn_change" 
+            android:layout_marginLeft="48dip"
+    android:layout_marginTop="250dip"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="기타 "
+        android:textSize="18sp" 
+        android:layout_marginLeft="140dip"
+        android:layout_marginTop="290dip"/>
+
+
+    <Button
+        android:id="@+id/live_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/live_btn_change" 
+            android:layout_marginLeft="60dip"
+    android:layout_marginTop="180dip"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생명"
+        android:textSize="18sp" 
+        android:layout_marginLeft="140dip"
+        android:layout_marginTop="220dip"/>
+    
     
 
-        <Button
-            android:id="@+id/safe_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="      안전 리스트"
-            android:textSize="18sp" />
-        <Button
-            android:id="@+id/live_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="       생명 리스트"
-            android:textSize="18sp" />
-        <Button
+
+    <Button
+        android:id="@+id/setting_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/setting_btn_change" 
+        android:layout_marginLeft="55dip"
+    	android:layout_marginTop="330dip"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설정"
+        android:textSize="18sp" 
+        android:layout_marginLeft="140dip"
+        android:layout_marginTop="350dip"/>
+
+<!--         <Button
             android:id="@+id/etc_btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,6 +94,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:layout_weight="1"
             android:text="설정"
             android:textSize="18sp" />
         <Button
@@ -53,7 +104,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/testFlipper_btn_txt"
-            android:textSize="18sp" />
+            android:textSize="18sp" /> -->
         
     <!--
     <ImageButton
@@ -131,4 +182,4 @@
         android:text="@string/testFlipper_btn_txt" />
     -->
 
-</LinearLayout>
+</RelativeLayout>
