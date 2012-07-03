@@ -58,7 +58,7 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@id/addlist_title_layout"
     android:layout_marginTop="16dip"
-    android:maxLength="20"
+    android:maxLength="15"
     android:ems="10"
     android:hint="@string/addlist_edittext_hint"/>
 
