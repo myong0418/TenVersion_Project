@@ -6,7 +6,12 @@
     android:orientation="vertical"
     android:gravity="center_vertical"
      >
-
+ <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/goout_red" 
+        android:visibility="invisible"
+        android:enabled="false"/>
 
     <Button
         android:id="@+id/safe_btn"
@@ -23,7 +28,20 @@
         android:layout_marginLeft="140dip"
         android:layout_marginTop="150dip"
         android:textColor="#692E0A"/> -->
+ 
+    <Button
+        android:id="@+id/live_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/live_btn_change" />
 
+<!--     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생명"
+        android:textSize="18sp" 
+        android:layout_marginTop="220dip"
+        android:textColor="#692E0A"/> -->
 
 
     <Button
@@ -44,19 +62,7 @@
         android:textColor="#692E0A"/>
  -->
 
-    <Button
-        android:id="@+id/live_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/live_btn_change" />
 
-<!--     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="생명"
-        android:textSize="18sp" 
-        android:layout_marginTop="220dip"
-        android:textColor="#692E0A"/> -->
     
     
 
