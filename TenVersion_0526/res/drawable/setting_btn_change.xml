@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true" android:drawable="@drawable/light_out" /> <!-- pressed -->
-    <item android:state_selected="true" android:drawable="@drawable/light_out" /> <!-- selected -->
-    <item android:drawable="@drawable/light_in" /> <!-- default -->
+    <item android:state_pressed="true" android:drawable="@drawable/light_out2" /> <!-- pressed -->
+    <item android:state_selected="true" android:drawable="@drawable/light_out2" /> <!-- selected -->
+    <item android:drawable="@drawable/light_in2" /> <!-- default -->
 </selector>

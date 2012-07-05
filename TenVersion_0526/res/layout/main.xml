@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
+    android:gravity="center_vertical"
      >
 
 
     <Button
         android:id="@+id/safe_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/safe_btn_change"
-        android:layout_marginLeft="30dip"
-        android:layout_marginTop="90dip"
         />
 
-    <TextView
+<!--     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="안전 "
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
         android:layout_marginTop="150dip"
-        android:textColor="#692E0A"/>
+        android:textColor="#692E0A"/> -->
 
 
 
     <Button
          android:id="@+id/etc_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/etc_btn_change" 
-            android:layout_marginLeft="48dip"
-    android:layout_marginTop="250dip"/>
+        android:background="@drawable/etc_btn_change" />
 
-
+<!-- 
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,37 +42,32 @@
         android:layout_marginLeft="140dip"
         android:layout_marginTop="290dip"
         android:textColor="#692E0A"/>
-
+ -->
 
     <Button
         android:id="@+id/live_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/live_btn_change" 
-            android:layout_marginLeft="60dip"
-    android:layout_marginTop="180dip"/>
+        android:background="@drawable/live_btn_change" />
 
-    <TextView
+<!--     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="생명"
         android:textSize="18sp" 
-        android:layout_marginLeft="140dip"
         android:layout_marginTop="220dip"
-        android:textColor="#692E0A"/>
+        android:textColor="#692E0A"/> -->
     
     
 
 
     <Button
         android:id="@+id/setting_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/setting_btn_change" 
-        android:layout_marginLeft="55dip"
-    	android:layout_marginTop="330dip"/>
+        android:background="@drawable/setting_btn_change" />
 
-
+<!-- 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +75,7 @@
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
         android:layout_marginTop="350dip"
-        android:textColor="#692E0A"/>
+        android:textColor="#692E0A"/> -->
 
 <!--         <Button
             android:id="@+id/etc_btn"
@@ -186,4 +178,4 @@
         android:text="@string/testFlipper_btn_txt" />
     -->
 
-</RelativeLayout>
+</LinearLayout>
