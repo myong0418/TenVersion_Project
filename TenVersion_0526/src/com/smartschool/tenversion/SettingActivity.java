@@ -243,6 +243,9 @@ public class SettingActivity extends Activity implements OnClickListener{
         }else{
         	  wifiSummaryTV.setText(wifiSSID);
         }
+        
+        String alarmPref = WifiReceiver.getAlarmSettingPrefence(this);
+        setAlram(alarmPref);   
        
 //        String wifiBSSID = WifiReceiver.getWifiSettingBSSID(this);
 //        wifiSummaryTV.setText(wifiBSSID);	
@@ -301,11 +304,15 @@ public class SettingActivity extends Activity implements OnClickListener{
     	customDialog.alarmDialog();
     	customDialog.show();
     }
-    public  void  setAlram(String time){
+    public  void  setAlram(String time){//String hour, String min){
 	   	 Log.v(TAG,"[setAlram] ");
-	   	 alarmSummaryTV.setText("");
-    }
+	   	 if(time == null || time.equals("")){
+	   		 alarmSummaryTV.setText("시간 설정으로 사용.");
+	   	 }else{
+	   		 alarmSummaryTV.setText(time);
     
+	   	 }
+    }
 
 	// set wifi sharedPreference
 	public void setWifiSetting(String wifiSSID, String wifiBSSID) {

@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/safe_btn_change"
-        android:layout_marginLeft="44dip"
-        android:layout_marginTop="95dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="90dip"
         />
 
     <TextView
@@ -22,7 +22,8 @@
         android:text="안전 "
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
-        android:layout_marginTop="140dip"/>
+        android:layout_marginTop="150dip"
+        android:textColor="#692E0A"/>
 
 
 
@@ -42,7 +43,8 @@
         android:text="기타 "
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
-        android:layout_marginTop="290dip"/>
+        android:layout_marginTop="290dip"
+        android:textColor="#692E0A"/>
 
 
     <Button
@@ -59,7 +61,8 @@
         android:text="생명"
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
-        android:layout_marginTop="210dip"/>
+        android:layout_marginTop="220dip"
+        android:textColor="#692E0A"/>
     
     
 
@@ -79,7 +82,8 @@
         android:text="설정"
         android:textSize="18sp" 
         android:layout_marginLeft="140dip"
-        android:layout_marginTop="350dip"/>
+        android:layout_marginTop="350dip"
+        android:textColor="#692E0A"/>
 
 <!--         <Button
             android:id="@+id/etc_btn"

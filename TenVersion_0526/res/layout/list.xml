@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#ffffff">
- 	
-<RelativeLayout 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-     android:background="#F5F8C0"
+    android:background="@android:color/white"
     >
     
 <!-- button -->
@@ -22,14 +17,14 @@
 		android:id="@+id/btnlayout_list"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:layout_alignParentBottom="true">
 	<Button
 		android:id="@+id/addBtn"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
 		android:text="추가"
 		android:layout_weight="1"
-		android:background="@drawable/btn_selector"
 		/>
 	<Button
 		android:id="@+id/deleteBtn"
@@ -37,7 +32,6 @@
 		android:layout_height="wrap_content"
 		android:text="삭제"
 		android:layout_weight="1"
-		android:background="@drawable/btn_selector"
 		/>
 	<Button
 		android:id="@+id/allCheckBtn"
@@ -45,7 +39,6 @@
 		android:layout_height="wrap_content"
 		android:text="전체선택"
 		android:layout_weight="1"
-		android:background="@drawable/btn_selector"
 		
 		/>
 	</LinearLayout>                      
@@ -60,4 +53,3 @@
 
 
 </RelativeLayout>
-</LinearLayout>

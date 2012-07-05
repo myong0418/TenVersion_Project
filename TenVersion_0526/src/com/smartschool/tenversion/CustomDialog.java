@@ -3,6 +3,7 @@ package com.smartschool.tenversion;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.SystemClock;
@@ -205,18 +207,30 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 	
 	}
 	static int mAlarmCode = 2030;
-	public static void registerAlarm(Context context, int hour,int minute) {
-		Log.e(TAG, "registerAlarm hour :: "+hour+"   minute::"+minute);
+	public  void registerAlarm(Context context, int hour,int minute) {
+		Log.v(TAG, "registerAlarm hour :: "+hour+"   minute::"+minute);
 		PendingIntent padingIntent_Alarm = PendingIntent.getBroadcast(context, mAlarmCode,new Intent(WifiReceiver.ALARM_ACTION), 0);
 		AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		Calendar mCalendar = Calendar.getInstance();
 		mCalendar.setTimeInMillis(System.currentTimeMillis());
+		
+		int CurreuntHour = mCalendar.getTime().getHours();
+		if(CurreuntHour> hour ||( CurreuntHour==hour && mCalendar.getTime().getMinutes()>minute) ){
+			mCalendar.add(Calendar.DATE, 1);
+		}
+		
+		
 		mCalendar.set(Calendar.HOUR_OF_DAY, hour);
 		mCalendar.set(Calendar.MINUTE, minute);
 		mCalendar.set(Calendar.SECOND,0);
 		mCalendar.set(Calendar.MILLISECOND,0);
 		Log.e(TAG, "mCalendar getTime :: "+mCalendar.getTime().toString());
+		Log.e(TAG, "mCalendar getHours 2:: "+mCalendar.getTime().getHours());
+		
 		manager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, padingIntent_Alarm);
+		String time = mCalendar.getTime().getHours()+" ½Ã "+mCalendar.getTime().getMinutes()+" ºÐ";
+		((SettingActivity) mContext).setAlram(time);
+		WifiReceiver.setAlarmSettingPrefence(mContext,time);
 	}
 	public static void stopAlarm(Context context) {
 		AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -301,6 +315,8 @@ public class CustomDialog extends Dialog implements View.OnClickListener,
 		case R.id.alarm_reset_btn:
 			stopAlarm(mContext);
 			WifiReceiver.cancleNotification(mContext,alarmNotiState);
+			((SettingActivity) mContext).setAlram(null);
+			WifiReceiver.setAlarmSettingPrefence(mContext,null);
 			this.dismiss();
 			break;
 			
