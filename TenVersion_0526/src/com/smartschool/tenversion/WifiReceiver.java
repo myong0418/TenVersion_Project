@@ -198,7 +198,7 @@ public class WifiReceiver extends BroadcastReceiver{
 			 startVibrate(context);							// ..............add setting vibrate
 			 
 			 //start alarm
-			 startSound(context, R.raw.dingdong);     	// ..............add select sound
+			 startSound(context, R.raw.out_3);     	// ..............add select sound
 		
 	}
 	
@@ -219,7 +219,7 @@ public class WifiReceiver extends BroadcastReceiver{
 			try {
 				MediaPlayer mplay = MediaPlayer.create(context, id);
 				if (mplay == null) {
-					mplay = MediaPlayer.create(context, R.raw.dingdong);
+					mplay = MediaPlayer.create(context, R.raw.out_3);
 				}
 				mplay.seekTo(0);
 				mplay.start();
@@ -236,7 +236,7 @@ public class WifiReceiver extends BroadcastReceiver{
 		Log.v(TAG, "soundPlay()");
         try {
             if(mplay == null) {
-            	mplay = MediaPlayer.create(context,  R.raw.dingdong);
+            	mplay = MediaPlayer.create(context,  R.raw.out_3);
             }
             mplay.stop();
             mplay = null;
