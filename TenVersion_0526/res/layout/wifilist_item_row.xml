@@ -14,6 +14,7 @@
   android:layout_width="180dip"
   android:layout_height="wrap_content"
   android:orientation="vertical"
+  android:layout_centerVertical="true"
 
 >
 
@@ -27,7 +28,8 @@
         android:id="@+id/wifilist_bssid_summary_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#224307" />
+        android:textColor="#224307" 
+       	android:visibility="gone"/>
 
 </LinearLayout>
 

@@ -28,6 +28,9 @@ public class WifiReceiver extends BroadcastReceiver{
 	public static final String KEY_WIFI_MODE = "wifi_mode";
 	public static final String KEY_WIFISSID = "wifi_ssid";
 	public static final String KEY_WIFIBSSID = "wifi_bssid";
+	
+	public static final String KEY_ALARM_MODE = "alarm_mode";
+	public static final String KEY_ALARM = "alarm";
 	//hw Key
 	public static final String KEY_SOUND = "sound_mode";
 	public static final String KEY_VIBRATE = "vibrator_mode";
@@ -160,16 +163,16 @@ public class WifiReceiver extends BroadcastReceiver{
 	public static void setNotification(Context mContext, int notiState){
 		int notiImageIcon = 0;
 		if(notiState == WifiNotiState){
-			notiImageIcon = R.drawable.goout;
+			notiImageIcon = R.drawable.goout_wifi;
 		}else {//if(notiState == alarmNotiState){
-			notiImageIcon = R.drawable.ic_launcher;
+			notiImageIcon = R.drawable.goout_alarm;
 		}
 		notiMgr = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
 		Intent goIntent = new Intent(mContext,TenVersionActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(mContext, notiState, goIntent,PendingIntent.FLAG_CANCEL_CURRENT);
 
-		Notification notification = new Notification(notiImageIcon, "TenVersion",System.currentTimeMillis());
-		notification.setLatestEventInfo(mContext, "TenVersion","TenVersion 에서 설정을 하실 수 있습니다.", pendingIntent);
+		Notification notification = new Notification(notiImageIcon, "외출하니?",System.currentTimeMillis());
+		notification.setLatestEventInfo(mContext, "외출하니?","외출하니? 에서 설정을 하실 수 있습니다.", pendingIntent);
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		notiMgr.notify(notiState, notification);
 	}
@@ -359,6 +362,24 @@ public class WifiReceiver extends BroadcastReceiver{
 		return wifiBSSID;
 	}
 /**WIFI END**/
+	
+	
+	
+/**alarm**/	
+	
+	public static void setAlarmSettingPrefence(Context mContext, String time){
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_ALARM_MODE,Context.MODE_PRIVATE);
+		Editor editor = sharedPrefs.edit();
+        
+        editor.putString(KEY_ALARM, time); 
+        editor.commit();
+	}
+	public static String getAlarmSettingPrefence(Context mContext) {
+		SharedPreferences sharedPrefs = mContext.getSharedPreferences(KEY_ALARM_MODE, Context.MODE_PRIVATE);
+		String alarm = sharedPrefs.getString(KEY_ALARM, "");
+		return alarm;
+	}
+	
 	
 	
 /**checkbox sharedPreference START**/

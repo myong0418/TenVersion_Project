@@ -47,6 +47,7 @@
 //
 //	public static PreferenceScreen alramTimeSetPref = null;
 //	public static PreferenceScreen helpPref = null;
+//	public static PreferenceScreen versionPref = null;
 //	public static PreferenceScreen createPref = null;
 //	// private SharedPreferences sharedPrefs = null;
 //
@@ -95,7 +96,11 @@
 //		helpPref = (PreferenceScreen) findPreference(KEY_HELP); // (R.id.wifi_listpref);
 //		helpPref.setOnPreferenceClickListener(this);
 //		helpPref.setOnPreferenceChangeListener(this);	
-//				
+//		
+//		versionPref = (PreferenceScreen) findPreference(KEY_VERSION); // (R.id.wifi_listpref);
+//		versionPref.setOnPreferenceClickListener(this);
+//		versionPref.setOnPreferenceChangeListener(this);
+//		
 //		createPref = (PreferenceScreen) findPreference(KEY_CREATE); // (R.id.wifi_listpref);
 //		createPref.setOnPreferenceClickListener(this);
 //		createPref.setOnPreferenceChangeListener(this);
@@ -138,7 +143,10 @@
 //		} else if (preference.getKey().equals(KEY_HELP)) {
 //			Log.v(TAG, "KEY_HELP");
 //			Toast.makeText(this, "도움말 화면입니다.", Toast.LENGTH_LONG).show();
-//		} else if (preference.getKey().equals(KEY_VERSION)) {
+//		} else if (preference.getKey().equals(KEY_CREATE)) {
+//			Log.v(TAG, "KEY_CREATE");
+//			Toast.makeText(this, "개발자정보 화면입니다.", Toast.LENGTH_LONG).show();
+//		}else if (preference.getKey().equals(KEY_VERSION)) {
 //			Log.v(TAG, "KEY_VERSION");
 //			Toast.makeText(this, "버전정보 화면입니다.", Toast.LENGTH_LONG).show();
 //		}
